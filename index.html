@@ -77,7 +77,7 @@ main{padding-bottom:calc(80px + env(safe-area-inset-bottom))}
 .gender-quick .lbl{padding:6px 4px 6px 10px;color:var(--muted);font-size:.78rem;text-transform:uppercase;letter-spacing:.06em}
 
 @media (max-width:899px){
-  .brand{flex:1;order:0}.brand .sub{display:none}
+  .brand{flex:1 1 auto;order:0}.brand .sub{display:none}
   #practiceBtn{order:1}#settingsBtn{order:2}
   .search{order:3;flex:1 1 180px}.gender-quick{order:4;flex:none}
 }
@@ -228,6 +228,8 @@ main{padding:12px 16px 80px;min-width:0}
 .range{display:flex;align-items:center;gap:10px}
 .range input{flex:1}
 .range .ar{font-size:1.4rem}
+.voice-row{display:flex;gap:8px;align-items:center}
+.voice-row select{flex:1;min-width:0;border:1px solid var(--line-2);border-radius:10px;padding:8px 10px;background:var(--bg);color:var(--ink);font:inherit}
 
 .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:8px 14px;border-radius:999px;font-size:.9rem;z-index:80;opacity:0;pointer-events:none;transition:opacity .2s}
 .toast.on{opacity:1}
@@ -287,7 +289,10 @@ footer{color:var(--muted);font-size:.82rem;text-align:center;padding:24px 16px 4
     <div class="field"><span>I am</span><div class="seg" id="segMe"><button data-v="m">a man</button><button data-v="f">a woman</button></div><div class="hint">Words about yourself change too: ana jou3aan (m) / jou3aan<b>e</b> (f).</div></div>
     <div class="field"><span>Transliteration</span><div class="seg" id="segTr"><button data-v="arabizi">With 3, 7, S/T/D</button><button data-v="simple">Simple letters</button></div><div class="hint">Simple mode drops the throaty letters. You'll still be understood; see the Pronunciation guide to sound closer.</div></div>
     <div class="field"><span>Arabic text size</span><div class="range"><input type="range" id="arSize" min="0.8" max="1.6" step="0.1" value="1"><span class="ar" lang="ar" id="arSizeDemo">مرحبا</span></div></div>
-    <div class="field"><span>Voice</span><div class="hint" id="voiceInfo">Checking for an Arabic voice…</div></div>
+    <div class="field"><span>Voice</span>
+      <div class="voice-row"><select id="voiceSel" aria-label="Arabic voice"><option value="">Auto (best available)</option></select><button class="tb" id="voiceTest">Test</button></div>
+      <div class="range"><span class="hint" style="margin:0">Speed</span><input type="range" id="rate" min="0.5" max="1.2" step="0.05" value="0.85"><span class="hint" id="rateVal" style="margin:0;width:3ch">0.85</span></div>
+      <div class="hint" id="voiceInfo">Checking for Arabic voices…</div></div>
     <div class="field"><span>Progress</span><div class="seg"><button id="printAll">Print all as PDF</button><button id="resetProg">Reset practice progress</button></div></div>
   </div>
 </div>
@@ -877,7 +882,7 @@ const CATS = [
 const LS = (k, d) => { try { const v = localStorage.getItem("jo-" + k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } };
 const SAVE = (k, v) => { try { localStorage.setItem("jo-" + k, JSON.stringify(v)); } catch (e) {} };
 const S = {
-  to: LS("to", "m"), me: LS("me", "m"), tr: LS("tr", "arabizi"), ar: LS("ar", 1),
+  to: LS("to", "m"), me: LS("me", "m"), tr: LS("tr", "arabizi"), ar: LS("ar", 1), voice: LS("voice", ""), rate: LS("rate", 0.85),
   favs: new Set(LS("favs", [])), srs: LS("srs", {}), cat: LS("cat", "essentials"), q: "",
 };
 const ID = it => it.ar + "|" + it.en;
@@ -912,24 +917,30 @@ const I = {
 
 // ---------- speech ----------
 let VOICE = null, voiceChecked = false;
+const arVoices = () => speechSynthesis.getVoices().filter(v => /^ar([-_]|$)/i.test(v.lang)).sort((a, b) => a.lang.localeCompare(b.lang) || a.name.localeCompare(b.name));
+const REGION = { JO: "Jordan", SA: "Saudi", AE: "Emirates", EG: "Egypt", LB: "Lebanon", SY: "Syria", PS: "Palestine", IQ: "Iraq", KW: "Kuwait", QA: "Qatar", BH: "Bahrain", OM: "Oman", YE: "Yemen", MA: "Morocco", TN: "Tunisia", DZ: "Algeria", LY: "Libya", XA: "Standard", "001": "Standard" };
+const voiceLabel = v => { const r = (v.lang.split(/[-_]/)[1] || "").toUpperCase(); return `${v.name} · ${REGION[r] || v.lang}${v.localService === false ? " (online)" : ""}`; };
 function pickVoice() {
-  const vs = speechSynthesis.getVoices();
-  const ar = vs.filter(v => /^ar/i.test(v.lang));
-  VOICE = ar.find(v => /JO/i.test(v.lang)) || ar.find(v => /SA|AE|LB|SY|PS/i.test(v.lang)) || ar[0] || null;
-  const info = document.getElementById("voiceInfo");
-  if (info) info.textContent = VOICE ? `Using “${VOICE.name}” (${VOICE.lang}). Voices are standard Arabic, so they read the script a little formally; use them for rhythm and letters, not for the Jordanian accent.`
-    : (vs.length ? "No Arabic voice is installed on this device. On iPhone: Settings → Accessibility → Spoken Content → Voices → Arabic. On Android: Settings → Text-to-speech." : "Checking for an Arabic voice…");
+  const ar = arVoices();
+  VOICE = (S.voice && ar.find(v => v.voiceURI === S.voice || v.name === S.voice))
+    || ar.find(v => /JO/i.test(v.lang)) || ar.find(v => /SA|AE|LB|SY|PS/i.test(v.lang)) || ar[0] || null;
+  const sel = document.getElementById("voiceSel"), info = document.getElementById("voiceInfo");
+  if (sel) {
+    sel.innerHTML = `<option value="">Auto (best available)</option>` + ar.map(v => `<option value="${esc(v.voiceURI)}" ${S.voice && (v.voiceURI === S.voice || v.name === S.voice) ? "selected" : ""}>${esc(voiceLabel(v))}</option>`).join("");
+    if (!S.voice) sel.value = "";
+  }
+  if (info) info.innerHTML = ar.length
+    ? `${ar.length} Arabic voice${ar.length === 1 ? "" : "s"} on this device. Now using <b>${esc(VOICE ? voiceLabel(VOICE) : "none")}</b>. Voices come from the operating system and read the script in a standard way; a Jordanian-labelled voice gets closest to the accent. Add more under iPhone Settings → Accessibility → Spoken Content → Voices → Arabic, Android Settings → Text-to-speech, or Mac System Settings → Accessibility → Spoken Content. Microsoft Edge includes Jordanian voices (Taim, Sana).`
+    : (speechSynthesis.getVoices().length ? "No Arabic voice is installed on this device. iPhone: Settings → Accessibility → Spoken Content → Voices → Arabic. Android: Settings → Text-to-speech → install Arabic. Then reload." : "Checking for Arabic voices…");
   voiceChecked = true;
 }
-if ("speechSynthesis" in window) { pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }
-else { const info = document.getElementById("voiceInfo"); if (info) info.textContent = "This browser has no speech support."; }
 function speak(text, btn) {
   if (!("speechSynthesis" in window)) return toast("No speech support in this browser");
   if (!voiceChecked || !VOICE) pickVoice();
   if (!VOICE) return toast("No Arabic voice on this device (see Settings)");
   speechSynthesis.cancel();
   const u = new SpeechSynthesisUtterance(tpl(text).replace(/[…\/]/g, " ، ").replace(/\s+/g, " "));
-  u.voice = VOICE; u.lang = VOICE.lang; u.rate = 0.85;
+  u.voice = VOICE; u.lang = VOICE.lang; u.rate = S.rate;
   if (btn) { btn.classList.add("busy"); u.onend = u.onerror = () => btn.classList.remove("busy"); }
   speechSynthesis.speak(u);
 }
@@ -1135,8 +1146,8 @@ function applySettings() {
   document.querySelectorAll("#segTo button").forEach(b => b.classList.toggle("on", b.dataset.v === S.to));
   document.querySelectorAll("#segMe button").forEach(b => b.classList.toggle("on", b.dataset.v === S.me));
   document.querySelectorAll("#segTr button").forEach(b => b.classList.toggle("on", b.dataset.v === S.tr));
-  $("#arSize").value = S.ar;
-  SAVE("to", S.to); SAVE("me", S.me); SAVE("tr", S.tr); SAVE("ar", S.ar);
+  $("#arSize").value = S.ar; $("#rate").value = S.rate; $("#rateVal").textContent = Number(S.rate).toFixed(2);
+  SAVE("to", S.to); SAVE("me", S.me); SAVE("tr", S.tr); SAVE("ar", S.ar); SAVE("voice", S.voice); SAVE("rate", S.rate);
 }
 function openSettings(open) { $("#settings").classList.toggle("open", open); $("#scrim").classList.toggle("open", open); }
 
@@ -1196,6 +1207,9 @@ $("#show").addEventListener("touchend", e => { if (tx == null) return; const dx 
 let qT; $("#q").addEventListener("input", e => { S.q = e.target.value; $("#qclr").hidden = !S.q; clearTimeout(qT); qT = setTimeout(() => { renderMain(); document.querySelectorAll(".cat").forEach(c => c.classList.toggle("on", !S.q && c.dataset.cat === S.cat)); }, 120); });
 $("#qclr").addEventListener("click", () => { S.q = ""; $("#q").value = ""; $("#qclr").hidden = true; renderNav(); renderMain(); });
 $("#arSize").addEventListener("input", e => { S.ar = +e.target.value; applySettings(); });
+$("#rate").addEventListener("input", e => { S.rate = +e.target.value; applySettings(); });
+$("#voiceSel").addEventListener("change", e => { S.voice = e.target.value; SAVE("voice", S.voice); pickVoice(); });
+$("#voiceTest").addEventListener("click", e => speak("مرحبا، كيفك؟ أهلاً وسهلاً بالأردن", e.currentTarget));
 
 // ---------- boot ----------
 if (!catById(S.cat) && S.cat !== "saved") S.cat = "essentials";
