@@ -162,6 +162,21 @@ main{padding:12px 16px 80px;min-width:0}
 .guide td.ex{color:var(--ink-2)}
 .wrap{overflow-x:auto}
 
+/* numerals */
+.dgrid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin-bottom:14px}
+@media (min-width:700px){.dgrid{grid-template-columns:repeat(10,minmax(0,1fr))}}
+.dg{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 4px 8px;display:grid;justify-items:center;gap:2px;line-height:1}
+.dg:hover{border-color:var(--sea)}
+.dg-e{font-family:"Noto Naskh Arabic","Geeza Pro",serif;font-size:2.2rem;color:var(--accent);line-height:1.1}
+.dg-w{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:1.1rem}
+.dg-t{font-size:.72rem;color:var(--sea);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.ib.sm{width:30px;height:30px;border-radius:8px}.ib.sm svg{width:17px;height:17px}
+.ph-reply{align-items:center}
+.ph-reply .ar{cursor:pointer}
+.show-reply{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:center;color:var(--ink-2);background:var(--surface-2);border-radius:12px;padding:10px 16px;cursor:pointer}
+.show-reply .k{font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:700}
+.show-reply .ar{font-size:1.8rem}.show-reply .tr{color:var(--sea);font-weight:700;font-size:1.1rem}
+
 /* number tool */
 .tool{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin-bottom:14px;display:grid;gap:10px}
 .tool label{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700}
@@ -473,7 +488,7 @@ const CATS = [
  P("Everything","كل شي","kull shi"),
  P("Something","شي","shi"),
 ]},
-{id:"numbers", name:"Numbers & Money", ar:"الأرقام والمصاري", desc:"Prices are quoted in dinars (JD), often called “leera”. 1 JD = 100 piasters (girsh). Type any number below to hear how it's said.", tool:"numbers", items:[
+{id:"numbers", name:"Numbers & Money", ar:"الأرقام والمصاري", desc:"Prices are quoted in dinars (JD), often called “leera”. 1 JD = 100 piasters (girsh). Type any number below to hear how it's said. For reading the digits themselves, see Numerals.", tool:"numbers", items:[
  P("0","صفر","Sifr"), P("1","واحد","waa7ad"), P("2","تنين","tnein"), P("3","تلاتة","talaate"), P("4","أربعة","arba3a"),
  P("5","خمسة","khamse"), P("6","ستة","sitte"), P("7","سبعة","sab3a"), P("8","تمانية","tamaanye"), P("9","تسعة","tis3a"),
  P("10","عشرة","3ashara"), P("11","حدعش","7da3sh"), P("12","طنعش","tna3sh"), P("13","تلتعش","talatta3sh"), P("14","أربعطعش","arba3ta3sh"),
@@ -500,6 +515,7 @@ const CATS = [
  P("Discount","خصم","khaSim"),
  P("Money","مصاري","maSaari"),
 ]},
+{id:"numerals", name:"Numerals ٠١٢٣", ar:"الأرقام الهندية", desc:"The digits on price tags, plates and bus numbers. In Egypt they are everywhere; in Jordan you'll see both sets. Numbers read left to right even inside right-to-left text.", tool:"numerals"},
 {id:"taxi", name:"Taxi & Directions", ar:"التكسي والاتجاهات", desc:"Amman is navigated by numbered circles (duwwaar). Yellow taxis should run the meter; Uber and Careem work well too.", items:[
  P("Taxi","تكسي","taksi"),
  P("To …, please","على … لو سمحت","3ala … law sama7{t|ti}",{n:"3ala el-balad = to downtown. 3ala el-maTaar = to the airport."}),
@@ -952,10 +968,10 @@ let toastT; function toast(msg) { const t = document.getElementById("toast"); t.
 const $ = s => document.querySelector(s);
 const catById = id => CATS.find(c => c.id === id);
 function navHTML(side) {
-  const groups = side ? [["Phrases", CATS.filter(c => c.items).map(c => c.id)], ["Reference", ["tips", "guide"]], ["Yours", ["saved"]]] : [["", ["saved", ...CATS.map(c => c.id)]]];
+  const groups = side ? [["Phrases", CATS.filter(c => c.items).map(c => c.id)], ["Reference", ["numerals", "tips", "guide"]], ["Yours", ["saved"]]] : [["", ["saved", ...CATS.map(c => c.id)]]];
   return groups.map(([g, ids]) => (g ? `<div class="grp">${g}</div>` : "") + ids.map(id => {
     const c = id === "saved" ? { name: "Saved", items: [...S.favs] } : catById(id);
-    const n = c.items ? c.items.length : (c.tips || c.guide || []).length;
+    const n = c.items ? c.items.length : c.tool === "numerals" ? 10 : (c.tips || c.guide || []).length;
     return `<button class="cat ${S.cat === id ? "on" : ""} ${id === "saved" ? "fav-cat" : ""}" data-cat="${id}">${esc(c.name)} <span class="n">${n}</span></button>`;
   }).join("")).join("");
 }
@@ -964,7 +980,7 @@ function renderNav() {
   const on = $("#cats .cat.on"); if (on) on.scrollIntoView({ block: "nearest", inline: "center" });
 }
 function phraseHTML(it, i) {
-  const reply = it.r ? `<div class="ph-reply"><span class="k">Reply</span><span class="tr">${esc(trOut(it.r[2]))}</span><span class="ar" lang="ar">${esc(tpl(it.r[1]))}</span><span class="ph-lit">${esc(it.r[0])}</span></div>` : "";
+  const reply = it.r ? `<div class="ph-reply"><span class="k">Reply</span><span class="tr">${esc(trOut(it.r[2]))}</span><span class="ar" lang="ar" data-act="reply" role="button" tabindex="0" title="Tap to hear the reply">${esc(tpl(it.r[1]))}</span><span class="ph-lit">${esc(it.r[0])}</span><button class="ib sm" data-act="reply" aria-label="Hear the reply" title="Hear the reply">${I.speak}</button></div>` : "";
   const note = (it.n || it.l) ? `<div class="ph-note">${it.l ? `<span class="ph-lit">lit. “${esc(it.l)}”</span>${it.n ? " · " : ""}` : ""}${it.n ? esc(it.n) : ""}</div>` : "";
   const fav = S.favs.has(it.id);
   return `<article class="ph ${known(it) ? "known" : ""}" data-i="${i}" data-id="${esc(it.id)}">
@@ -999,12 +1015,14 @@ function renderMain() {
   const c = catById(S.cat) || CATS[0];
   let html = `<div class="sec-head"><div><h2>${esc(c.name)}<span class="ar" lang="ar">${esc(c.ar)}</span></h2><p>${esc(c.desc)}</p></div>${c.items ? progHTML(c.items) : ""}</div>`;
   if (c.tool === "numbers") html += numberToolHTML();
+  if (c.tool === "numerals") { LIST = []; html += numeralsHTML(); }
   if (c.items) { LIST = c.items; html += `<div class="list">${c.items.map(phraseHTML).join("")}</div>`; }
   if (c.tips) { LIST = []; html += `<div class="tips">${c.tips.map(t => `<div class="tip"><h3>${esc(t.t)}<span class="ar" lang="ar">${esc(t.ar)}</span></h3><p>${esc(t.d)}</p></div>`).join("")}</div>`; }
   if (c.guide) { LIST = []; html += `<div class="guide wrap"><table><thead><tr><th>Written</th><th>Letter</th><th>Sound</th><th>Examples</th></tr></thead><tbody>${c.guide.map(g => `<tr><td class="sym">${esc(g[0])}</td><td><span class="ar" lang="ar">${esc(g[1])}</span></td><td>${esc(g[2])}</td><td class="ex">${esc(g[3])}</td></tr>`).join("")}</tbody></table></div>
     <p class="hint">Stress usually falls on a long (doubled) vowel or a doubled consonant. When in doubt, say it flat and quick; Jordanians will meet you halfway.</p>`; }
   main.innerHTML = html;
   if (c.tool === "numbers") wireNumberTool();
+  if (c.tool === "numerals") wireNumerals();
 }
 function progHTML(items) {
   const k = items.filter(known).length;
@@ -1043,6 +1061,47 @@ function dinarWords(n, frac) { // whole dinars + fractional piasters
   return [tr, ar];
 }
 const eastern = s => String(s).replace(/\d/g, d => "٠١٢٣٤٥٦٧٨٩"[d]);
+const western = s => String(s).replace(/[٠-٩]/g, d => "٠١٢٣٤٥٦٧٨٩".indexOf(d)).replace(/[۰-۹]/g, d => "۰۱۲۳۴۵۶۷۸۹".indexOf(d));
+const LOOKALIKES = [
+  ["٠", "0", "A dot, not a circle. Easy to miss: ١٠ is 10."],
+  ["١", "1", "Same as ours."],
+  ["٢", "2", "Like a backwards 7 with a hook. Not a 7."],
+  ["٣", "3", "Like a 2 with an extra bump. Not a 3."],
+  ["٤", "4", "Looks like a reversed 3. Not a 3."],
+  ["٥", "5", "A circle or teardrop. Looks like our 0."],
+  ["٦", "6", "Looks like our 7. The classic mix-up."],
+  ["٧", "7", "Looks like a V."],
+  ["٨", "8", "Looks like an upside-down V or a caret ^."],
+  ["٩", "9", "Same as ours."],
+];
+function numeralsHTML() {
+  const tiles = LOOKALIKES.map(([e, w, tip], i) => `<button class="dg" data-say="${esc(N.ones[i][1])}" title="${esc(tip)}"><span class="dg-e" lang="ar">${e}</span><span class="dg-w">${w}</span><span class="dg-t">${esc(S.tr === "simple" ? simple(N.ones[i][0]) : N.ones[i][0])}</span></button>`).join("");
+  return `<div class="dgrid">${tiles}</div>
+  <div class="tool"><label for="convIn">Convert either way: paste a price, a plate, a phone number</label><input id="convIn" value="٢٥٠ جنيه · بص ٣٥٧ · ٠١٠ ١٢٣٤ ٥٦٧٨" autocomplete="off">
+    <div class="num-out" id="convOut"></div>
+    <div class="hint">Type Western digits to see the Eastern form, or Eastern digits to see the Western. The decimal separator is ٫ and the thousands separator is ٬, so ٢٫٥ is 2.5.</div></div>
+  <div class="tips">
+    <div class="tip"><h3>Reading direction<span class="ar" lang="ar">١٢٣</span></h3><p>Multi-digit numbers read left to right, the same as ours, even when the Arabic words around them run right to left. ٢٠٢٦ is 2026. Phone numbers are read digit by digit.</p></div>
+    <div class="tip"><h3>The three traps<span class="ar" lang="ar">٥ ٦ ٧</span></h3><p>٦ looks like a 7 but is 6. ٧ is 7. ٥ looks like a zero but is 5, and the real zero ٠ is a small dot. A price tag reading ٧٥ is 75, not 70.</p></div>
+    <div class="tip"><h3>Egypt<span class="ar" lang="ar">مصر</span></h3><p>Egypt uses Eastern digits almost everywhere: prices, plates, bus and train numbers, building numbers, banknotes (which also carry Western digits on the reverse). Currency is the pound, <i>gineeh</i> (جنيه), split into 100 piasters, <i>'irsh</i>. Number words are nearly identical to Jordan's; 2 is <i>itnein</i>, and ق becomes a glottal stop, so “how much” is <i>bikaam?</i></p></div>
+    <div class="tip"><h3>Jordan<span class="ar" lang="ar">الأردن</span></h3><p>Both sets appear. Menus and malls lean Western; markets, plates, some road signs and older shopfronts use Eastern. Expect the two to mix on the same receipt.</p></div>
+    <div class="tip"><h3>Tap a digit above<span class="ar" lang="ar">اسمع</span></h3><p>Each tile plays the digit's name. Useful for reading a bus number or a price back to a vendor to confirm it.</p></div>
+  </div>`;
+}
+function wireNumerals() {
+  const inp = $("#convIn"), out = $("#convOut");
+  const upd = () => {
+    const v = inp.value;
+    if (!v.trim()) { out.innerHTML = ""; return; }
+    const hasE = /[٠-٩۰-۹]/.test(v), hasW = /\d/.test(v);
+    const rows = [];
+    if (hasE) rows.push(["Western", `<span class="v" style="unicode-bidi:plaintext">${esc(western(v).replace(/٫/g, ".").replace(/٬/g, ","))}</span>`]);
+    if (hasW) rows.push(["Eastern", `<span class="v ar" lang="ar" style="display:inline">${esc(eastern(v))}</span>`]);
+    if (!rows.length) rows.push(["", `<span class="hint">No digits found.</span>`]);
+    out.innerHTML = rows.map(([k, h]) => `<div class="row"><span class="k">${k}</span><span>${h}</span></div>`).join("");
+  };
+  inp.addEventListener("input", upd); upd();
+}
 function numberToolHTML() {
   return `<div class="tool"><label for="numIn">Say a number or a price (0 – 9999, e.g. 2.5)</label><input id="numIn" inputmode="decimal" value="12.5" autocomplete="off">
     <div class="num-out" id="numOut"></div><div class="hint">Numbers on menus and price tags may use Eastern Arabic digits: ٠١٢٣٤٥٦٧٨٩. Units come before tens: 25 is “five-and-twenty”.</div></div>`;
@@ -1073,7 +1132,7 @@ function openShow(i) {
 }
 function renderShow() {
   const it = LIST[showIdx]; if (!it) return;
-  $("#showBody").innerHTML = `<div class="show-ar" lang="ar" id="showAr" role="button" tabindex="0">${esc(tpl(it.ar))}</div><div class="show-tr">${esc(trOut(it.tr))}</div><div class="show-en">${esc(it.en)}</div>${it.n ? `<div class="show-note">${esc(it.n)}</div>` : ""}`;
+  $("#showBody").innerHTML = `<div class="show-ar" lang="ar" id="showAr" role="button" tabindex="0">${esc(tpl(it.ar))}</div><div class="show-tr">${esc(trOut(it.tr))}</div><div class="show-en">${esc(it.en)}</div>${it.n ? `<div class="show-note">${esc(it.n)}</div>` : ""}${it.r ? `<div class="show-reply" data-say="${esc(tpl(it.r[1]))}" role="button" tabindex="0"><span class="k">They may reply</span><span class="ar" lang="ar">${esc(tpl(it.r[1]))}</span><span class="tr">${esc(trOut(it.r[2]))}</span></div>` : ""}`;
   $("#showPrev").disabled = showIdx === 0; $("#showNext").disabled = showIdx >= LIST.length - 1;
 }
 function closeOverlays() { document.querySelectorAll(".ov.open").forEach(o => o.classList.remove("open")); document.body.style.overflow = ""; speechSynthesis?.cancel?.(); }
@@ -1160,12 +1219,13 @@ document.addEventListener("click", e => {
     const row = act.closest(".ph"); const it = LIST[+row.dataset.i]; if (!it) return;
     const a = act.dataset.act;
     if (a === "speak") speak(it.ar, act.classList.contains("ib") ? act : row.querySelector('.ib[data-act="speak"]'));
+    if (a === "reply" && it.r) speak(it.r[1], row.querySelector('.ib[data-act="reply"]'));
     if (a === "fav") { S.favs.has(it.id) ? S.favs.delete(it.id) : S.favs.add(it.id); SAVE("favs", [...S.favs]); act.classList.toggle("on"); act.innerHTML = S.favs.has(it.id) ? I.starOn : I.star; toast(S.favs.has(it.id) ? "Saved" : "Removed"); renderNav(); if (S.cat === "saved" && !S.q) renderMain(); }
     if (a === "show") openShow(+row.dataset.i);
     if (a === "copy") { navigator.clipboard?.writeText(`${tpl(it.ar)} — ${trOut(it.tr)} — ${it.en}`).then(() => toast("Copied"), () => toast("Couldn't copy")); }
     return;
   }
-  const say = e.target.closest("#practice [data-say]"); if (say) return speak(say.dataset.say, say);
+  const say = e.target.closest("#practice [data-say], #show [data-say], .dg[data-say]"); if (say) return speak(say.dataset.say, say);
   if (e.target.closest("#showAr") || e.target.closest("#showSpeak")) { const it = LIST[showIdx]; if (it) speak(it.ar, $("#showSpeak")); return; }
   if (e.target.closest("#showClose, #prClose")) return closeOverlays();
   if (e.target.closest("#showPrev")) { if (showIdx > 0) { showIdx--; renderShow(); } return; }
@@ -1200,7 +1260,7 @@ document.addEventListener("keydown", e => {
   if ($("#show").classList.contains("open")) { if (e.key === "ArrowLeft" && showIdx > 0) { showIdx--; renderShow(); } if (e.key === "ArrowRight" && showIdx < LIST.length - 1) { showIdx++; renderShow(); } }
   if ($("#practice").classList.contains("open") && (e.key === " " || e.key === "Enter") && $("#reveal") && document.activeElement.tagName !== "BUTTON") { e.preventDefault(); $("#reveal").click(); }
 });
-document.addEventListener("keydown", e => { if ((e.key === "Enter" || e.key === " ") && e.target.matches(".ph-ar, #showAr")) { e.preventDefault(); e.target.click(); } });
+document.addEventListener("keydown", e => { if ((e.key === "Enter" || e.key === " ") && e.target.matches(".ph-ar, #showAr, .ph-reply .ar, .show-reply")) { e.preventDefault(); e.target.click(); } });
 // swipe in show mode
 let tx = null; $("#show").addEventListener("touchstart", e => { tx = e.touches[0].clientX; }, { passive: true });
 $("#show").addEventListener("touchend", e => { if (tx == null) return; const dx = e.changedTouches[0].clientX - tx; tx = null; if (Math.abs(dx) > 50) { if (dx < 0 && showIdx < LIST.length - 1) showIdx++; else if (dx > 0 && showIdx > 0) showIdx--; else return; renderShow(); } });
