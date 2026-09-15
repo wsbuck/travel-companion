@@ -1,6 +1,6 @@
-# Yalla Jordan Phrasebook
+# Yalla Arabic Phrasebook
 
-A single-file Jordanian Arabic cheat sheet for travelers. Phrases with Arabic script, transliteration, audio, set replies, gender-aware endings, flashcards with spaced repetition, multiple-choice quizzes, a number and price converter, and culture tips.
+A single-file Jordanian and Egyptian Arabic cheat sheet for travelers. A Jordan / Egypt / Both switch shows shared phrases once and labels the forms that differ. Phrases with Arabic script, transliteration, audio, set replies, gender-aware endings, flashcards with spaced repetition, multiple-choice quizzes, a number and price converter, and culture tips.
 
 Installable as a PWA: open the site on your phone, then **Add to Home Screen**. Works offline after the first visit.
 

@@ -12,16 +12,16 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Yalla">
-<meta name="description" content="Jordanian Arabic cheat sheet for travelers: phrases, audio, flashcards, numbers and culture tips.">
+<meta name="description" content="Jordanian and Egyptian Arabic cheat sheet for travelers: phrases, audio, flashcards, numbers and culture tips.">
 </head>
 <body>
-<title>Yalla Jordan Phrasebook</title>
+<title>Yalla Arabic Phrasebook</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
 <style>
 :root{
   --bg:#FAF7F1; --surface:#FFFFFF; --surface-2:#F3EDE2; --ink:#22201C; --ink-2:#4A443C; --muted:#7A7164;
   --line:#E6DFD2; --line-2:#D6CCB9; --accent:#B4281E; --accent-ink:#8F1E16; --accent-soft:#F7E4E0;
-  --sea:#2C6E72; --sea-soft:#E1EFEE; --sand:#EFE5D2; --ok:#3F7D4E; --ok-soft:#E3F0E5; --warn:#B7791F;
+  --sea:#2C6E72; --sea-soft:#E1EFEE; --sand:#EFE5D2; --gold:#8A5E0C; --gold-soft:#F5E9CC; --ok:#3F7D4E; --ok-soft:#E3F0E5; --warn:#B7791F;
   --shadow:0 8px 28px rgba(60,40,20,.14); --radius:14px;
   --ar-scale:1;
 }
@@ -29,14 +29,14 @@
   :root:not([data-theme="light"]){
     --bg:#16130E; --surface:#201C15; --surface-2:#2A251C; --ink:#F2ECE1; --ink-2:#D5CCBD; --muted:#A3988A;
     --line:#332D23; --line-2:#463E31; --accent:#E45B4E; --accent-ink:#F08A80; --accent-soft:#3D1E1A;
-    --sea:#74BFC1; --sea-soft:#1B3436; --sand:#2C261B; --ok:#7BC48A; --ok-soft:#1E3324; --warn:#E0A94A;
+    --sea:#74BFC1; --sea-soft:#1B3436; --sand:#2C261B; --gold:#E2B85C; --gold-soft:#3A2E12; --ok:#7BC48A; --ok-soft:#1E3324; --warn:#E0A94A;
     --shadow:0 8px 28px rgba(0,0,0,.5);
   }
 }
 :root[data-theme="dark"]{
   --bg:#16130E; --surface:#201C15; --surface-2:#2A251C; --ink:#F2ECE1; --ink-2:#D5CCBD; --muted:#A3988A;
   --line:#332D23; --line-2:#463E31; --accent:#E45B4E; --accent-ink:#F08A80; --accent-soft:#3D1E1A;
-  --sea:#74BFC1; --sea-soft:#1B3436; --sand:#2C261B; --ok:#7BC48A; --ok-soft:#1E3324; --warn:#E0A94A;
+  --sea:#74BFC1; --sea-soft:#1B3436; --sand:#2C261B; --gold:#E2B85C; --gold-soft:#3A2E12; --ok:#7BC48A; --ok-soft:#1E3324; --warn:#E0A94A;
   --shadow:0 8px 28px rgba(0,0,0,.5);
 }
 *{box-sizing:border-box}
@@ -60,7 +60,7 @@ main{padding-bottom:calc(80px + env(safe-area-inset-bottom))}
 .brand h1{font-size:1.25rem;font-weight:700;letter-spacing:-.01em;white-space:nowrap}
 .brand .ar{font-size:1.15rem;color:var(--accent);font-weight:600}
 .brand .sub{color:var(--muted);font-size:.85rem;white-space:nowrap}
-.search{flex:1 1 260px;display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line-2);border-radius:999px;padding:6px 12px;min-width:0}
+.search{flex:1 1 200px;display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line-2);border-radius:999px;padding:6px 12px;min-width:0}
 .search svg{flex:none;color:var(--muted)}
 .search input{flex:1;border:0;background:none;min-width:0;padding:4px 0}
 .search input::placeholder{color:var(--muted)}
@@ -79,7 +79,7 @@ main{padding-bottom:calc(80px + env(safe-area-inset-bottom))}
 @media (max-width:899px){
   .brand{flex:1 1 auto;order:0}.brand .sub{display:none}
   #practiceBtn{order:1}#settingsBtn{order:2}
-  .search{order:3;flex:1 1 180px}.gender-quick{order:4;flex:none}
+  .search{order:3;flex:1 1 180px}.gender-quick{order:4;flex:none}.dl-quick{order:5}
 }
 
 /* ---------- category nav ---------- */
@@ -95,6 +95,7 @@ main{padding-bottom:calc(80px + env(safe-area-inset-bottom))}
 .body{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr}
 .side{display:none}
 main{padding:12px 16px 80px;min-width:0}
+@media (max-width:1180px){.brand .sub{display:none}}
 @media (min-width:900px){
   .cats{display:none}
   .body{grid-template-columns:250px minmax(0,1fr);gap:24px;padding:0 16px}
@@ -121,13 +122,26 @@ main{padding:12px 16px 80px;min-width:0}
 
 /* ---------- phrase rows ---------- */
 .list{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
-.ph{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px;padding:12px 14px;border-top:1px solid var(--line);position:relative}
+.ph{display:flex;gap:10px;padding:12px 14px;border-top:1px solid var(--line);position:relative}
+.ph-main{flex:1;min-width:0;display:grid;gap:4px}
+.form{display:grid;gap:2px}
+.form .ph-ar{justify-self:end}
+.form + .form{margin-top:4px;padding-top:8px;border-top:1px dashed var(--line)}
+.ph-main.multi .form{grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:0 12px}
+.ph-main.multi .form .ph-ar{grid-column:2;grid-row:1;font-size:calc(1.45rem * var(--ar-scale))}
+.ph-main.multi .form .ph-tr{grid-column:1;grid-row:1}
+.ph-main.multi .form + .form{margin-top:2px;padding-top:4px;border-top:0}
 .ph:first-child{border-top:0}
 .ph.known::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--ok)}
 .ph-en{font-weight:700;color:var(--ink);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .tag{font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;padding:1px 6px;border-radius:4px;background:var(--sand);color:var(--ink-2);font-weight:700}
 .tag.g{background:var(--sea-soft);color:var(--sea)}
-.ph-ar{font-size:calc(1.7rem * var(--ar-scale));line-height:1.55;color:var(--ink);text-align:right;grid-column:1;justify-self:end;max-width:100%;overflow-wrap:anywhere}
+.tag.dl.jo{background:var(--accent-soft);color:var(--accent-ink)}
+.tag.dl.eg{background:var(--gold-soft);color:var(--gold)}
+.ph-tr .tag,.card .tr .tag{margin-right:6px;vertical-align:middle}
+.tip h3 .tag,.guide td .tag{margin-left:8px;vertical-align:middle}
+.dl-quick button.on{background:var(--accent);color:#fff}
+.ph-ar{font-size:calc(1.7rem * var(--ar-scale));line-height:1.55;color:var(--ink);text-align:right;max-width:100%;overflow-wrap:anywhere}
 .ph-tr{color:var(--sea);font-size:1.05rem;letter-spacing:.005em}
 .ph-tr i{color:var(--muted);font-size:.9rem}
 .ph-note{color:var(--muted);font-size:.9rem;margin-top:2px;max-width:65ch}
@@ -136,7 +150,7 @@ main{padding:12px 16px 80px;min-width:0}
 .ph-reply .tr{color:var(--sea);font-weight:700}
 .ph-reply .ar{font-size:1.15rem}
 .ph-lit{color:var(--muted);font-style:italic}
-.acts{grid-column:2;grid-row:1 / span 5;display:grid;grid-template-columns:38px 38px;gap:2px;align-self:start}
+.acts{flex:none;display:grid;grid-template-columns:38px 38px;gap:2px;align-self:start}
 .ib{width:38px;height:38px;display:grid;place-items:center;border-radius:10px;color:var(--muted)}
 .ib:hover{background:var(--surface-2);color:var(--ink)}
 .ib.on{color:var(--accent)}
@@ -198,6 +212,9 @@ main{padding:12px 16px 80px;min-width:0}
 .show-tr{font-size:clamp(1.3rem,5vw,2.4rem);color:var(--sea)}
 .show-en{font-size:clamp(1.1rem,4vw,1.6rem);color:var(--ink-2);font-family:"Bricolage Grotesque",sans-serif;font-weight:500}
 .show-note{color:var(--muted);max-width:55ch}
+.show-form{display:grid;gap:6px;justify-items:center;cursor:pointer}
+.show-body.multi .show-ar{font-size:clamp(2.2rem,9vw,5rem)}
+.show-body.multi .show-tr{font-size:clamp(1.1rem,4vw,1.8rem)}
 .show-nav{display:flex;gap:10px;justify-content:center;padding:16px;flex-wrap:wrap}
 .show-hint{color:var(--muted);font-size:.85rem;text-align:center;padding-bottom:20px}
 
@@ -255,7 +272,7 @@ footer{color:var(--muted);font-size:.82rem;text-align:center;padding:24px 16px 4
   .top,.side,.acts,.sec-tools,.tool,footer,.sheet,.scrim,.ov{display:none!important}
   body{background:#fff;color:#000;font-size:11px}
   .list,.tip,.guide{border:0;break-inside:avoid}
-  .ph{padding:4px 0;grid-template-columns:1fr auto;break-inside:avoid}
+  .ph{padding:4px 0;break-inside:avoid}
   .ph-ar{font-size:1.3rem}
   .ph-note{display:none}
   .sec-head{break-before:page;padding-top:0}
@@ -270,17 +287,20 @@ footer{color:var(--muted);font-size:.82rem;text-align:center;padding:24px 16px 4
   <div class="bar">
     <div class="brand">
       <span class="ar" lang="ar">يلا</span>
-      <h1>Jordanian Arabic</h1>
-      <span class="sub">traveler's cheat sheet</span>
+      <h1>Arabic for Travelers</h1>
+      <span class="sub">Jordan &amp; Egypt</span>
     </div>
     <label class="search" for="q">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-      <input id="q" type="search" autocomplete="off" placeholder="Search: thank you, shukran, شكراً…" aria-label="Search phrases">
+      <input id="q" type="search" autocomplete="off" placeholder="Search: thank you, shukran, bikaam, شكراً…" aria-label="Search phrases">
       <button class="clr" id="qclr" aria-label="Clear search" hidden>✕</button>
     </label>
     <div class="gender-quick" title="Who are you speaking to? Arabic changes by gender." role="group" aria-label="Speaking to">
       <span class="lbl">To</span>
       <button id="toM" class="on">a man</button><button id="toF">a woman</button>
+    </div>
+    <div class="gender-quick dl-quick" title="Which dialect to show" role="group" aria-label="Dialect">
+      <button data-dl="jo">Jordan</button><button data-dl="eg">Egypt</button><button data-dl="both">Both</button>
     </div>
     <button class="tb primary" id="practiceBtn">Practice</button>
     <button class="tb icon" id="settingsBtn" aria-label="Settings">
@@ -294,12 +314,13 @@ footer{color:var(--muted);font-size:.82rem;text-align:center;padding:24px 16px 4
   <aside class="side" id="side" aria-label="Categories"></aside>
   <main id="main"></main>
 </div>
-<footer>Jordanian (Ammani/Levantine) dialect, not textbook Arabic. Transliteration: 3 = ع, 7 = ح, ' = glottal stop. Saved phrases and practice progress stay on this device.</footer>
+<footer>Spoken Jordanian and Egyptian Arabic, not textbook Arabic. Shared phrases appear once; where the dialects differ you see both. Transliteration: 3 = ع, 7 = ح, ' = glottal stop. Saved phrases and practice progress stay on this device.</footer>
 
 <div class="scrim" id="scrim"></div>
 <div class="sheet" id="settings" role="dialog" aria-label="Settings">
   <div class="sheet-in">
     <div style="display:flex;justify-content:space-between;align-items:center"><h2>Settings</h2><button class="tb" id="settingsClose">Done</button></div>
+    <div class="field"><span>Where I am</span><div class="seg" id="segDl"><button data-dl="jo">Jordan</button><button data-dl="eg">Egypt</button><button data-dl="both">Both</button></div><div class="hint">Shared phrases show once. Where the dialects differ you see the local form, or both with labels. Country-specific words, dishes and tips follow the switch.</div></div>
     <div class="field"><span>I'm speaking to</span><div class="seg" id="segTo"><button data-v="m">a man</button><button data-v="f">a woman</button></div><div class="hint">Verbs and “you” endings change: keef<b>ak</b> to a man, keef<b>ik</b> to a woman.</div></div>
     <div class="field"><span>I am</span><div class="seg" id="segMe"><button data-v="m">a man</button><button data-v="f">a woman</button></div><div class="hint">Words about yourself change too: ana jou3aan (m) / jou3aan<b>e</b> (f).</div></div>
     <div class="field"><span>Transliteration</span><div class="seg" id="segTr"><button data-v="arabizi">With 3, 7, S/T/D</button><button data-v="simple">Simple letters</button></div><div class="hint">Simple mode drops the throaty letters. You'll still be understood; see the Pronunciation guide to sound closer.</div></div>
@@ -327,570 +348,641 @@ footer{color:var(--muted);font-size:.82rem;text-align:center;padding:24px 16px 4
 
 <script>
 // Data. Templates: {to a man|to a woman} changes with who you speak to; [I'm male|I'm female] changes with the speaker.
-// Transliteration: 3 = ع, 7 = ح, ' = glottal stop, g = ق (Jordanian), capital S/D/T/Z = emphatic letters.
+// Fields: en, ar, tr (Jordanian form); eg:[ar,tr] Egyptian form when it differs; only:"jo"|"eg" for country-specific items;
+// n = note for both, jn = Jordan note, egn = Egypt note; l = literal meaning; r = reply [en, ar, tr]; egr = Egyptian reply.
+// Transliteration: 3 = ع, 7 = ح, ' = glottal stop, capitals S/D/T/Z = emphatic. Jordan: g = ق, j = ج. Egypt: g = ج, ' = ق.
 function P(en, ar, tr, x){ return Object.assign({en, ar, tr}, x||{}); }
 const CATS = [
-{id:"essentials", name:"Essentials", ar:"الأساسيات", desc:"If you learn twenty things, learn these. They cover most of a travel day.", items:[
- P("Hello","مرحبا","mar7aba",{r:["Two hellos","مرحبتين","mar7abtein"],n:"Works any time of day, with anyone."}),
+{id:"essentials", name:"Essentials", ar:"الأساسيات", desc:"If you learn twenty things, learn these. They cover most of a travel day in either country.", items:[
+ P("Hello","مرحبا","mar7aba",{r:["Two hellos","مرحبتين","mar7abtein"],jn:"Works any time of day, with anyone.",egn:"Understood everywhere, but Egyptians mostly open with “ahlan”."}),
  P("Peace be upon you (formal hello)","السلام عليكم","es-salaamu 3aleikum",{r:["And upon you, peace","وعليكم السلام","w 3aleikum es-salaam"],n:"Use when entering a shop or greeting elders."}),
  P("Thank you","شكراً","shukran",{r:["You're welcome","عفواً","3afwan"]}),
  P("Please / excuse me (to get attention)","لو سمحت","law sama7{t|ti}",{n:"Start almost any request with this. Waiters, drivers, strangers."}),
- P("Yes","آه / نعم","aah / na3am",{n:"“aah” is casual, “na3am” is polite. You'll also hear “eh”."}),
+ P("Yes","آه / نعم","aah / na3am",{eg:["أيوة / نعم","aywa / na3am"],n:"“na3am” is the polite one in both countries."}),
  P("No","لا","la'",{n:"A short “la” with a stop. “la la la” for emphasis."}),
+ P("No thank you (firm)","لا شكراً","la' shukran",{egn:"For touts at the pyramids or Khan el-Khalili: say it once, smile, keep walking. Add “khalaS” if needed."}),
  P("OK / fine / perfect","تمام","tamaam"),
- P("I want…","بدي…","biddi…",{n:"The most useful verb in Levantine Arabic. biddi mayy = I want water."}),
- P("I don't want","ما بدي","ma biddi"),
- P("How much is this?","قديش هاد؟","gaddeesh haad?",{n:"Amman city speakers say “'addeesh” with a glottal stop. Both are understood."}),
- P("Where is…?","وين…؟","wein…?"),
- P("Where is the bathroom?","وين الحمام؟","wein el-7ammaam?"),
- P("I don't understand","ما فهمت","ma fhimit"),
- P("Do you speak English?","بتحكي إنجليزي؟","bti7ki ingleezi?"),
- P("I don't speak Arabic","ما بحكي عربي","ma ba7ki 3arabi",{n:"Add “shwayy” (a little): ba7ki 3arabi shwayy."}),
- P("Sorry","آسف","[aasef|aasfe]",{n:"Jordanians also just say “sorry”."}),
+ P("I want…","بدي…","biddi…",{eg:["[عايز|عايزة]…","[3aayiz|3ayza]…"],n:"The most useful verb you'll learn. Add a noun: water, taxi, the bill."}),
+ P("I don't want","ما بدي","ma biddi",{eg:["مش [عايز|عايزة]","mish [3aayiz|3ayza]"]}),
+ P("How much is this?","قديش هاد؟","gaddeesh haad?",{eg:["بكام ده؟","bikaam da?"],jn:"Amman city speakers say “'addeesh” with a glottal stop. Both are understood."}),
+ P("Where is…?","وين…؟","wein…?",{eg:["فين…؟","fein…?"]}),
+ P("Where is the bathroom?","وين الحمام؟","wein el-7ammaam?",{eg:["فين الحمام؟","fein el-7ammaam?"]}),
+ P("I don't understand","ما فهمت","ma fhimit",{eg:["مش [فاهم|فاهمة]","mish [faahim|fahma]"]}),
+ P("Do you speak English?","بتحكي إنجليزي؟","bti7ki ingleezi?",{eg:["بتتكلم إنجليزي؟","bititkallim{|i} ingleezi?"]}),
+ P("I don't speak Arabic","ما بحكي عربي","ma ba7ki 3arabi",{eg:["ما بتكلمش عربي","ma batkallimsh 3arabi"],n:"Add “shwayy” / “shwayya” (a little) to soften it."}),
+ P("Sorry","آسف","[aasef|aasfe]",{n:"Locals also just say “sorry”."}),
  P("Never mind / it's OK / oops","معليش","ma3leish",{n:"Bump someone, decline something, comfort someone. All ma3leish."}),
  P("Can I…? / Is it possible…?","ممكن…؟","mumkin…?",{n:"mumkin + noun is a polite request: mumkin el-7saab? (the bill?)"}),
  P("Help me, please","ساعدني لو سمحت","saa3{idni|deeni} law sama7{t|ti}"),
- P("Water","مي","mayy"),
+ P("Water","مي","mayy",{eg:["مية","mayya"]}),
  P("Goodbye","مع السلامة","ma3 es-salaame",{n:"Said to the person leaving. If you're leaving: “yalla bye” or “salaam”."}),
  P("God willing / hopefully","إن شاء الله","inshallah",{n:"Any plan about the future. Sometimes a soft “we'll see”."}),
  P("Let's go / come on","يلا","yalla"),
- P("Good / nice","منيح","mnee7",{n:"Answer to “how are you”, verdict on food, weather, anything."}),
- P("God give you strength (to anyone working)","يعطيك العافية","ya3Tee{k|ki} el-3aafye",{r:["God keep you well","الله يعافيك","allah y3aafee{k|ki}"],n:"Say it to a driver, waiter or shopkeeper instead of thanks. Locals love it."}),
+ P("Good / nice","منيح","mnee7",{eg:["كويس","kwayyis"],n:"Answer to “how are you”, verdict on food, weather, anything."}),
+ P("How are you?","كيفك؟","keef{ak|ik}?",{eg:["إزيك؟","ezzayy{ak|ik}?"],r:["Fine, thank God","منيح، الحمد لله","mnee7[|a], el-7amdulillah"],egr:["Fine, thank God","كويس، الحمد لله","[kwayyis|kwayyisa], el-7amdulillah"]}),
+ P("God give you strength (to anyone working)","يعطيك العافية","ya3Tee{k|ki} el-3aafye",{only:"jo",r:["God keep you well","الله يعافيك","allah y3aafee{k|ki}"],n:"Say it to a driver, waiter or shopkeeper instead of thanks. Levantines love it."}),
+ P("Thanks (may your goodness increase)","كتر خيرك","kattar kheir{ak|ik}",{only:"eg",r:["Your goodness came first","خيرك سابق","kheir{ak|ik} saabi'"],n:"The warm Egyptian thank-you for a favor."}),
 ]},
 {id:"greetings", name:"Greetings", ar:"التحيات", desc:"Greetings come in pairs. Learn the reply and you'll sound like you've been here a while.", items:[
  P("Hello","مرحبا","mar7aba",{r:["Two hellos","مرحبتين","mar7abtein"]}),
- P("Hi","أهلاً","ahlan",{r:["Hi (back)","أهلين","ahlein"]}),
- P("Hi / welcome (warm, casual)","هلا","hala",{n:"“ya hala!” or “hala wallah!” when a friend shows up."}),
- P("Welcome","أهلاً وسهلاً","ahlan wa sahlan",{r:["Welcome to you","أهلاً فيك","ahlan fee{k|ki}"],n:"You will hear this fifty times a day. The reply is “ahlan feek”."}),
+ P("Hi","أهلاً","ahlan",{r:["Hi (back)","أهلين","ahlein"],egr:["Hi to you","أهلاً بيك","ahlan bee{k|ki}"]}),
+ P("Hi / welcome (warm, casual)","هلا","hala",{n:"“ya hala!” when a friend shows up. Jordanians add “hala wallah!”"}),
+ P("Welcome","أهلاً وسهلاً","ahlan wa sahlan",{r:["Welcome to you","أهلاً فيك","ahlan fee{k|ki}"],egr:["Welcome to you","أهلاً بيك","ahlan bee{k|ki}"],n:"You will hear this fifty times a day."}),
  P("Peace be upon you","السلام عليكم","es-salaamu 3aleikum",{r:["And upon you, peace","وعليكم السلام","w 3aleikum es-salaam"]}),
- P("Good morning","صباح الخير","Sabaa7 el-kheir",{r:["Morning of light","صباح النور","Sabaa7 en-noor"]}),
+ P("Good morning","صباح الخير","Sabaa7 el-kheir",{r:["Morning of light","صباح النور","Sabaa7 en-noor"],egn:"Egyptians also answer “Sabaa7 el-full” (jasmine morning) or “Sabaa7 el-3asal” (honey morning)."}),
  P("Good evening","مساء الخير","masa el-kheir",{r:["Evening of light","مساء النور","masa en-noor"]}),
  P("Good night","تصبح على خير","tiSba7{|i} 3ala kheir",{r:["And you're one of its people","وإنت من أهله","w in{ta|ti} min ahlo"],l:"may you wake to goodness"}),
- P("How are you?","كيفك؟","keef{ak|ik}?",{n:"Also: keef el-7aal? (how's the state?), shu akhbaarak? (what's your news?)"}),
- P("I'm fine, thank God","منيح، الحمد لله","mnee7[|a], el-7amdulillah"),
- P("What's new?","شو أخبارك؟","shu akhbaar{ak|ik}?",{r:["All good","كلو تمام","kullo tamaam"]}),
- P("What's up?","شو في ما في؟","shu fi ma fi?",{l:"what's there, what's not there"}),
- P("What's your name?","شو اسمك؟","shu ism{ak|ik}?"),
+ P("How are you?","كيفك؟","keef{ak|ik}?",{eg:["إزيك؟","ezzayy{ak|ik}?"],jn:"Also: keef el-7aal? shu akhbaarak?",egn:"Also: 3aamil eh? (what are you doing?) and akhbaarak eh?"}),
+ P("How's it going?","كيف الحال؟","keef el-7aal?",{eg:["عامل إيه؟","3aam{il|la} eh?"]}),
+ P("I'm fine, thank God","منيح، الحمد لله","mnee7[|a], el-7amdulillah",{eg:["كويس، الحمد لله","[kwayyis|kwayyisa], el-7amdulillah"]}),
+ P("What's new?","شو أخبارك؟","shu akhbaar{ak|ik}?",{eg:["أخبارك إيه؟","akhbaar{ak|ik} eh?"],r:["All good","كلو تمام","kullo tamaam"],egr:["All good","كله تمام","kullu tamaam"]}),
+ P("What's up?","شو في ما في؟","shu fi ma fi?",{only:"jo",l:"what's there, what's not there"}),
+ P("What's your name?","شو اسمك؟","shu ism{ak|ik}?",{eg:["اسمك إيه؟","ism{ak|ik} eh?"]}),
  P("My name is…","اسمي…","ismi…"),
- P("Nice to meet you","تشرفنا","tsharrafna",{l:"we've been honored",r:["The honor is ours","الشرف إلنا","esh-sharaf ilna"]}),
- P("Where are you from?","من وين إنت؟","min wein in{ta|ti}?"),
+ P("Nice to meet you","تشرفنا","tsharrafna",{eg:["فرصة سعيدة","furSa sa3eeda"],l:"we've been honored",r:["The honor is ours","الشرف إلنا","esh-sharaf ilna"],egr:["I'm the happier one","أنا أسعد","ana as3ad"]}),
+ P("Where are you from?","من وين إنت؟","min wein in{ta|ti}?",{eg:["إنت منين؟","in{ta|ti} minein?"]}),
  P("I'm from America","أنا من أمريكا","ana min amreeka",{n:"Britain: bariTaanya · Canada: kanada · Australia: ustraalya · Germany: almaanya · France: faransa · Holland: holanda"}),
  P("Long time no see","عاش من شافك","3aash min shaaf{ak|ik}",{l:"whoever sees you lives"}),
- P("See you later","بشوفك بعدين","bashoof{ak|ik} ba3dein"),
- P("Take care","دير بالك","deer{|i} baal{ak|ik}"),
+ P("See you later","بشوفك بعدين","bashoof{ak|ik} ba3dein",{eg:["أشوفك بعدين","ashoof{ak|ik} ba3dein"]}),
+ P("Take care","دير بالك","deer{|i} baal{ak|ik}",{eg:["خلي بالك من نفسك","khalli baal{ak|ik} min nafs{ak|ik}"]}),
  P("Goodbye","مع السلامة","ma3 es-salaame"),
  P("Bye (casual)","يلا باي / سلام","yalla bye / salaam"),
  P("God be with you (goodbye)","الله معك","allah ma3{ak|ik}"),
- P("Welcome to Jordan","أهلاً وسهلاً بالأردن","ahlan wa sahlan bil-urdun"),
+ P("Welcome to Jordan / Egypt","أهلاً وسهلاً بالأردن","ahlan wa sahlan bil-urdun",{eg:["أهلاً وسهلاً في مصر","ahlan wa sahlan fi maSr"],egn:"Egyptians call their country and Cairo both “maSr”."}),
 ]},
 {id:"polite", name:"Politeness & Replies", ar:"المجاملات", desc:"Set phrases with set answers. Most are blessings; the reply returns the blessing.", items:[
  P("Thank you","شكراً","shukran",{r:["You're welcome","عفواً","3afwan"]}),
- P("Thank you very much","شكراً كتير","shukran kteer"),
- P("Thanks (bless your hands)","يسلمو إيديك","yislamu eidei{k|ki}",{n:"For food, a gift, or a favor done by hand. Short form: “yislamu”.",r:["And your hands","وإيديك","w eidei{k|ki}"]}),
+ P("Thank you very much","شكراً كتير","shukran kteer",{eg:["شكراً جزيلاً","shukran gazeelan"]}),
+ P("Thanks (bless your hands)","يسلمو إيديك","yislamu eidei{k|ki}",{eg:["تسلم إيدك","tislam eed{ak|ik}"],n:"For food, a gift, or a favor done by hand.",r:["And your hands","وإيديك","w eidei{k|ki}"],egr:["And your hands","وإيدك","w eed{ak|ik}"]}),
+ P("Thanks (may your goodness increase)","كتر خيرك","kattar kheir{ak|ik}",{only:"eg",r:["Your goodness came first","خيرك سابق","kheir{ak|ik} saabi'"]}),
  P("Bless you / thanks (reply to a compliment or favor)","تسلم","tislam{|i}"),
- P("You're welcome / gladly","تكرم","tikram{|i}",{n:"Also “tikram 3einak” (your eye is honored) = with pleasure."}),
+ P("You're welcome / gladly","تكرم","tikram{|i}",{eg:["من عنيا","min 3eneyya"],jn:"Also “tikram 3einak” (your eye is honored).",egn:"Literally “from my eyes”. Also “3ala raasi”."}),
  P("With pleasure / at your service","على راسي","3ala raasi",{l:"on my head"}),
  P("Don't mention it","ولا يهمك","wala yhimm{ak|ik}",{l:"don't let it concern you"}),
- P("Please, go ahead / here you are","تفضل","tfaDDal{|i}",{n:"Handing something over, offering a seat, inviting someone in or to eat."}),
+ P("Please, go ahead / here you are","تفضل","tfaDDal{|i}",{eg:["اتفضل","itfaDDal{|i}"],n:"Handing something over, offering a seat, inviting someone in or to eat."}),
  P("Please (requesting)","لو سمحت","law sama7{t|ti}",{n:"More formal: min faDlak / min faDlik."}),
- P("Please, I beg you","الله يخليك","allah ykhallee{k|ki}",{l:"may God keep you"}),
- P("Excuse me (passing by / leaving)","عن إذنك","3an izn{ak|ik}",{l:"with your permission"}),
+ P("Please, I beg you","الله يخليك","allah ykhallee{k|ki}",{eg:["ربنا يخليك","rabbina ykhallee{k|ki}"],l:"may God keep you"}),
+ P("Excuse me (passing by / leaving)","عن إذنك","3an izn{ak|ik}",{eg:["بعد إذنك","ba3d izn{ak|ik}"],l:"with your permission"}),
  P("Sorry","آسف","[aasef|aasfe]"),
- P("I apologize","بعتذر","ba3tizir"),
+ P("I apologize","بعتذر","ba3tizir",{eg:["أنا [آسف|آسفة] جداً","ana [aasif|asfa] giddan"]}),
  P("Never mind / it's fine","معليش","ma3leish"),
- P("No problem","ما في مشكلة","ma fi mushkile",{n:"Also: mish mushkile."}),
+ P("No problem","ما في مشكلة","ma fi mushkile",{eg:["مفيش مشكلة","mafeesh mushkila"]}),
  P("No big deal","بسيطة","baseeTa",{l:"simple"}),
- P("Bon appétit / enjoy","صحتين","Sa7tein",{l:"two healths",r:["On your heart","على قلبك","3ala galb{ak|ik}"],n:"Said before eating, and to anyone who just finished a drink or meal."}),
+ P("Bon appétit / enjoy","صحتين","Sa7tein",{eg:["بالهنا والشفا","bil-hana wish-shifa"],l:"two healths",r:["On your heart","على قلبك","3ala galb{ak|ik}"],egr:["May God bless you with the same","الله يهنيك","allah yihannee{k|ki}"],n:"Said before eating, and to anyone who just finished a drink or meal."}),
  P("Enjoy (after a shower, haircut or shave)","نعيماً","na3eeman",{r:["God bless you","الله ينعم عليك","allah yin3am 3alei{k|ki}"]}),
  P("Congratulations","مبروك","mabrook",{r:["God bless you","الله يبارك فيك","allah ybaarek fee{k|ki}"]}),
  P("Get well soon","سلامتك","salaamt{ak|ik}",{r:["God keep you safe","الله يسلمك","allah ysallm{ak|ik}"]}),
  P("God willing","إن شاء الله","inshallah"),
  P("Thank God","الحمد لله","el-7amdulillah",{n:"After a meal, after a safe arrival, when asked how you are."}),
  P("God has willed it (admiring, complimenting)","ما شاء الله","mashallah",{n:"Say it when you praise a child, a home, or a meal. It wards off envy."}),
- P("You lit up the place (to a guest)","نورت","nawwar{t|ti}",{r:["It's lit by its people","منور بأهله","mnawwar bi-ahlo"]}),
- P("Happy holiday","كل عام وإنت بخير","kull 3aam w in{ta|ti} bkheir",{n:"For Eid, New Year, birthdays. Also “3eed mubaarak”."}),
+ P("You lit up the place (to a guest)","نورت","nawwar{t|ti}",{eg:["نورت مصر","nawwar{t|ti} maSr"],r:["It's lit by its people","منور بأهله","mnawwar bi-ahlo"],egr:["Egypt is lit by its people","مصر منورة بأهلها","maSr mnawwara bi-ahlaha"],egn:"You'll hear “nawwart maSr” constantly. Answer with the reply and watch the smile."}),
+ P("Happy holiday","كل عام وإنت بخير","kull 3aam w in{ta|ti} bkheir",{eg:["كل سنة وإنت طيب","kull sana w in{ta Tayyib|ti Tayyiba}"],n:"For Eid, New Year, birthdays. Also “3eed mubaarak”."}),
  P("Ramadan greeting","رمضان كريم","ramaDaan kareem",{r:["God is more generous","الله أكرم","allahu akram"]}),
 ]},
-{id:"smalltalk", name:"Small Talk", ar:"دردشة", desc:"Jordanians will ask. Having three answers ready turns a taxi ride into a conversation.", items:[
- P("How's it going?","كيف الحال؟","keef el-7aal?"),
- P("Everything's fine","كل شي تمام","kull shi tamaam"),
- P("I'm a tourist","أنا سايح","ana [saaye7|saay7a]"),
- P("I'm here on holiday","أنا هون بعطلة","ana hoon bi-3uTle"),
- P("First time in Jordan","أول مرة بالأردن","awwal marra bil-urdun"),
- P("I love Jordan","بحب الأردن","ba7ibb el-urdun"),
- P("Jordan is beautiful","الأردن حلو","el-urdun 7ilu"),
- P("The people are kind","الناس طيبين","en-naas Tayybeen"),
- P("Do you like Jordan? (you'll be asked)","عجبك الأردن؟","3ajab{ak|ik} el-urdun?",{r:["A lot!","كتير!","kteer!"]}),
- P("I like it","عجبني","3ajabni",{n:"About food, a place, anything. “kteer 3ajabni” = I love it."}),
- P("What do you do?","شو بتشتغل؟","shu btishtgh{il|li}?"),
- P("Where are you staying?","وين نازل؟","wein naaz{il|le}?"),
- P("Are you married?","إنت متزوج؟","in{ta|ti} mitzaww{ej|je}?",{n:"A normal question here, not a flirt."}),
- P("Do you have kids?","عندك ولاد؟","3ind{ak|ik} wlaad?"),
- P("How old are you?","قديش عمرك؟","gaddeesh 3umr{ak|ik}?"),
- P("I'm … years old","عمري … سنة","3umri … sane"),
- P("I've been here … days","أنا هون من … أيام","ana hoon min … ayyaam"),
- P("Really?","عن جد؟","3an jad?"),
- P("I swear / really!","والله","wallah",{n:"As a question, “wallah?” = seriously?"}),
+{id:"smalltalk", name:"Small Talk", ar:"دردشة", desc:"People will ask. Having three answers ready turns a taxi ride into a conversation.", items:[
+ P("Everything's fine","كل شي تمام","kull shi tamaam",{eg:["كل حاجة تمام","kull 7aaga tamaam"]}),
+ P("I'm a tourist","أنا سايح","ana [saaye7|saay7a]",{eg:["أنا [سايح|سايحة]","ana [saayi7|say7a]"]}),
+ P("I'm here on holiday","أنا هون بعطلة","ana hoon bi-3uTle",{eg:["أنا هنا في أجازة","ana hina fi agaaza"]}),
+ P("First time in Jordan / Egypt","أول مرة بالأردن","awwal marra bil-urdun",{eg:["أول مرة في مصر","awwil marra fi maSr"]}),
+ P("I love Jordan / Egypt","بحب الأردن","ba7ibb el-urdun",{eg:["بحب مصر","ba7ibb maSr"]}),
+ P("Jordan / Egypt is beautiful","الأردن حلو","el-urdun 7ilu",{eg:["مصر حلوة","maSr 7ilwa"]}),
+ P("The people are kind","الناس طيبين","en-naas Tayybeen",{eg:["الناس طيبين","en-naas Tayyibeen"]}),
+ P("Do you like it here? (you'll be asked)","عجبك الأردن؟","3ajab{ak|ik} el-urdun?",{eg:["عجبتك مصر؟","3agabit{ak|ik} maSr?"],r:["A lot!","كتير!","kteer!"],egr:["A lot!","قوي!","'awi!"]}),
+ P("I like it","عجبني","3ajabni",{eg:["عجبني","3agabni"],n:"About food, a place, anything. Add kteer / 'awi for “I love it”."}),
+ P("What do you do?","شو بتشتغل؟","shu btishtgh{il|li}?",{eg:["بتشتغل إيه؟","btishtagh{al|ali} eh?"]}),
+ P("Where are you staying?","وين نازل؟","wein naaz{il|le}?",{eg:["نازل فين؟","naaz{il|la} fein?"]}),
+ P("Are you married?","إنت متزوج؟","in{ta|ti} mitzaww{ej|je}?",{eg:["إنت [متجوز|متجوزة]؟","in{ta|ti} mitgaww{iz|iza}?"],n:"A normal question here, not a flirt."}),
+ P("Do you have kids?","عندك ولاد؟","3ind{ak|ik} wlaad?",{eg:["عندك عيال؟","3and{ak|ik} 3iyaal?"]}),
+ P("How old are you?","قديش عمرك؟","gaddeesh 3umr{ak|ik}?",{eg:["عندك كام سنة؟","3and{ak|ik} kaam sana?"]}),
+ P("I'm … years old","عمري … سنة","3umri … sane",{eg:["عندي … سنة","3andi … sana"]}),
+ P("I've been here … days","أنا هون من … أيام","ana hoon min … ayyaam",{eg:["أنا هنا من … أيام","ana hina min … ayyaam"]}),
+ P("Really?","عن جد؟","3an jad?",{eg:["بجد؟","bigadd?"]}),
+ P("I swear / really!","والله","wallah",{n:"As a question, “wallah?” = seriously? Egyptians say “wallaahi” too."}),
  P("Of course","أكيد / طبعاً","akeed / Tab3an"),
  P("Maybe","يمكن","yimkin"),
- P("I don't know","ما بعرف","ma ba3rif"),
- P("Very / a lot","كتير","kteer"),
- P("A little","شوي","shwayy"),
+ P("I don't know","ما بعرف","ma ba3rif",{eg:["مش [عارف|عارفة]","mish [3aarif|3arfa]"]}),
+ P("Very / a lot","كتير","kteer",{eg:["قوي / كتير","'awi / kiteer"]}),
+ P("A little","شوي","shwayy",{eg:["شوية","shwayya"]}),
  P("I'm happy","أنا مبسوط","ana [mabsooT|mabsooTa]"),
- P("I'm tired","أنا تعبان","ana [ta3baan|ta3baane]"),
- P("It's hot (weather)","الدنيا شوب","ed-dinya shoob"),
- P("It's cold (weather)","الدنيا برد","ed-dinya bard"),
+ P("I'm tired","أنا تعبان","ana [ta3baan|ta3baane]",{eg:["أنا [تعبان|تعبانة]","ana [ta3baan|ta3baana]"]}),
+ P("It's hot (weather)","الدنيا شوب","ed-dinya shoob",{eg:["الدنيا حر","ed-dunya 7arr"]}),
+ P("It's cold (weather)","الدنيا برد","ed-dinya bard",{eg:["الدنيا برد","ed-dunya bard"]}),
+ P("Wow! / how lovely","يا سلام!","ya salaam!",{n:"Admiring, or sarcastic, depending on the eyebrows."}),
 ]},
-{id:"basics", name:"Questions & Basics", ar:"أسئلة وأساسيات", desc:"Question words, pronouns and the little connectors that let you build your own sentences.", items:[
- P("What?","شو؟","shu?"),
- P("Where?","وين؟","wein?"),
- P("When?","إيمتى؟","eimta?"),
- P("Why?","ليش؟","leish?"),
- P("How?","كيف؟","keef?"),
+{id:"basics", name:"Questions & Basics", ar:"أسئلة وأساسيات", desc:"Question words, pronouns and the little connectors that let you build your own sentences. This is where the two dialects differ most.", items:[
+ P("What?","شو؟","shu?",{eg:["إيه؟","eh?"],egn:"Egyptian question words go at the end: “ismak eh?” = your name what?"}),
+ P("Where?","وين؟","wein?",{eg:["فين؟","fein?"]}),
+ P("When?","إيمتى؟","eimta?",{eg:["إمتى؟","imta?"]}),
+ P("Why?","ليش؟","leish?",{eg:["ليه؟","leh?"]}),
+ P("How?","كيف؟","keef?",{eg:["إزاي؟","izzayy?"]}),
  P("Who?","مين؟","meen?"),
- P("Which?","أي؟","ayy?"),
- P("How much / how many?","قديش / كم؟","gaddeesh / kam?",{n:"gaddeesh for prices and amounts, kam for counting things."}),
- P("Is there…? / Do you have…?","في…؟","fi…?",{n:"“fi” = there is. “fi wai-fai?” “fi ghurfe?” Answer: fi / ma fi."}),
- P("There isn't / none","ما في","ma fi"),
- P("I have","عندي","3indi"),
- P("I don't have","ما عندي","ma 3indi"),
- P("Do you have…?","عندك…؟","3ind{ak|ik}…?"),
- P("Do you want…?","بدك…؟","bidd{ak|ik}…?"),
- P("I need…","لازمني…","laazimni…",{n:"Also “ba7taaj”. laazim + verb = must: laazim aroo7 (I must go)."}),
- P("I can","بقدر","bagdar"),
- P("I can't","ما بقدر","ma bagdar"),
- P("I know","بعرف","ba3rif"),
- P("I understand","فهمت","fhimit"),
- P("I don't understand","ما فهمت","ma fhimit"),
- P("Slowly, please","شوي شوي لو سمحت","shwayy shwayy law sama7{t|ti}"),
- P("Again? / one more time","مرة تانية؟","marra taanye?"),
- P("What does … mean?","شو يعني…؟","shu ya3ni…?"),
- P("How do you say … in Arabic?","كيف بتقول … بالعربي؟","keef btigool{|i} … bil-3arabi?"),
- P("Write it down, please","اكتبها لو سمحت","iktub{|ee}ha law sama7{t|ti}"),
+ P("Which?","أي؟","ayy?",{eg:["أنهي؟","anhi?"]}),
+ P("How much / how many?","قديش / كم؟","gaddeesh / kam?",{eg:["بكام / كام؟","bikaam / kaam?"],n:"The first is for prices, the second for counting."}),
+ P("Is there…? / Do you have…?","في…؟","fi…?",{eg:["فيه…؟","fee…?"],n:"“fi wai-fai?” “fi ghurfe?” The answer is fi or ma fi (Egypt: fee / mafeesh)."}),
+ P("There isn't / none","ما في","ma fi",{eg:["مفيش","mafeesh"]}),
+ P("I have","عندي","3indi",{eg:["عندي","3andi"]}),
+ P("I don't have","ما عندي","ma 3indi",{eg:["معنديش","ma3andeesh"]}),
+ P("Do you have…?","عندك…؟","3ind{ak|ik}…?",{eg:["عندك…؟","3and{ak|ik}…?"]}),
+ P("Do you want…?","بدك…؟","bidd{ak|ik}…?",{eg:["[عايز|عايزة]…؟","{3aayiz|3ayza}…?"]}),
+ P("I need…","لازمني…","laazimni…",{eg:["[محتاج|محتاجة]…","[mi7taag|mi7taaga]…"],jn:"laazim + verb = must: laazim aroo7 (I must go).",egn:"laazim works in Egypt too: laazim aroo7."}),
+ P("I can","بقدر","bagdar",{eg:["أقدر","a'dar"]}),
+ P("I can't","ما بقدر","ma bagdar",{eg:["ماقدرش","ma'darsh"]}),
+ P("I know","بعرف","ba3rif",{eg:["[عارف|عارفة]","[3aarif|3arfa]"]}),
+ P("I understand","فهمت","fhimit",{eg:["[فاهم|فاهمة]","[faahim|fahma]"]}),
+ P("I don't understand","ما فهمت","ma fhimit",{eg:["مش [فاهم|فاهمة]","mish [faahim|fahma]"]}),
+ P("Slowly, please","شوي شوي لو سمحت","shwayy shwayy law sama7{t|ti}",{eg:["بالراحة لو سمحت","bir-raa7a law sama7{t|ti}"]}),
+ P("Again? / one more time","مرة تانية؟","marra taanye?",{eg:["تاني؟","taani?"]}),
+ P("What does … mean?","شو يعني…؟","shu ya3ni…?",{eg:["… يعني إيه؟","… ya3ni eh?"]}),
+ P("How do you say … in Arabic?","كيف بتقول … بالعربي؟","keef btigool{|i} … bil-3arabi?",{eg:["إزاي تقول … بالعربي؟","izzayy ti'ool{|i} … bil-3arabi?"]}),
+ P("Write it down, please","اكتبها لو سمحت","iktub{|ee}ha law sama7{t|ti}",{eg:["اكتبها لو سمحت","iktib{|ee}ha law sama7{t|ti}"]}),
  P("I","أنا","ana"),
  P("You","إنت / إنتي","in{ta|ti}",{n:"inta to a man, inti to a woman."}),
- P("He / she","هو / هي","huwwe / hiyye"),
+ P("He / she","هو / هي","huwwe / hiyye",{eg:["هو / هي","huwwa / hiyya"]}),
  P("We","إحنا","i7na"),
- P("They","هم","humme"),
- P("This","هاد / هاي","haad / haay",{n:"haad for masculine nouns, haay for feminine. When unsure, point and say haad."}),
- P("That","هداك / هديك","hadaak / hadeek"),
- P("Here","هون","hoon"),
- P("There","هناك","hunaak"),
- P("Now","هلأ","halla'"),
+ P("They","هم","humme",{eg:["هم","humma"]}),
+ P("This","هاد / هاي","haad / haay",{eg:["ده / دي","da / di"],n:"First for masculine nouns, second for feminine. When unsure, point and use the first."}),
+ P("That","هداك / هديك","hadaak / hadeek",{eg:["ده / دي","da / di"],egn:"Egyptians use da / di for both this and that."}),
+ P("Here","هون","hoon",{eg:["هنا","hina"]}),
+ P("There","هناك","hunaak",{eg:["هناك","hinaak"]}),
+ P("Now","هلأ","halla'",{eg:["دلوقتي","dilwa'ti"]}),
  P("Later","بعدين","ba3dein"),
- P("And","و","w"),
- P("Or","أو / ولا","aw / willa"),
+ P("And","و","w",{eg:["و","wi"]}),
+ P("Or","أو / ولا","aw / willa",{eg:["أو / ولا","aw / walla"]}),
  P("But / only / enough","بس","bass",{n:"Three meanings: “bass shwayy” (only a little), “bass!” (enough!), “7ilu bass ghaali” (nice but expensive)."}),
- P("Because","لأنو","la'anno"),
- P("With / without","مع / بدون","ma3 / bidoon"),
+ P("Because","لأنو","la'anno",{eg:["عشان","3ashaan"]}),
+ P("With / without","مع / بدون","ma3 / bidoon",{eg:["مع / من غير","ma3a / min gheir"]}),
  P("Also","كمان","kamaan"),
- P("Nothing","ولا شي","wala shi"),
- P("Everything","كل شي","kull shi"),
- P("Something","شي","shi"),
+ P("Nothing","ولا شي","wala shi",{eg:["ولا حاجة","wala 7aaga"]}),
+ P("Everything","كل شي","kull shi",{eg:["كل حاجة","kull 7aaga"]}),
+ P("Something","شي","shi",{eg:["حاجة","7aaga"]}),
 ]},
-{id:"numbers", name:"Numbers & Money", ar:"الأرقام والمصاري", desc:"Prices are quoted in dinars (JD), often called “leera”. 1 JD = 100 piasters (girsh). Type any number below to hear how it's said. For reading the digits themselves, see Numerals.", tool:"numbers", items:[
- P("0","صفر","Sifr"), P("1","واحد","waa7ad"), P("2","تنين","tnein"), P("3","تلاتة","talaate"), P("4","أربعة","arba3a"),
- P("5","خمسة","khamse"), P("6","ستة","sitte"), P("7","سبعة","sab3a"), P("8","تمانية","tamaanye"), P("9","تسعة","tis3a"),
- P("10","عشرة","3ashara"), P("11","حدعش","7da3sh"), P("12","طنعش","tna3sh"), P("13","تلتعش","talatta3sh"), P("14","أربعطعش","arba3ta3sh"),
- P("15","خمسطعش","khamsta3sh"), P("16","سطعش","sitta3sh"), P("17","سبعطعش","saba3ta3sh"), P("18","تمنطعش","tamanta3sh"), P("19","تسعطعش","tisa3ta3sh"),
- P("20","عشرين","3ishreen"), P("21","واحد وعشرين","waa7ad w 3ishreen",{n:"Units come first: one-and-twenty."}), P("30","تلاتين","talaateen"), P("40","أربعين","arb3een"),
+{id:"numbers", name:"Numbers & Money", ar:"الأرقام والمصاري", desc:{jo:"Prices are quoted in dinars (JD), often called “leera”. 1 JD = 100 piasters (girsh). Type any number below to hear how it's said.",eg:"Prices are in Egyptian pounds, “gineeh” (EGP). 1 pound = 100 piasters ('irsh). Type any number below to hear how it's said.",both:"Jordan uses the dinar (JD), Egypt the pound (gineeh). Number words are close cousins; the differences are mostly 2 and the teens. Type any number below to hear it in both."}, tool:"numbers", items:[
+ P("0","صفر","Sifr"), P("1","واحد","waa7ad",{eg:["واحد","waa7id"]}), P("2","تنين","tnein",{eg:["اتنين","itnein"]}), P("3","تلاتة","talaate",{eg:["تلاتة","talaata"]}), P("4","أربعة","arba3a"),
+ P("5","خمسة","khamse",{eg:["خمسة","khamsa"]}), P("6","ستة","sitte",{eg:["ستة","sitta"]}), P("7","سبعة","sab3a"), P("8","تمانية","tamaanye",{eg:["تمانية","tamanya"]}), P("9","تسعة","tis3a"),
+ P("10","عشرة","3ashara"), P("11","حدعش","7da3sh",{eg:["حداشر","7idaashar"]}), P("12","طنعش","tna3sh",{eg:["اتناشر","itnaashar"]}), P("13","تلتعش","talatta3sh",{eg:["تلاتاشر","talattaashar"]}), P("14","أربعطعش","arba3ta3sh",{eg:["أربعتاشر","arba3taashar"]}),
+ P("15","خمسطعش","khamsta3sh",{eg:["خمستاشر","khamastaashar"]}), P("16","سطعش","sitta3sh",{eg:["ستاشر","sittaashar"]}), P("17","سبعطعش","saba3ta3sh",{eg:["سبعتاشر","saba3taashar"]}), P("18","تمنطعش","tamanta3sh",{eg:["تمنتاشر","tamantaashar"]}), P("19","تسعطعش","tisa3ta3sh",{eg:["تسعتاشر","tisa3taashar"]}),
+ P("20","عشرين","3ishreen"), P("21","واحد وعشرين","waa7ad w 3ishreen",{eg:["واحد وعشرين","waa7id wi 3ishreen"],n:"Units come first: one-and-twenty."}), P("30","تلاتين","talaateen"), P("40","أربعين","arb3een",{eg:["أربعين","arbi3een"]}),
  P("50","خمسين","khamseen"), P("60","ستين","sitteen"), P("70","سبعين","sab3een"), P("80","تمانين","tamaneen"), P("90","تسعين","tis3een"),
- P("100","مية","miyye"), P("200","ميتين","miteen"), P("300","تلت مية","talat miyye"), P("1,000","ألف","alf"), P("2,000","ألفين","alfein"),
- P("Half","نص","nuSS"), P("Quarter","ربع","rubu3"),
- P("Dinar (JD)","دينار","dinaar",{n:"Locals often say “leera”. 2 = dinaareen, 3–10 = danaaneer, 11+ = dinaar again."}),
- P("Piaster (1/100 dinar)","قرش","girsh",{n:"Plural: gruush. 50 piasters = nuSS dinaar / nuSS leera."}),
- P("How much?","قديش؟","gaddeesh?"),
- P("How much altogether?","قديش كلو؟","gaddeesh kullo?"),
+ P("100","مية","miyye",{eg:["مية","miyya"]}), P("200","ميتين","miteen"), P("300","تلت مية","talat miyye",{eg:["تلتمية","tultumiyya"]}), P("1,000","ألف","alf"), P("2,000","ألفين","alfein"),
+ P("Half","نص","nuSS"), P("Quarter","ربع","rubu3",{eg:["ربع","rub3"]}),
+ P("Dinar (JD)","دينار","dinaar",{only:"jo",n:"Locals often say “leera”. 2 = dinaareen, 3–10 = danaaneer, 11+ = dinaar again."}),
+ P("Pound (EGP)","جنيه","gineeh",{only:"eg",n:"2 = gineihein. After 3–10 it stays singular: khamsa gneih. 100 = meet gneih."}),
+ P("Piaster","قرش","girsh",{eg:["قرش","'irsh"],jn:"100 to the dinar. 50 piasters = nuSS dinaar.",egn:"100 to the pound. Coins are rare now; prices round to the pound."}),
+ P("How much?","قديش؟","gaddeesh?",{eg:["بكام؟","bikaam?"]}),
+ P("How much altogether?","قديش كلو؟","gaddeesh kullo?",{eg:["كله بكام؟","kullu bikaam?"]}),
  P("Expensive","غالي","ghaali"),
- P("Cheap","رخيص","rkheeS"),
- P("Do you have change?","عندك فراطة؟","3ind{ak|ik} fraaTa?"),
- P("I don't have change","ما عندي فراطة","ma 3indi fraaTa"),
- P("Keep the change","خلي الباقي","khalli el-baagi"),
+ P("Cheap","رخيص","rkheeS",{eg:["رخيص","rikheeS"]}),
+ P("Do you have change?","عندك فراطة؟","3ind{ak|ik} fraaTa?",{eg:["عندك فكة؟","3and{ak|ik} fakka?"]}),
+ P("I don't have change","ما عندي فراطة","ma 3indi fraaTa",{eg:["معنديش فكة","ma3andeesh fakka"],egn:"Taxi drivers rarely have change. Carry small notes."}),
+ P("Keep the change","خلي الباقي","khalli el-baagi",{eg:["خلي الباقي","khalli el-baa'i"]}),
  P("Free (no charge)","ببلاش","bibalaash"),
- P("Do you take cards?","بتقبل فيزا؟","btigbal{|i} feeza?",{n:"Cash still rules outside Amman and Aqaba."}),
+ P("Do you take cards?","بتقبل فيزا؟","btigbal{|i} feeza?",{eg:["بتقبل فيزا؟","bti'bal{|i} feeza?"],n:"Cash still rules outside big cities and hotels."}),
  P("Cash","كاش","kaash"),
- P("ATM","صراف","Sarraaf",{n:"wein eS-Sarraaf? Also just “ATM”."}),
+ P("ATM","صراف","Sarraaf",{eg:["ماكينة ATM","makanat ATM"],n:"Or just say “ATM”."}),
  P("Money exchange","صرافة","Siraafa"),
  P("Receipt / bill","فاتورة","faatoora"),
- P("Discount","خصم","khaSim"),
- P("Money","مصاري","maSaari"),
+ P("Discount","خصم","khaSim",{eg:["خصم","khaSm"]}),
+ P("Money","مصاري","maSaari",{eg:["فلوس","filoos"]}),
+ P("Tip (baksheesh)","إكرامية / بقشيش","ikraamiyye / bakhsheesh",{eg:["بقشيش","ba'sheesh"],egn:"Small tips grease everything in Egypt: bathroom attendants, anyone who helps with a bag, the man who “finds” you a seat."}),
 ]},
 {id:"numerals", name:"Numerals ٠١٢٣", ar:"الأرقام الهندية", desc:"The digits on price tags, plates and bus numbers. In Egypt they are everywhere; in Jordan you'll see both sets. Numbers read left to right even inside right-to-left text.", tool:"numerals"},
-{id:"taxi", name:"Taxi & Directions", ar:"التكسي والاتجاهات", desc:"Amman is navigated by numbered circles (duwwaar). Yellow taxis should run the meter; Uber and Careem work well too.", items:[
+{id:"taxi", name:"Taxi & Directions", ar:"التكسي والاتجاهات", desc:{jo:"Amman is navigated by numbered circles (duwwaar). Yellow taxis should run the meter; Uber and Careem work well too.",eg:"Cairo is navigated by squares (meedaan). White taxis have meters that are rarely used; agree a price or use Uber, Careem or inDrive.",both:"Amman goes by numbered circles, Cairo by squares. In both, ride-hailing apps save you the fare negotiation."}, items:[
  P("Taxi","تكسي","taksi"),
- P("To …, please","على … لو سمحت","3ala … law sama7{t|ti}",{n:"3ala el-balad = to downtown. 3ala el-maTaar = to the airport."}),
- P("Take me to…","خدني على…","khud{|ee}ni 3ala…"),
- P("Do you know…?","بتعرف…؟","bti3raf{|i}…?"),
- P("How much to…?","قديش على…؟","gaddeesh 3ala…?"),
- P("Turn on the meter, please","شغل العداد لو سمحت","shaghgh{il|li} el-3addaad law sama7{t|ti}"),
- P("Stop here","وقف هون","wagg{if|fi} hoon"),
- P("Here is fine","هون منيح","hoon mnee7"),
- P("Wait a moment","استنى شوي","istann{a|i} shwayy"),
- P("Straight ahead","دغري","dughri"),
- P("Right","يمين","ymeen"),
- P("Left","شمال","shmaal"),
- P("Turn right / left","لف يمين / شمال","liff{|i} ymeen / shmaal"),
- P("Near","قريب","gareeb"),
- P("Far","بعيد","b3eed"),
- P("Is it far?","بعيد؟","b3eed?"),
- P("Is this the way to…?","هاد الطريق على…؟","haad eT-Tareeg 3ala…?"),
- P("I'm lost","أنا ضايع","ana [Daaye3|Daay3a]"),
- P("I'm going to…","أنا رايح على…","ana [raaye7|raay7a] 3ala…"),
- P("Slowly / take it easy","على مهلك","3ala mahl{ak|ik}",{n:"Useful with fast drivers."}),
- P("Quickly","بسرعة","bsur3a"),
- P("Circle / roundabout","دوار","duwwaar",{n:"Amman's 1st to 8th Circles: ed-duwwaar el-awwal, et-taani, et-taalit, er-raabi3, el-khaamis, es-saadis, es-saabi3, et-taamin."}),
- P("Downtown (Amman)","البلد / وسط البلد","el-balad / wasaT el-balad"),
+ P("To …, please","على … لو سمحت","3ala … law sama7{t|ti}",{n:"3ala el-maTaar = to the airport."}),
+ P("Take me to…","خدني على…","khud{|ee}ni 3ala…",{eg:["وصلني…","waSSal{ni|eeni}…"]}),
+ P("Do you know…?","بتعرف…؟","bti3raf{|i}…?",{eg:["تعرف…؟","ti3raf{|i}…?"]}),
+ P("How much to…?","قديش على…؟","gaddeesh 3ala…?",{eg:["بكام لـ…؟","bikaam li…?"]}),
+ P("Turn on the meter, please","شغل العداد لو سمحت","shaghgh{il|li} el-3addaad law sama7{t|ti}",{eg:["شغل العداد لو سمحت","shaghgh{al|ali} el-3addaad law sama7{t|ti}"],egn:"Expect a shrug. Agreeing the price first is the norm."}),
+ P("Stop here","وقف هون","wagg{if|fi} hoon",{eg:["وقف هنا","wa''{af|afi} hina"]}),
+ P("Here is fine","هون منيح","hoon mnee7",{eg:["هنا كويس","hina kwayyis"]}),
+ P("Wait a moment","استنى شوي","istann{a|i} shwayy",{eg:["استنى شوية","istann{a|i} shwayya"]}),
+ P("Straight ahead","دغري","dughri",{eg:["على طول","3ala Tool"]}),
+ P("Right","يمين","ymeen",{eg:["يمين","yimeen"]}),
+ P("Left","شمال","shmaal",{eg:["شمال","shimaal"]}),
+ P("Turn right / left","لف يمين / شمال","liff{|i} ymeen / shmaal",{eg:["حود يمين / شمال","7aww{id|idi} yimeen / shimaal"]}),
+ P("Near","قريب","gareeb",{eg:["قريب","'urayyib"]}),
+ P("Far","بعيد","b3eed",{eg:["بعيد","bi3eed"]}),
+ P("Is it far?","بعيد؟","b3eed?",{eg:["بعيد؟","bi3eed?"]}),
+ P("Is this the way to…?","هاد الطريق على…؟","haad eT-Tareeg 3ala…?",{eg:["ده الطريق لـ…؟","da eT-Taree' li…?"]}),
+ P("I'm lost","أنا ضايع","ana [Daaye3|Daay3a]",{eg:["أنا [تايه|تايهة]","ana [taayih|tayha]"]}),
+ P("I'm going to…","أنا رايح على…","ana [raaye7|raay7a] 3ala…",{eg:["أنا [رايح|رايحة]…","ana [raayi7|ray7a]…"]}),
+ P("Slowly / take it easy","على مهلك","3ala mahl{ak|ik}",{eg:["بالراحة","bir-raa7a"],n:"Useful with fast drivers."}),
+ P("Quickly","بسرعة","bsur3a",{eg:["بسرعة","bisur3a"]}),
+ P("Circle / roundabout","دوار","duwwaar",{only:"jo",n:"Amman's 1st to 8th Circles: ed-duwwaar el-awwal, et-taani, et-taalit, er-raabi3, el-khaamis, es-saadis, es-saabi3, et-taamin."}),
+ P("Square","ميدان","meedaan",{only:"eg",n:"Cairo landmarks: meedaan et-Ta7reer, meedaan Ramsees, meedaan Tal3at 7arb."}),
+ P("Downtown","البلد / وسط البلد","el-balad / wasaT el-balad",{eg:["وسط البلد","wisT el-balad"]}),
  P("Street","شارع","shaari3"),
  P("Traffic light","إشارة","ishaara"),
- P("Bridge","جسر","jisir"),
- P("Next to","جنب","jamb"),
- P("Opposite","مقابل","mgaabil"),
+ P("Bridge / overpass","جسر","jisir",{eg:["كوبري","kubri"],egn:"Cairo runs on kubri: the 6th of October Bridge is “kubri sitta oktoobar”."}),
+ P("Next to","جنب","jamb",{eg:["جنب","gamb"]}),
+ P("Opposite","مقابل","mgaabil",{eg:["قصاد","'uSaad"]}),
  P("Behind","ورا","wara"),
- P("In front of","قدام","guddaam"),
- P("Bus","باص","baaS"),
- P("Bus station","مجمع","mujamma3",{n:"Amman's main stations: Mujamma3 esh-Shamaali (Tabarbour, for the north) and el-Janoobi (Wehdat, for the south)."}),
+ P("In front of","قدام","guddaam",{eg:["قدام","'uddaam"]}),
+ P("Bus","باص","baaS",{eg:["أوتوبيس","otobees"]}),
+ P("Microbus (shared minivan)","ميكروباص","mikrobaaS",{only:"eg",n:"Cheap and everywhere. Shout your stop; pay the driver's helper."}),
+ P("Metro","مترو","metro",{only:"eg",n:"Cairo's metro is the fastest way across town. The middle cars are women-only."}),
+ P("Train","قطار","giTaar",{eg:["قطر","'aTr"],egn:"Cairo to Luxor or Aswan: book sleeper trains ahead."}),
+ P("Bus station","مجمع","mujamma3",{eg:["موقف / محطة الأوتوبيس","maw'af / ma7aTTat el-otobees"],jn:"Amman's main stations: Mujamma3 esh-Shamaali (Tabarbour, for the north) and el-Janoobi (Wehdat, for the south)."}),
  P("Airport","مطار","maTaar"),
- P("Car","سيارة","sayyaara"),
- P("I want to rent a car","بدي أستأجر سيارة","biddi asta'jir sayyaara"),
- P("Petrol station","كازية","kaaziyye"),
- P("Parking","موقف","mawgaf"),
+ P("Car","سيارة","sayyaara",{eg:["عربية","3arabiyya"]}),
+ P("I want to rent a car","بدي أستأجر سيارة","biddi asta'jir sayyaara",{eg:["[عايز|عايزة] أأجر عربية","[3aayiz|3ayza] a'aggar 3arabiyya"]}),
+ P("Petrol station","كازية","kaaziyye",{eg:["بنزينة","banzeena"]}),
+ P("Parking","موقف","mawgaf",{eg:["باركينج / جراج","parking / garaaj"]}),
+ P("Boat","قارب / مركب","markab",{eg:["مركب / فلوكة","markib / falooka"],egn:"A felucca (falooka) is the sailboat for a Nile sunset."}),
  P("Map","خريطة","khareeTa"),
  P("Address","عنوان","3inwaan"),
- P("Where is the …?","وين ال…؟","wein el-…?"),
 ]},
-{id:"food", name:"Food & Drink", ar:"الأكل والشرب", desc:"Hospitality is serious here. Refuse a third helping with “wallah shbi3it” and a hand on your heart.", items:[
- P("I'm hungry","أنا جوعان","ana [jou3aan|jou3aane]"),
- P("I'm thirsty","أنا عطشان","ana [3aTshaan|3aTshaane]"),
+{id:"food", name:"Food & Drink", ar:"الأكل والشرب", desc:{jo:"Hospitality is serious here. Refuse a third helping with “wallah shbi3it” and a hand on your heart.",eg:"Street food is the point: ful and ta3meya for breakfast, koshari for lunch. Bread is “3eish”, which also means life.",both:"Hospitality is serious in both countries. Watch the two false friends: bread and milk have different words."}, items:[
+ P("I'm hungry","أنا جوعان","ana [jou3aan|jou3aane]",{eg:["أنا [جعان|جعانة]","ana [ga3aan|ga3aana]"]}),
+ P("I'm thirsty","أنا عطشان","ana [3aTshaan|3aTshaane]",{eg:["أنا [عطشان|عطشانة]","ana [3aTshaan|3aTshaana]"]}),
  P("Restaurant","مطعم","maT3am"),
  P("The menu, please","المنيو لو سمحت","el-menyu law sama7{t|ti}"),
- P("What do you recommend?","شو بتنصحني؟","shu btinSa7{|ee}ni?"),
- P("I'd like…","بدي…","biddi…"),
- P("Water","مي","mayy"),
- P("A bottle of water","قنينة مي","ganeenet mayy"),
- P("Cold water","مي باردة","mayy baarde"),
- P("Tea","شاي","shaay",{n:"Comes sweet by default, often with mint (na3na3) or sage (meramiyye)."}),
- P("Coffee","قهوة","gahwe",{n:"Arabic coffee is bitter with cardamom, poured in tiny cups. Say “saada” for none, “maZbooT” for medium sugar, “7ilwe” for sweet."}),
- P("Without sugar / medium / sweet","سادة / مظبوط / حلوة","saada / maZbooT / 7ilwe"),
+ P("What do you recommend?","شو بتنصحني؟","shu btinSa7{|ee}ni?",{eg:["تنصحني بإيه؟","tinSa7{ni|eeni} bi-eh?"]}),
+ P("I'd like…","بدي…","biddi…",{eg:["[عايز|عايزة]…","[3aayiz|3ayza]…"]}),
+ P("Water","مي","mayy",{eg:["مية","mayya"]}),
+ P("A bottle of water","قنينة مي","ganeenet mayy",{eg:["إزازة مية","izaazat mayya"]}),
+ P("Cold water","مي باردة","mayy baarde",{eg:["مية ساقعة","mayya saa'3a"]}),
+ P("Tea","شاي","shaay",{jn:"Comes sweet by default, often with mint (na3na3) or sage (meramiyye).",egn:"Ask for “shaay bi-na3na3” (mint) or “shaay koshari” (loose leaf). Sugar is assumed; say “min gheir sukkar”."}),
+ P("Coffee","قهوة","gahwe",{eg:["قهوة","'ahwa"],n:"Say “saada” for no sugar, “maZbooT” for medium, “ziyaada” for sweet.",jn:"Arabic coffee is bitter with cardamom, poured in tiny cups.",egn:"Turkish-style, thick, in a small cup. An “'ahwa” is also the traditional café itself."}),
+ P("Without sugar / medium / sweet","سادة / مظبوط / حلوة","saada / maZbooT / 7ilwe",{eg:["سادة / مظبوط / زيادة","saada / maZbooT / ziyaada"]}),
  P("Juice","عصير","3aSeer"),
- P("Milk","حليب","7aleeb"),
- P("Bread","خبز","khubiz"),
- P("Meat","لحمة","la7me"),
- P("Chicken","جاج","jaaj"),
- P("Lamb","لحمة خاروف","la7met kharoof"),
+ P("Milk","حليب","7aleeb",{eg:["لبن","laban"],n:"False friend: in Jordan “laban” is yogurt drink; in Egypt “laban” is milk and yogurt is “zabaadi”."}),
+ P("Bread","خبز","khubiz",{eg:["عيش","3eish"],egn:"3eish also means “life”. 3eish baladi is the puffy whole-wheat flatbread."}),
+ P("Meat","لحمة","la7me",{eg:["لحمة","la7ma"]}),
+ P("Chicken","جاج","jaaj",{eg:["فراخ","firaakh"]}),
+ P("Lamb","لحمة خاروف","la7met kharoof",{eg:["لحمة ضاني","la7ma Daani"]}),
  P("Fish","سمك","samak"),
- P("Vegetables","خضرة","khuDra"),
+ P("Shrimp","جمبري","jambari",{eg:["جمبري","gambari"],egn:"Alexandria's specialty. Order by the kilo."}),
+ P("Vegetables","خضرة","khuDra",{eg:["خضار","khuDaar"]}),
  P("Rice","رز","ruzz"),
  P("Salad","سلطة","salaTa"),
- P("Cheese","جبنة","jibne"),
+ P("Cheese","جبنة","jibne",{eg:["جبنة","gibna"]}),
  P("Eggs","بيض","beiD"),
- P("Fruit","فواكه","fawaakih"),
+ P("Fruit","فواكه","fawaakih",{eg:["فاكهة","fakha"]}),
  P("Salt / pepper","ملح / فلفل","mil7 / filfil"),
  P("Sugar","سكر","sukkar"),
- P("Spicy","حار","7aarr"),
- P("Not spicy","مش حار","mish 7aarr"),
- P("Delicious!","زاكي!","zaaki!",{n:"The Jordanian word. “Tayyib” works too. Best compliment to a host: kteer zaaki!"}),
- P("I'm vegetarian","أنا نباتي","ana [nabaati|nabaatiyye]"),
- P("I don't eat meat","ما بآكل لحمة","ma baakul la7me"),
- P("I'm allergic to…","عندي حساسية من…","3indi 7asaasiyye min…",{n:"Nuts: mkassaraat · Dairy: 7aleeb · Gluten: gluteen · Sesame: simsim · Eggs: beiD"}),
- P("Without…","بدون…","bidoon…"),
- P("I'm full","شبعت","shbi3it",{n:"Hosts will keep offering. “wallah shbi3it” with a hand on your heart ends it politely."}),
+ P("Spicy","حار","7aarr",{eg:["حامي / حراق","7aami / 7arraa'"]}),
+ P("Not spicy","مش حار","mish 7aarr",{eg:["مش حامي","mish 7aami"]}),
+ P("Delicious!","زاكي!","zaaki!",{eg:["لذيذ! / حلو قوي!","lazeez! / 7ilw 'awi!"],jn:"The Jordanian word. “Tayyib” works too.",egn:"“Tayyib” in Egypt means OK, not tasty. Use lazeez or 7ilw."}),
+ P("I'm vegetarian","أنا نباتي","ana [nabaati|nabaatiyye]",{eg:["أنا [نباتي|نباتية]","ana [nabaati|nabaatiyya]"]}),
+ P("I don't eat meat","ما بآكل لحمة","ma baakul la7me",{eg:["ما باكلش لحمة","ma baakulsh la7ma"]}),
+ P("I'm allergic to…","عندي حساسية من…","3indi 7asaasiyye min…",{eg:["عندي حساسية من…","3andi 7asasiyya min…"],n:"Nuts: mkassaraat · Dairy: 7aleeb / laban · Gluten: gluteen · Sesame: simsim · Eggs: beiD"}),
+ P("Without…","بدون…","bidoon…",{eg:["من غير…","min gheir…"]}),
+ P("I'm full","شبعت","shbi3it",{eg:["أنا [شبعان|شبعانة]","ana [shab3aan|shab3aana]"],n:"Hosts will keep offering. Hand on heart and “wallah” ends it politely."}),
  P("Enough, thank you","خلص، شكراً","khalaS, shukran"),
- P("The bill, please","الحساب لو سمحت","el-7saab law sama7{t|ti}"),
- P("To go / dine in","سفري / هون","safari / hoon"),
- P("Breakfast / lunch / dinner","فطور / غدا / عشا","fToor / ghada / 3asha"),
- P("Spoon / fork / knife","معلقة / شوكة / سكينة","ma3laga / shooke / sikkeene"),
- P("Glass","كاسة","kaase"),
- P("Plate","صحن","Sa7in"),
- P("Hot / cold (food)","سخن / بارد","sukhun / baarid"),
- P("Dessert / sweets","حلو / حلويات","7ilu / 7alawiyyaat"),
- P("Beer / wine","بيرة / نبيذ","beera / nbeed",{n:"Sold in Amman, Aqaba, Madaba and hotels. Not in public."}),
- P("Mansaf (national dish)","منسف","mansaf",{n:"Lamb in jameed (dried yogurt) sauce over rice and thin bread. Eaten standing, with the right hand, at celebrations."}),
- P("Maqluba","مقلوبة","maglooba",{n:"Upside-down pot of rice, chicken or lamb, and fried vegetables."}),
- P("Knafeh","كنافة","knaafe",{n:"Warm sweet cheese under orange semolina crust. Habibah, downtown Amman, is the pilgrimage."}),
- P("Falafel / hummus","فلافل / حمص","falaafil / 7ummuS"),
- P("Shawarma","شاورما","shaawirma"),
- P("Musakhan","مسخن","musakhkhan",{n:"Sumac-onion chicken on taboon bread soaked in olive oil."}),
- P("Fatteh","فتة","fatte",{n:"Bread, hummus, yogurt, pine nuts. Breakfast of champions."}),
- P("Labneh / za'atar","لبنة / زعتر","labane / za3tar"),
- P("Zarb (Bedouin barbecue)","زرب","zarb",{n:"Meat and vegetables cooked underground in Wadi Rum camps."}),
- P("Shrak bread","شراك","shraak",{n:"Paper-thin bread baked on a domed saj."}),
- P("Sage tea","شاي ميرمية","shaay meramiyye"),
+ P("The bill, please","الحساب لو سمحت","el-7saab law sama7{t|ti}",{eg:["الحساب لو سمحت","el-7isaab law sama7{t|ti}"]}),
+ P("To go / dine in","سفري / هون","safari / hoon",{eg:["تيك أواي / هنا","take away / hina"]}),
+ P("Breakfast / lunch / dinner","فطور / غدا / عشا","fToor / ghada / 3asha",{eg:["فطار / غدا / عشا","fiTaar / ghada / 3asha"]}),
+ P("Spoon / fork / knife","معلقة / شوكة / سكينة","ma3laga / shooke / sikkeene",{eg:["معلقة / شوكة / سكينة","ma3la'a / shooka / sikkeena"]}),
+ P("Glass","كاسة","kaase",{eg:["كوباية","kubbaaya"]}),
+ P("Plate","صحن","Sa7in",{eg:["طبق","Taba'"]}),
+ P("Hot / cold (food)","سخن / بارد","sukhun / baarid",{eg:["سخن / ساقع","sukhn / saa'i3"]}),
+ P("Dessert / sweets","حلو / حلويات","7ilu / 7alawiyyaat",{eg:["حلو / حلويات","7ilw / 7alawiyyaat"]}),
+ P("Beer / wine","بيرة / نبيذ","beera / nbeed",{eg:["بيرة / نبيت","beera / nibeet"],jn:"Sold in Amman, Aqaba, Madaba and hotels. Not in public.",egn:"Stella and Sakara are the local beers. Hotels, some restaurants, Drinkies shops. Not in public."}),
+ P("Mansaf (national dish)","منسف","mansaf",{only:"jo",n:"Lamb in jameed (dried yogurt) sauce over rice and thin bread. Eaten standing, with the right hand, at celebrations."}),
+ P("Maqluba","مقلوبة","maglooba",{only:"jo",n:"Upside-down pot of rice, chicken or lamb, and fried vegetables."}),
+ P("Musakhan","مسخن","musakhkhan",{only:"jo",n:"Sumac-onion chicken on taboon bread soaked in olive oil."}),
+ P("Zarb (Bedouin barbecue)","زرب","zarb",{only:"jo",n:"Meat and vegetables cooked underground in Wadi Rum camps."}),
+ P("Shrak bread","شراك","shraak",{only:"jo",n:"Paper-thin bread baked on a domed saj."}),
+ P("Sage tea","شاي ميرمية","shaay meramiyye",{only:"jo"}),
+ P("Koshari","كشري","koshari",{only:"eg",n:"Rice, lentils, pasta, chickpeas, fried onions, tomato sauce. Add garlic vinegar (da''a) and chili (shaTTa). Egypt's national lunch."}),
+ P("Ful (fava beans)","فول","fool",{only:"eg",n:"Breakfast of the nation, stewed overnight, served with 3eish, oil, lemon and cumin."}),
+ P("Ta3meya (Egyptian falafel)","طعمية","Ta3miyya",{only:"eg",n:"Made from fava beans, not chickpeas. Greener and fluffier than Levantine falafel."}),
+ P("Molokhia","ملوخية","mulukhiyya",{only:"eg",n:"Slippery green jute-leaf soup with garlic and coriander, over rice with chicken or rabbit."}),
+ P("Mahshi","محشي","ma7shi",{only:"eg",n:"Stuffed vine leaves, peppers, cabbage or zucchini."}),
+ P("Hawawshi","حواوشي","7awawshi",{only:"eg",n:"Spiced minced meat baked inside bread. Street food royalty."}),
+ P("Feteer","فطير","fiTeer",{only:"eg",n:"Flaky layered pie, sweet or savory. “fiTeer mishaltit” is the plain one with honey."}),
+ P("Om Ali","أم علي","umm 3ali",{only:"eg",n:"Warm bread pudding with milk, nuts and raisins."}),
+ P("Sugarcane juice","عصير قصب","3aSeer 'aSab",{only:"eg",n:"Pressed fresh at every juice stand. Also try mango (manga) and guava (gawaafa)."}),
+ P("Hibiscus tea","كركديه","karkadeh",{only:"eg",n:"Hot or iced, deep red, slightly tart."}),
+ P("Knafeh","كنافة","knaafe",{eg:["كنافة","kunaafa"],jn:"Warm sweet cheese under orange semolina crust. Habibah, downtown Amman, is the pilgrimage.",egn:"Shredded pastry with cream or nuts; a Ramadan staple."}),
+ P("Falafel / hummus","فلافل / حمص","falaafil / 7ummuS",{eg:["طعمية / حمص","Ta3miyya / 7ummuS"]}),
+ P("Shawarma","شاورما","shaawirma",{eg:["شاورما","shawerma"]}),
+ P("Fatteh","فتة","fatte",{eg:["فتة","fatta"],jn:"Bread, hummus, yogurt, pine nuts. Breakfast of champions.",egn:"Rice and crispy bread in garlic-vinegar tomato sauce. A feast dish."}),
+ P("Labneh / za'atar","لبنة / زعتر","labane / za3tar",{only:"jo"}),
+ P("Kofta / liver","كفتة / كبدة","kufta / kibde",{eg:["كفتة / كبدة","kufta / kibda"],egn:"Kibda iskandaraani (Alexandrian liver) sandwiches are a late-night classic."}),
  P("Mint","نعنع","na3na3"),
- P("Bon appétit","صحتين","Sa7tein",{r:["On your heart","على قلبك","3ala galb{ak|ik}"]}),
+ P("Bon appétit","صحتين","Sa7tein",{eg:["بالهنا والشفا","bil-hana wish-shifa"],r:["On your heart","على قلبك","3ala galb{ak|ik}"],egr:["May God bless you with the same","الله يهنيك","allah yihannee{k|ki}"]}),
 ]},
-{id:"shopping", name:"Shopping & Bargaining", ar:"التسوق", desc:"Haggle in souqs and with unmetered taxis, never in malls, supermarkets or restaurants. Smile, start around 60%, and be ready to walk.", items:[
- P("How much is this?","قديش هاد؟","gaddeesh haad?"),
+{id:"shopping", name:"Shopping & Bargaining", ar:"التسوق", desc:"Haggle in souqs and with unmetered taxis, never in malls, supermarkets or restaurants. Smile, start around half, and be ready to walk.", items:[
+ P("How much is this?","قديش هاد؟","gaddeesh haad?",{eg:["بكام ده؟","bikaam da?"]}),
  P("That's expensive","غالي","ghaali"),
- P("Too expensive!","كتير غالي!","kteer ghaali!"),
- P("Give me a good price","اعطيني سعر منيح","a3Teeni si3ir mnee7"),
- P("Last price?","آخر سعر؟","aakhir si3ir?"),
- P("Is there a discount?","في خصم؟","fi khaSim?"),
- P("I'll take it","بآخده","baakhdo"),
- P("I'm just looking","بس بتفرج","bass batfarraj"),
- P("Can I see that?","ممكن أشوف هاد؟","mumkin ashoof haad?"),
- P("Another size / color?","في مقاس تاني / لون تاني؟","fi magaas taani / loon taani?"),
+ P("Too expensive!","كتير غالي!","kteer ghaali!",{eg:["غالي قوي!","ghaali 'awi!"]}),
+ P("Give me a good price","اعطيني سعر منيح","a3Teeni si3ir mnee7",{eg:["اديني سعر كويس","iddeeni si3r kwayyis"]}),
+ P("Last price?","آخر سعر؟","aakhir si3ir?",{eg:["آخر سعر؟","aakhir si3r?"]}),
+ P("Is there a discount?","في خصم؟","fi khaSim?",{eg:["فيه خصم؟","fee khaSm?"]}),
+ P("I'll take it","بآخده","baakhdo",{eg:["هاخده","haakhdu"]}),
+ P("I'm just looking","بس بتفرج","bass batfarraj",{eg:["بتفرج بس","batfarrag bass"]}),
+ P("Can I see that?","ممكن أشوف هاد؟","mumkin ashoof haad?",{eg:["ممكن أشوف ده؟","mumkin ashoof da?"]}),
+ P("Another size / color?","في مقاس تاني / لون تاني؟","fi magaas taani / loon taani?",{eg:["فيه مقاس تاني / لون تاني؟","fee ma'aas taani / loon taani?"]}),
  P("Bigger / smaller","أكبر / أصغر","akbar / aSghar"),
- P("I don't want it, thanks","ما بدي، شكراً","ma biddi, shukran"),
- P("Market","سوق","soog",{n:"Downtown Amman souq; Friday market “soog el-jum3a” in Ras el-Ain."}),
- P("Shop","محل / دكانة","ma7all / dukkaane"),
+ P("I don't want it, thanks","ما بدي، شكراً","ma biddi, shukran",{eg:["مش [عايز|عايزة]، شكراً","mish [3aayiz|3ayza], shukran"]}),
+ P("Market","سوق","soog",{eg:["سوق","soo'"],jn:"Downtown Amman souq; Friday market “soog el-jum3a” in Ras el-Ain.",egn:"Khan el-Khalili for souvenirs, Souq el-Gum3a for chaos, Ataba for everything else."}),
+ P("Shop","محل / دكانة","ma7all / dukkaane",{eg:["محل","ma7all"]}),
  P("Supermarket","سوبرماركت","subermarket"),
- P("Bakery","فرن","furn"),
- P("Open / closed","فاتح / مسكر","faati7 / msakkar"),
+ P("Bakery","فرن","furn",{eg:["فرن / مخبز","furn / makhbaz"]}),
+ P("Open / closed","فاتح / مسكر","faati7 / msakkar",{eg:["فاتح / مقفول","faati7 / ma'fool"]}),
  P("Is it open?","فاتح؟","faati7?"),
- P("Gift / souvenir","هدية / تذكار","hadiyye / tizkaar"),
- P("Shmagh (red-checked keffiyeh)","شماغ","shmaagh",{n:"Red and white is Jordanian; black and white (7aTTa) is Palestinian."}),
- P("Dead Sea salt / mud","ملح / طين البحر الميت","mil7 / Teen el-ba7r el-mayyit"),
- P("Spices","بهارات","bhaaraat"),
+ P("Gift / souvenir","هدية / تذكار","hadiyye / tizkaar",{eg:["هدية","hidiyya"]}),
+ P("Shmagh (red-checked keffiyeh)","شماغ","shmaagh",{only:"jo",n:"Red and white is Jordanian; black and white (7aTTa) is Palestinian."}),
+ P("Dead Sea salt / mud","ملح / طين البحر الميت","mil7 / Teen el-ba7r el-mayyit",{only:"jo"}),
+ P("Galabeya (long robe)","جلابية","gallabiyya",{only:"eg",n:"Cotton ones from Khan el-Khalili or Aswan's souq make good gifts."}),
+ P("Papyrus","بردي","bardi",{only:"eg",n:"Real papyrus bends without cracking; banana-leaf fakes crack."}),
+ P("Cartouche (name pendant)","خرطوش","kharToosh",{only:"eg",n:"Your name in hieroglyphs on silver or gold. Agree the price per gram."}),
+ P("Alabaster","ألاباستر","alabaster",{only:"eg",n:"Luxor's west bank workshops. Watch for painted plaster."}),
+ P("Spices","بهارات","bhaaraat",{eg:["بهارات / توابل","bahaaraat / tawaabil"]}),
  P("Gold / silver","دهب / فضة","dahab / faDDa"),
- P("Handmade","شغل إيد","shughul eed"),
- P("Good quality","نوعية منيحة","naw3iyye mnee7a"),
+ P("Handmade","شغل إيد","shughul eed",{eg:["شغل إيد","shughl eed"]}),
+ P("Good quality","نوعية منيحة","naw3iyye mnee7a",{eg:["خامة كويسة","khaama kwayyisa"]}),
  P("A kilo / half a kilo","كيلو / نص كيلو","keelo / nuSS keelo"),
- P("Do you want a bag?","بدك كيس؟","bidd{ak|ik} kees?"),
- P("Cheap","رخيص","rkheeS"),
- P("Pharmacy","صيدلية","Saydaliyye"),
+ P("Do you want a bag?","بدك كيس؟","bidd{ak|ik} kees?",{eg:["[عايز|عايزة] كيس؟","{3aayiz|3ayza} kees?"]}),
+ P("Cheap","رخيص","rkheeS",{eg:["رخيص","rikheeS"]}),
+ P("Pharmacy","صيدلية","Saydaliyye",{eg:["أجزخانة / صيدلية","agzakhaana / Saydaliyya"]}),
 ]},
-{id:"hotel", name:"Hotel", ar:"الفندق", desc:"Jordan gets properly cold in winter. Ask about heating, and about the hot water.", items:[
- P("Hotel","فندق","fundug",{n:"Also “oteel”."}),
- P("I have a reservation","عندي حجز","3indi 7ajiz"),
- P("Do you have a room?","عندك غرفة؟","3ind{ak|ik} ghurfe?"),
- P("For one night / two nights","لليلة / ليلتين","la-leile / leilteen"),
- P("How much per night?","قديش الليلة؟","gaddeesh el-leile?"),
- P("Is breakfast included?","الفطور محسوب؟","el-fToor ma7soob?"),
+{id:"hotel", name:"Hotel", ar:"الفندق", desc:{jo:"Jordan gets properly cold in winter. Ask about heating, and about the hot water.",eg:"Cairo hotels range from Nile-view towers to downtown walk-ups. Always ask about the air conditioning.",both:"Winter cold in Jordan, summer heat in Egypt. Ask about the heater or the AC, and about the hot water."}, items:[
+ P("Hotel","فندق","fundug",{eg:["فندق / أوتيل","fundu' / oteel"]}),
+ P("I have a reservation","عندي حجز","3indi 7ajiz",{eg:["عندي حجز","3andi 7agz"]}),
+ P("Do you have a room?","عندك غرفة؟","3ind{ak|ik} ghurfe?",{eg:["عندك أوضة؟","3and{ak|ik} ooDa?"]}),
+ P("For one night / two nights","لليلة / ليلتين","la-leile / leilteen",{eg:["لليلة / ليلتين","li-leila / leiltein"]}),
+ P("How much per night?","قديش الليلة؟","gaddeesh el-leile?",{eg:["الليلة بكام؟","el-leila bikaam?"]}),
+ P("Is breakfast included?","الفطور محسوب؟","el-fToor ma7soob?",{eg:["الفطار محسوب؟","el-fiTaar ma7soob?"]}),
  P("Key","مفتاح","muftaa7"),
- P("Room","غرفة","ghurfe"),
+ P("Room","غرفة","ghurfe",{eg:["أوضة","ooDa"]}),
  P("Bathroom","حمام","7ammaam"),
- P("Hot water","مي سخنة","mayy sukhne"),
- P("There's no hot water","ما في مي سخنة","ma fi mayy sukhne"),
- P("Towel","بشكير","bashkeer"),
- P("Tissues / toilet paper","محارم","ma7aarim",{n:"Most toilets have a bidet spray (shaTTaaf). Paper goes in the bin."}),
- P("Blanket","حرام","7raam",{n:"Another blanket please: 7raam taani law sama7t."}),
- P("What's the wifi password?","شو باسورد الواي فاي؟","shu baasword el-wai-fai?"),
- P("Air conditioning","مكيف","mkayyif"),
- P("Heater","صوبة","Soobe"),
- P("The … is broken","ال… خربان","el-… kharbaan",{n:"el-mkayyif kharbaan = the AC is broken."}),
- P("Clean / dirty","نظيف / وسخ","naDeef / wisikh"),
- P("Quiet room","غرفة هادية","ghurfe haadye"),
- P("With a view","مع منظر","ma3 manZar"),
- P("Can you call a taxi?","ممكن تطلب تكسي؟","mumkin tuTlub{|i} taksi?"),
- P("I'm leaving today","أنا ماشي اليوم","ana [maashi|maashye] el-yoom"),
+ P("Hot water","مي سخنة","mayy sukhne",{eg:["مية سخنة","mayya sukhna"]}),
+ P("There's no hot water","ما في مي سخنة","ma fi mayy sukhne",{eg:["مفيش مية سخنة","mafeesh mayya sukhna"]}),
+ P("Towel","بشكير","bashkeer",{eg:["فوطة","fooTa"]}),
+ P("Tissues / toilet paper","محارم","ma7aarim",{eg:["مناديل","manadeel"],n:"Most toilets have a bidet spray (shaTTaaf). Paper goes in the bin."}),
+ P("Blanket","حرام","7raam",{eg:["بطانية","baTTaniyya"]}),
+ P("What's the wifi password?","شو باسورد الواي فاي؟","shu baasword el-wai-fai?",{eg:["باسورد الواي فاي إيه؟","baasword el-wai-fai eh?"]}),
+ P("Air conditioning","مكيف","mkayyif",{eg:["تكييف","takyeef"]}),
+ P("Heater","صوبة","Soobe",{eg:["دفاية","daffaaya"]}),
+ P("The … is broken","ال… خربان","el-… kharbaan",{eg:["ال… بايظ","el-… baayiZ"],n:"Point at it and say the word. Everyone understands."}),
+ P("Clean / dirty","نظيف / وسخ","naDeef / wisikh",{eg:["نظيف / وسخ","niDeef / wisikh"]}),
+ P("Quiet room","غرفة هادية","ghurfe haadye",{eg:["أوضة هادية","ooDa hadya"]}),
+ P("With a view","مع منظر","ma3 manZar",{eg:["بمنظر / على النيل","bi-manZar / 3ala en-neel"]}),
+ P("Can you call a taxi?","ممكن تطلب تكسي؟","mumkin tuTlub{|i} taksi?",{eg:["ممكن تطلب تاكسي؟","mumkin tuTlub{|i} taksi?"]}),
+ P("I'm leaving today","أنا ماشي اليوم","ana [maashi|maashye] el-yoom",{eg:["أنا [ماشي|ماشية] النهارده","ana [maashi|mashya] en-naharda"]}),
  P("Luggage","شنط","shunaT"),
- P("Passport","جواز سفر","jawaaz safar"),
- P("Electricity / adapter","كهربا / محول","kahraba / mu7awwil",{n:"Jordan uses 230V with mixed plug types; a universal adapter is wise."}),
+ P("Passport","جواز سفر","jawaaz safar",{eg:["باسبور","basboor"]}),
+ P("Electricity / adapter","كهربا / محول","kahraba / mu7awwil",{n:"Both countries use 220–230V with European two-pin sockets."}),
 ]},
 {id:"sights", name:"Sightseeing", ar:"السياحة", desc:"How locals say the place names, plus the words on tickets and signs.", items:[
- P("Petra","البتراء","el-batra",{n:"The town next door is Wadi Musa (waadi moosa)."}),
- P("Wadi Rum","وادي رم","waadi ramm"),
- P("The Dead Sea","البحر الميت","el-ba7r el-mayyit"),
- P("Amman","عمّان","3ammaan"),
- P("Aqaba","العقبة","el-3agaba"),
- P("Jerash","جرش","jarash"),
- P("Madaba","مادبا","maadaba"),
- P("Mount Nebo","جبل نيبو","jabal neebo"),
- P("Dana","ضانا","Daana"),
- P("Ajloun","عجلون","3ajloon"),
- P("Kerak","الكرك","el-karak"),
- P("Wadi Mujib","وادي الموجب","waadi el-moojib"),
- P("Ma'in hot springs","حمامات ماعين","7ammaamaat maa3een"),
- P("Umm Qais","أم قيس","umm gais"),
- P("The Citadel (Amman)","جبل القلعة","jabal el-gal3a"),
- P("Roman Theatre","المدرج الروماني","el-mudarraj er-roomaani"),
- P("Rainbow Street","شارع الرينبو","shaari3 er-reinbo"),
+ P("Petra","البتراء","el-batra",{only:"jo",n:"The town next door is Wadi Musa (waadi moosa)."}),
+ P("Wadi Rum","وادي رم","waadi ramm",{only:"jo"}),
+ P("The Dead Sea","البحر الميت","el-ba7r el-mayyit",{only:"jo"}),
+ P("Amman","عمّان","3ammaan",{only:"jo"}),
+ P("Aqaba","العقبة","el-3agaba",{only:"jo"}),
+ P("Jerash","جرش","jarash",{only:"jo"}),
+ P("Madaba","مادبا","maadaba",{only:"jo"}),
+ P("Mount Nebo","جبل نيبو","jabal neebo",{only:"jo"}),
+ P("Dana","ضانا","Daana",{only:"jo"}),
+ P("Ajloun","عجلون","3ajloon",{only:"jo"}),
+ P("Kerak","الكرك","el-karak",{only:"jo"}),
+ P("Wadi Mujib","وادي الموجب","waadi el-moojib",{only:"jo"}),
+ P("Ma'in hot springs","حمامات ماعين","7ammaamaat maa3een",{only:"jo"}),
+ P("Umm Qais","أم قيس","umm gais",{only:"jo"}),
+ P("The Citadel (Amman)","جبل القلعة","jabal el-gal3a",{only:"jo"}),
+ P("Roman Theatre","المدرج الروماني","el-mudarraj er-roomaani",{only:"jo"}),
+ P("Rainbow Street","شارع الرينبو","shaari3 er-reinbo",{only:"jo"}),
+ P("Cairo","القاهرة / مصر","el-'aahira / maSr",{only:"eg",n:"Egyptians call Cairo “maSr”, the same word as Egypt."}),
+ P("The Pyramids (Giza)","الأهرامات / الهرم","el-ahramaat / el-haram",{only:"eg",n:"Tell a driver “el-haram”. The Sphinx is “abu el-hool” (father of terror)."}),
+ P("The Sphinx","أبو الهول","abu el-hool",{only:"eg"}),
+ P("The Nile","النيل","en-neel",{only:"eg"}),
+ P("Luxor","الأقصر","lu'Sur",{only:"eg",n:"East bank: Karnak and Luxor temples. West bank: Valley of the Kings."}),
+ P("Aswan","أسوان","aswaan",{only:"eg"}),
+ P("Alexandria","إسكندرية","iskindiriyya",{only:"eg"}),
+ P("Egyptian Museum","المتحف المصري","el-mat7af el-maSri",{only:"eg",n:"The Grand Egyptian Museum by the pyramids is “el-mat7af el-kibeer”."}),
+ P("Khan el-Khalili","خان الخليلي","khaan el-khaleeli",{only:"eg",n:"Cairo's great bazaar. Fishawi café for mint tea."}),
+ P("Tahrir Square","ميدان التحرير","meedaan et-ta7reer",{only:"eg"}),
+ P("Islamic Cairo / Coptic Cairo","القاهرة الإسلامية / مصر القديمة","el-'aahira el-islaamiyya / maSr el-'adeema",{only:"eg"}),
+ P("Valley of the Kings","وادي الملوك","waadi el-mulook",{only:"eg"}),
+ P("Karnak","الكرنك","el-karnak",{only:"eg"}),
+ P("Abu Simbel","أبو سمبل","abu simbil",{only:"eg"}),
+ P("Saqqara","سقارة","sa''aara",{only:"eg",n:"The Step Pyramid, older than Giza and quieter."}),
+ P("Hurghada / Sharm el-Sheikh / Dahab","الغردقة / شرم الشيخ / دهب","el-gharda'a / sharm esh-sheikh / dahab",{only:"eg"}),
+ P("Siwa","سيوة","seewa",{only:"eg"}),
  P("Ticket","تذكرة","tazkara"),
- P("How much is the ticket?","قديش التذكرة؟","gaddeesh et-tazkara?"),
- P("Where do I buy a ticket?","من وين أشتري تذكرة؟","min wein ashtiri tazkara?"),
- P("Jordan Pass","جوردن باس","jordan pass",{n:"Buy online before arrival: waives the visa fee if you stay 3+ nights and covers Petra and 40 sites."}),
- P("Entrance / exit","دخول / خروج","dukhool / khurooj"),
- P("When does it open / close?","إيمتى بفتح / بسكر؟","eimta bifta7 / bisakkir?"),
- P("Can I take a photo?","ممكن أصور؟","mumkin aSawwir?"),
- P("Can I take your photo?","ممكن أصورك؟","mumkin aSawwr{ak|ik}?",{n:"Always ask, especially before photographing women."}),
+ P("How much is the ticket?","قديش التذكرة؟","gaddeesh et-tazkara?",{eg:["التذكرة بكام؟","et-tazkara bikaam?"]}),
+ P("Where do I buy a ticket?","من وين أشتري تذكرة؟","min wein ashtiri tazkara?",{eg:["أشتري التذكرة منين؟","ashtiri et-tazkara minein?"]}),
+ P("Jordan Pass","جوردن باس","jordan pass",{only:"jo",n:"Buy online before arrival: waives the visa fee if you stay 3+ nights and covers Petra and 40 sites."}),
+ P("Cairo Pass / Luxor Pass","كايرو باس","cairo pass",{only:"eg",n:"Multi-day passes sold at the Egyptian Museum and Karnak. Bring passport photos and US dollars or euros in cash."}),
+ P("Entrance / exit","دخول / خروج","dukhool / khurooj",{eg:["دخول / خروج","dukhool / khuroog"]}),
+ P("When does it open / close?","إيمتى بفتح / بسكر؟","eimta bifta7 / bisakkir?",{eg:["بيفتح / بيقفل إمتى؟","biyifta7 / biyi'fil imta?"]}),
+ P("Can I take a photo?","ممكن أصور؟","mumkin aSawwir?",{eg:["ممكن أصور؟","mumkin aSawwar?"],egn:"Many Egyptian sites charge a camera or phone-photo fee. Ask “fee tazkarat taSweer?”"}),
+ P("Can I take your photo?","ممكن أصورك؟","mumkin aSawwr{ak|ik}?",{eg:["ممكن أصورك؟","mumkin aSawwar{ak|ik}?"],n:"Always ask, especially before photographing women."}),
  P("Is it allowed?","مسموح؟","masmoo7?"),
  P("Forbidden","ممنوع","mamnoo3"),
- P("Guide","دليل","daleel"),
+ P("Guide","دليل","daleel",{eg:["مرشد","murshid"]}),
+ P("I don't need a guide, thanks","ما بدي دليل، شكراً","ma biddi daleel, shukran",{eg:["مش [عايز|عايزة] مرشد، شكراً","mish [3aayiz|3ayza] murshid, shukran"],egn:"Have this ready at the pyramids and Karnak."}),
  P("Desert","صحرا","Sa7ra"),
- P("Castle","قلعة","gal3a"),
- P("Mosque","جامع","jaami3"),
- P("Church","كنيسة","kneese"),
+ P("Castle / citadel","قلعة","gal3a",{eg:["قلعة","'al3a"]}),
+ P("Temple","معبد","ma3bad",{only:"eg"}),
+ P("Tomb","مقبرة","ma'bara",{only:"eg"}),
+ P("Mosque","جامع","jaami3",{eg:["جامع","gaami3"]}),
+ P("Church","كنيسة","kneese",{eg:["كنيسة","kineesa"]}),
  P("Museum","متحف","mat7af"),
- P("Mountain / valley","جبل / وادي","jabal / waadi"),
- P("Sea / beach","بحر / شط","ba7r / shaTT"),
- P("Old / new","قديم / جديد","gadeem / jdeed"),
- P("Sunset / sunrise","غروب / شروق","ghuroob / shuroog"),
- P("Tent","خيمة","kheime"),
- P("Bedouin","بدوي","badawi",{n:"Plural: badu."}),
- P("Camel / horse / donkey","جمل / حصان / حمار","jamal / 7Saan / 7maar"),
- P("Beautiful","حلو","7ilu",{n:"Feminine: 7ilwe. Petra is “el-batra 7ilwe”."}),
- P("Amazing!","بجنن!","bijannin!",{l:"it drives you crazy"}),
+ P("Mountain / valley","جبل / وادي","jabal / waadi",{eg:["جبل / وادي","gabal / waadi"]}),
+ P("Sea / beach","بحر / شط","ba7r / shaTT",{eg:["بحر / شط","ba7r / shaTT"]}),
+ P("River","نهر","nahr",{eg:["نهر","nahr"]}),
+ P("Old / new","قديم / جديد","gadeem / jdeed",{eg:["قديم / جديد","'adeem / gideed"]}),
+ P("Sunset / sunrise","غروب / شروق","ghuroob / shuroog",{eg:["غروب / شروق","ghuroob / shuroo'"]}),
+ P("Tent","خيمة","kheime",{eg:["خيمة","kheima"]}),
+ P("Bedouin","بدوي","badawi",{n:"Plural: badu. Wadi Rum in Jordan; Sinai and the Western Desert in Egypt."}),
+ P("Camel / horse / donkey","جمل / حصان / حمار","jamal / 7Saan / 7maar",{eg:["جمل / حصان / حمار","gamal / 7uSaan / 7umaar"],egn:"Agree the price and the duration before you get on. “Free” photos are not free."}),
+ P("Beautiful","حلو","7ilu",{eg:["حلو","7ilw"],n:"Feminine: 7ilwe / 7ilwa."}),
+ P("Amazing!","بجنن!","bijannin!",{eg:["يجنن!","yigannin!"],l:"it drives you crazy"}),
 ]},
-{id:"health", name:"Health & Emergency", ar:"الصحة والطوارئ", desc:"Emergency number is 911 nationwide. Tourist police are posted at Petra and downtown Amman.", items:[
- P("Help!","إلحقوني!","il7agooni!"),
- P("I need help","بحتاج مساعدة","ba7taaj musaa3ade"),
+{id:"health", name:"Health & Emergency", ar:"الصحة والطوارئ", desc:{jo:"Emergency number is 911 nationwide. Tourist police are posted at Petra and downtown Amman.",eg:"Police 122, ambulance 123, fire 180, tourist police 126. Pharmacies are everywhere and pharmacists speak English.",both:"Jordan: 911 for everything. Egypt: police 122, ambulance 123, tourist police 126. Pharmacists in both countries can handle small problems."}, items:[
+ P("Help!","إلحقوني!","il7agooni!",{eg:["إلحقوني!","il7a'ooni!"]}),
+ P("I need help","بحتاج مساعدة","ba7taaj musaa3ade",{eg:["[محتاج|محتاجة] مساعدة","[mi7taag|mi7taaga] musaa3da"]}),
  P("Emergency","طوارئ","Tawaari'"),
- P("Call the police","اتصل بالشرطة","ittaS{il|li} bish-shurTa"),
- P("Police","شرطة","shurTa"),
+ P("Call the police","اتصل بالشرطة","ittaS{il|li} bish-shurTa",{eg:["اتصل بالشرطة","ittaS{il|li} bish-shurTa"]}),
+ P("Police","شرطة","shurTa",{eg:["شرطة / بوليس","shurTa / bolees"]}),
+ P("Tourist police","شرطة السياحة","shurTat es-siyaa7a",{egn:"Call 126. Posted at every major site."}),
  P("Ambulance","إسعاف","is3aaf"),
  P("Hospital","مستشفى","mustashfa"),
- P("I need a doctor","لازمني دكتور","laazimni duktoor"),
- P("Pharmacy","صيدلية","Saydaliyye",{n:"Pharmacists speak English and can prescribe basics."}),
+ P("I need a doctor","لازمني دكتور","laazimni duktoor",{eg:["[محتاج|محتاجة] دكتور","[mi7taag|mi7taaga] duktoor"]}),
+ P("Pharmacy","صيدلية","Saydaliyye",{eg:["أجزخانة","agzakhaana"],n:"Pharmacists speak English and can prescribe basics."}),
  P("Medicine","دوا","dawa"),
- P("I'm sick","أنا مريض","ana [mareeD|mareeDa]"),
- P("It hurts here","بوجعني هون","byooja3ni hoon"),
- P("My head hurts","راسي بيوجعني","raasi byooja3ni"),
- P("My stomach hurts","بطني بتوجعني","baTni btooja3ni"),
- P("Fever","حرارة","7araara"),
- P("Diarrhea","إسهال","is-haal"),
+ P("I'm sick","أنا مريض","ana [mareeD|mareeDa]",{eg:["أنا [عيان|عيانة]","ana [3ayyaan|3ayyaana]"]}),
+ P("It hurts here","بوجعني هون","byooja3ni hoon",{eg:["بيوجعني هنا","biyiwga3ni hina"]}),
+ P("My head hurts","راسي بيوجعني","raasi byooja3ni",{eg:["راسي بيوجعني","raasi biyiwga3ni"]}),
+ P("My stomach hurts","بطني بتوجعني","baTni btooja3ni",{eg:["بطني بتوجعني","baTni bitiwga3ni"]}),
+ P("Fever","حرارة","7araara",{eg:["سخونية","sukhuniyya"]}),
+ P("Diarrhea","إسهال","is-haal",{egn:"Common enough to have a nickname among travelers. Pharmacies stock Antinal; drink bottled water only."}),
  P("Painkiller","مسكن","musakkin",{n:"Ask for “Panadol” and everyone understands."}),
- P("I'm allergic to…","عندي حساسية من…","3indi 7asaasiyye min…"),
- P("I'm diabetic","عندي سكري","3indi sukkari"),
+ P("I'm allergic to…","عندي حساسية من…","3indi 7asaasiyye min…",{eg:["عندي حساسية من…","3andi 7asasiyya min…"]}),
+ P("I'm diabetic","عندي سكري","3indi sukkari",{eg:["عندي سكر","3andi sukkar"]}),
  P("I'm pregnant","أنا حامل","ana 7aamil"),
- P("Sanitary pads","فوط","fuwaT"),
- P("Sunscreen","واقي شمس","waagi shams"),
- P("Dentist","دكتور أسنان","duktoor asnaan"),
- P("Are you OK?","إنت منيح؟","in{ta|ti} mnee7{|a}?"),
- P("I'm OK","أنا منيح","ana mnee7[|a]"),
- P("Careful!","انتبه!","intabih!",{n:"Also “deer baalak!”"}),
+ P("Sanitary pads","فوط","fuwaT",{eg:["فوط صحية","fuwaT Si77iyya"]}),
+ P("Sunscreen","واقي شمس","waagi shams",{eg:["صن بلوك","sun block"]}),
+ P("Dentist","دكتور أسنان","duktoor asnaan",{eg:["دكتور سنان","duktoor sinaan"]}),
+ P("Are you OK?","إنت منيح؟","in{ta|ti} mnee7{|a}?",{eg:["إنت [كويس|كويسة]؟","in{ta kwayyis|ti kwayyisa}?"]}),
+ P("I'm OK","أنا منيح","ana mnee7[|a]",{eg:["أنا [كويس|كويسة]","ana [kwayyis|kwayyisa]"]}),
+ P("Careful!","انتبه!","intabih!",{eg:["خلي بالك!","khalli baal{ak|ik}!"],jn:"Also “deer baalak!”"}),
  P("Danger","خطر","khaTar"),
- P("Accident","حادث","7aadis"),
- P("Fire","حريق","7areeg"),
- P("I lost my passport","ضيعت جوازي","Dayya3it jawaazi"),
- P("My phone was stolen","انسرق تلفوني","insarag talafooni"),
+ P("Accident","حادث","7aadis",{eg:["حادثة","7adsa"]}),
+ P("Fire","حريق","7areeg",{eg:["حريقة","7aree'a"]}),
+ P("I lost my passport","ضيعت جوازي","Dayya3it jawaazi",{eg:["ضيعت الباسبور","Dayya3t el-basboor"]}),
+ P("My phone was stolen","انسرق تلفوني","insarag talafooni",{eg:["الموبايل اتسرق","el-mobayl itsara'"]}),
  P("Embassy","سفارة","safaara"),
- P("Leave me alone","خليني لحالي","khalleeni la7aali"),
+ P("Leave me alone","خليني لحالي","khalleeni la7aali",{eg:["سيبني في حالي","sibni fi 7aali"],egn:"Polite but final. Works on persistent touts."}),
 ]},
-{id:"time", name:"Time & Days", ar:"الوقت والأيام", desc:"The weekend is Friday and Saturday. Friday mornings are quiet; things reopen after noon prayers.", items:[
- P("What time is it?","قديش الساعة؟","gaddeesh es-saa3a?"),
- P("It's three o'clock","الساعة تلاتة","es-saa3a talaate",{n:"Half past: w nuSS · quarter past: w rubu3 · quarter to: illa rubu3."}),
- P("Today","اليوم","el-yoom"),
+{id:"time", name:"Time & Days", ar:"الوقت والأيام", desc:"The weekend is Friday and Saturday in both countries. Friday mornings are quiet; things reopen after noon prayers.", items:[
+ P("What time is it?","قديش الساعة؟","gaddeesh es-saa3a?",{eg:["الساعة كام؟","es-saa3a kaam?"]}),
+ P("It's three o'clock","الساعة تلاتة","es-saa3a talaate",{eg:["الساعة تلاتة","es-saa3a talaata"],n:"Half past: w nuSS · quarter past: w rub3 · quarter to: illa rub3."}),
+ P("Today","اليوم","el-yoom",{eg:["النهارده","en-naharda"]}),
  P("Tomorrow","بكرة","bukra"),
  P("Yesterday","أمبارح","imbaari7"),
- P("Now","هلأ","halla'"),
+ P("Now","هلأ","halla'",{eg:["دلوقتي","dilwa'ti"]}),
  P("Later","بعدين","ba3dein"),
- P("Soon","عن قريب","3an gareeb"),
- P("Morning","الصبح","eS-Subu7"),
- P("Noon / afternoon","الظهر / بعد الظهر","eD-Duhur / ba3d eD-Duhur"),
- P("Evening","المسا","el-masa"),
+ P("Soon","عن قريب","3an gareeb",{eg:["قريب","'urayyib"]}),
+ P("Morning","الصبح","eS-Subu7",{eg:["الصبح","eS-Sub7"]}),
+ P("Noon / afternoon","الظهر / بعد الظهر","eD-Duhur / ba3d eD-Duhur",{eg:["الظهر / بعد الظهر","eD-Duhr / ba3d eD-Duhr"]}),
+ P("Evening","المسا","el-masa",{eg:["بالليل","bil-leil"]}),
  P("Night","الليل","el-leil"),
- P("Minute / hour","دقيقة / ساعة","dageega / saa3a"),
- P("Five minutes","خمس دقايق","khams dagaayeg"),
- P("One moment","لحظة","la7Za"),
- P("Day / week / month / year","يوم / أسبوع / شهر / سنة","yoom / usboo3 / shahr / sane"),
- P("Sunday","الأحد","el-a7ad"),
+ P("Minute / hour","دقيقة / ساعة","dageega / saa3a",{eg:["دقيقة / ساعة","di'ee'a / saa3a"]}),
+ P("Five minutes","خمس دقايق","khams dagaayeg",{eg:["خمس دقايق","khamas da'aayi'"]}),
+ P("One moment","لحظة","la7Za",{eg:["لحظة / ثانية واحدة","la7Za / sanya wa7da"]}),
+ P("Day / week / month / year","يوم / أسبوع / شهر / سنة","yoom / usboo3 / shahr / sane",{eg:["يوم / أسبوع / شهر / سنة","yoom / usboo3 / shahr / sana"]}),
+ P("Sunday","الأحد","el-a7ad",{eg:["الحد","el-7add"]}),
  P("Monday","الاتنين","el-itnein"),
- P("Tuesday","التلاتا","et-talaata"),
- P("Wednesday","الأربعا","el-arba3a"),
+ P("Tuesday","التلاتا","et-talaata",{eg:["التلات","et-talaat"]}),
+ P("Wednesday","الأربعا","el-arba3a",{eg:["الأربع","el-arba3"]}),
  P("Thursday","الخميس","el-khamees"),
- P("Friday","الجمعة","el-jum3a"),
+ P("Friday","الجمعة","el-jum3a",{eg:["الجمعة","el-gum3a"]}),
  P("Saturday","السبت","es-sabt"),
- P("Early / late","بكير / متأخر","bakkeer / mit'akhkhir"),
+ P("Early / late","بكير / متأخر","bakkeer / mit'akhkhir",{eg:["بدري / متأخر","badri / mit'akhkhar"]}),
  P("Every day","كل يوم","kull yoom"),
  P("Always / never","دايماً / أبداً","daayman / abadan"),
- P("Sometimes","أحياناً","a7yaanan"),
- P("When does it leave?","إيمتى بيمشي؟","eimta bimshi?"),
- P("When does it arrive?","إيمتى بيوصل؟","eimta byooSal?"),
+ P("Sometimes","أحياناً","a7yaanan",{eg:["ساعات","sa3aat"]}),
+ P("When does it leave?","إيمتى بيمشي؟","eimta bimshi?",{eg:["بيقوم إمتى؟","biyi'oom imta?"]}),
+ P("When does it arrive?","إيمتى بيوصل؟","eimta byooSal?",{eg:["بيوصل إمتى؟","biyiwSal imta?"]}),
 ]},
 {id:"words", name:"Useful Words", ar:"كلمات مفيدة", desc:"Adjectives, everyday verbs in the “I” form, and how to address people.", items:[
- P("Big / small","كبير / صغير","kbeer / zgheer"),
- P("Good / bad","منيح / مش منيح","mnee7 / mish mnee7",{n:"“3aaTil” = bad, broken, no good."}),
- P("Hot / cold","سخن / بارد","sukhun / baarid"),
- P("New / old","جديد / قديم","jdeed / gadeem"),
+ P("Big / small","كبير / صغير","kbeer / zgheer",{eg:["كبير / صغير","kibeer / Sughayyar"]}),
+ P("Good / bad","منيح / مش منيح","mnee7 / mish mnee7",{eg:["كويس / وحش","kwayyis / wi7ish"],jn:"“3aaTil” = bad, broken, no good."}),
+ P("Hot / cold","سخن / بارد","sukhun / baarid",{eg:["سخن / ساقع","sukhn / saa'i3"]}),
+ P("New / old","جديد / قديم","jdeed / gadeem",{eg:["جديد / قديم","gideed / 'adeem"]}),
  P("Fast / slow","سريع / بطيء","saree3 / baTee'"),
- P("Easy / hard","سهل / صعب","sahil / Sa3ib"),
+ P("Easy / hard","سهل / صعب","sahil / Sa3ib",{eg:["سهل / صعب","sahl / Sa3b"]}),
  P("Full / empty","مليان / فاضي","malyaan / faaDi",{n:"faaDi also = free, available. “inta faaDi?” = are you free?"}),
- P("Same / different","نفس الشي / غير","nafs esh-shi / gheir"),
- P("More / less","أكتر / أقل","aktar / agall"),
+ P("Same / different","نفس الشي / غير","nafs esh-shi / gheir",{eg:["نفس الحاجة / مختلف","nafs el-7aaga / mukhtalif"]}),
+ P("More / less","أكتر / أقل","aktar / agall",{eg:["أكتر / أقل","aktar / a'all"]}),
  P("Correct / wrong","صح / غلط","Sa77 / ghalaT"),
  P("Important","مهم","muhimm"),
- P("Ready","جاهز","[jaahiz|jaahze]"),
+ P("Ready","جاهز","[jaahiz|jaahze]",{eg:["[جاهز|جاهزة]","[gaahiz|gahza]"]}),
  P("Sure / certain","أكيد","akeed"),
  P("I go","بروح","baroo7"),
- P("I come","باجي","baaji"),
+ P("I come","باجي","baaji",{eg:["باجي","baagi"]}),
  P("I eat / I drink","باكل / بشرب","baakul / bashrab"),
  P("I see","بشوف","bashoof"),
  P("I like / I love","بحب","ba7ibb"),
- P("I think","بفكر","bafakkir"),
+ P("I think","بفكر","bafakkir",{eg:["بفتكر","baftikir"]}),
  P("I sleep","بنام","banaam"),
  P("I pay","بدفع","badfa3"),
  P("I buy","بشتري","bashtiri"),
- P("I speak","بحكي","ba7ki"),
- P("I live (in…)","ساكن (في…)","[saakin|saakne] (fi…)"),
- P("I work","بشتغل","bashtghil"),
- P("I'm going / on my way","أنا رايح","ana [raaye7|raay7a]"),
- P("Man / woman","زلمة / مرا","zalame / mara"),
+ P("I speak","بحكي","ba7ki",{eg:["بتكلم","batkallim"]}),
+ P("I live (in…)","ساكن (في…)","[saakin|saakne] (fi…)",{eg:["[ساكن|ساكنة] (في…)","[saakin|sakna] (fi…)"]}),
+ P("I work","بشتغل","bashtghil",{eg:["بشتغل","bashtaghal"]}),
+ P("I'm going / on my way","أنا رايح","ana [raaye7|raay7a]",{eg:["أنا [رايح|رايحة]","ana [raayi7|ray7a]"]}),
+ P("Man / woman","زلمة / مرا","zalame / mara",{eg:["راجل / ست","raagil / sitt"]}),
  P("Boy / girl","ولد / بنت","walad / bint"),
- P("Friend","صاحب","[Saa7eb|Saa7be]"),
- P("Family","عيلة","3eile"),
+ P("Friend","صاحب","[Saa7eb|Saa7be]",{eg:["[صاحب|صاحبة]","[Saa7ib|Sa7ba]"]}),
+ P("Family","عيلة","3eile",{eg:["عيلة","3eila"]}),
  P("People","ناس","naas"),
  P("Place","مكان","makaan"),
- P("Sir (to any man)","أستاذ","ustaaz",{n:"Everyone will call you ustaaz. It's a compliment."}),
+ P("Sir (to any man)","أستاذ","ustaaz",{eg:["يا باشا / يا أستاذ","ya baasha / ya ustaaz"],jn:"Everyone will call you ustaaz. It's a compliment.",egn:"“ya baasha” (pasha) is the everyday Egyptian sir, from waiters to police. “ya fandim” is the polite reply to being called."}),
  P("Madam","مدام","madaam"),
- P("Elder (respectful)","حج / حجة","7ajj / 7ajje",{n:"For older men and women, regardless of whether they've made the pilgrimage."}),
- P("Uncle / auntie (to older strangers)","عمو / خالتو","3ammo / khaalto"),
- P("Boss / chief (to a shopkeeper, mechanic, driver)","يا معلم","ya m3allim"),
+ P("Elder (respectful)","حج / حجة","7ajj / 7ajje",{eg:["حج / حجة","7agg / 7agga"],n:"For older men and women, regardless of whether they've made the pilgrimage."}),
+ P("Uncle / auntie (to older strangers)","عمو / خالتو","3ammo / khaalto",{eg:["يا عم / يا طنط","ya 3amm / ya TanT"]}),
+ P("Boss / chief (to a shopkeeper, mechanic, driver)","يا معلم","ya m3allim",{eg:["يا معلم / يا أسطى","ya m3allim / ya usTa"],egn:"Drivers and craftsmen are “ya usTa”."}),
 ]},
-{id:"flavor", name:"Jordanian Flavor", ar:"نكهة أردنية", desc:"The words you'll hear every hour. Use a few and watch faces change.", items:[
- P("Yalla","يلا","yalla",{n:"Let's go, hurry up, come on, OK then, bye. The Swiss army knife."}),
+{id:"flavor", name:"Local Flavor", ar:"نكهة محلية", desc:"The words you'll hear every hour. Use a few and watch faces change.", items:[
+ P("Yalla","يلا","yalla",{n:"Let's go, hurry up, come on, OK then, bye. The Swiss army knife. Egyptians add “yalla beena” (let's go, us)."}),
  P("Inshallah","إن شاء الله","inshallah",{n:"God willing. Any future plan. Also the polite way to say “probably not”."}),
  P("Wallah","والله","wallah",{n:"I swear / really. Constant. “wallah?” = really?"}),
  P("Habibi / habibti","حبيبي / حبيبتي","7abeebi / 7abeebti",{n:"My dear. Men say it to men, shopkeepers to everyone. Between strangers, use it lightly."}),
  P("Khalas","خلص","khalaS",{n:"Done, enough, that's it, stop, finished."}),
- P("Ya zalame","يا زلمة","ya zalame",{n:"Dude / man. Very Jordanian, very informal, for men."}),
+ P("Ya zalame","يا زلمة","ya zalame",{only:"jo",n:"Dude / man. Very Jordanian, very informal, for men."}),
+ P("Ya 3amm","يا عم","ya 3amm",{only:"eg",n:"Man / dude / come on. Egyptian filler for addressing any man."}),
+ P("Ya basha","يا باشا","ya baasha",{only:"eg",n:"Hey boss / sir. Everyone is a pasha in Egypt."}),
+ P("Ya raagil","يا راجل","ya raagil",{only:"eg",n:"“Come on, man!” Disbelief or encouragement."}),
  P("Tamaam","تمام","tamaam",{n:"OK, perfect, all good."}),
  P("Maashi","ماشي","maashi",{n:"OK, fine, going along. Literally “walking”."}),
  P("Ya3ni","يعني","ya3ni",{n:"I mean, like, you know. The universal filler."}),
- P("3an jad","عن جد","3an jad",{n:"Seriously / really."}),
+ P("3an jad","عن جد","3an jad",{only:"jo",n:"Seriously / really."}),
+ P("Bigadd","بجد","bigadd",{only:"eg",n:"Seriously / really."}),
+ P("'awi","قوي","'awi",{only:"eg",n:"Very. “7ilw 'awi” = very nice. Cairo's favorite word."}),
+ P("Ba'a","بقى","ba'a",{only:"eg",n:"So / then / already. Pure filler: “yalla ba'a!” = come on already."}),
  P("Mashallah","ما شاء الله","mashallah",{n:"Wow, God willed it. Say it about babies, homes, food."}),
  P("Alhamdulillah","الحمد لله","el-7amdulillah",{n:"Thank God. The answer to how are you, how was the trip, how's the food."}),
- P("Ahlan wa sahlan","أهلاً وسهلاً","ahlan wa sahlan",{n:"Welcome. Reply: ahlan feek."}),
- P("Ya3Teek el-3aafye","يعطيك العافية","ya3Tee{k|ki} el-3aafye",{n:"To anyone working. Better than thanks.",r:["God keep you well","الله يعافيك","allah y3aafee{k|ki}"]}),
- P("Sa7tein","صحتين","Sa7tein",{n:"Enjoy your meal / drink. Reply: 3ala galbak."}),
+ P("Ahlan wa sahlan","أهلاً وسهلاً","ahlan wa sahlan",{n:"Welcome. Reply: ahlan feek (Jordan) / ahlan beek (Egypt)."}),
+ P("Ya3Teek el-3aafye","يعطيك العافية","ya3Tee{k|ki} el-3aafye",{only:"jo",n:"To anyone working. Better than thanks.",r:["God keep you well","الله يعافيك","allah y3aafee{k|ki}"]}),
+ P("Kattar kheirak","كتر خيرك","kattar kheir{ak|ik}",{only:"eg",n:"Warm thanks for a favor.",r:["Your goodness came first","خيرك سابق","kheir{ak|ik} saabi'"]}),
+ P("Sa7tein","صحتين","Sa7tein",{only:"jo",n:"Enjoy your meal / drink. Reply: 3ala galbak."}),
+ P("Bil-hana wish-shifa","بالهنا والشفا","bil-hana wish-shifa",{only:"eg",n:"Enjoy your meal. Reply: allah yihanneek."}),
  P("Na3eeman","نعيماً","na3eeman",{n:"After a haircut or shower. Yes, really."}),
- P("Yislamu","يسلمو","yislamu",{n:"Thanks, bless your hands."}),
+ P("Yislamu / tislam eedak","يسلمو / تسلم إيدك","yislamu",{eg:["تسلم إيدك","tislam eed{ak|ik}"],n:"Thanks, bless your hands."}),
  P("Tislam","تسلم","tislam{|i}",{n:"Bless you, thanks. Reply to a compliment."}),
  P("3ala raasi","على راسي","3ala raasi",{n:"On my head: with pleasure, consider it done."}),
- P("Tikram 3einak","تكرم عينك","tikram 3ein{ak|ik}",{n:"Gladly, you're welcome."}),
+ P("Tikram 3einak / min 3eneyya","تكرم عينك","tikram 3ein{ak|ik}",{eg:["من عنيا","min 3eneyya"],n:"Gladly, you're welcome."}),
  P("Ma3leish","معليش","ma3leish",{n:"Never mind, sorry, it's OK."}),
  P("Baseeta","بسيطة","baseeTa",{n:"No big deal."}),
- P("Bijannin","بجنن","bijannin",{n:"Amazing, drives you crazy (in a good way)."}),
- P("Zaaki","زاكي","zaaki",{n:"Delicious. Very Jordanian."}),
- P("Nawwart","نورت","nawwar{t|ti}",{n:"You lit the place up. Said to guests. Reply: mnawwar bi-ahlo."}),
- P("Hala wallah","هلا والله","hala wallah",{n:"Hey, welcome! Warm reply to any greeting."}),
- P("Shu ya3ni?","شو يعني؟","shu ya3ni?",{n:"So what? / what do you mean?"}),
- P("Dughri","دغري","dughri",{n:"Straight ahead. Also an honest, straightforward person."}),
- P("Ya m3allim","يا معلم","ya m3allim",{n:"Hey boss. How you call a shopkeeper or driver."}),
- P("Shmagh","شماغ","shmaagh",{n:"The red-and-white checked headscarf. Jordan's national pattern."}),
+ P("Bijannin / yigannin","بجنن","bijannin",{eg:["يجنن","yigannin"],n:"Amazing, drives you crazy (in a good way)."}),
+ P("Zaaki","زاكي","zaaki",{only:"jo",n:"Delicious. Very Jordanian."}),
+ P("Ya salaam","يا سلام","ya salaam",{n:"Wow! How lovely! Or, with a flat tone, “oh really”."}),
+ P("Eh da?!","إيه ده؟!","eh da?!",{only:"eg",n:"What is this?! Surprise, outrage, delight."}),
+ P("Nawwart","نورت","nawwar{t|ti}",{n:"You lit the place up. Said to guests. Egyptians say “nawwart maSr”. Reply: mnawwar bi-ahlo / maSr mnawwara bi-ahlaha."}),
+ P("Hala wallah","هلا والله","hala wallah",{only:"jo",n:"Hey, welcome! Warm reply to any greeting."}),
+ P("Shu ya3ni? / ya3ni eh?","شو يعني؟","shu ya3ni?",{eg:["يعني إيه؟","ya3ni eh?"],n:"So what? / what do you mean?"}),
+ P("Dughri / 3ala Tool","دغري","dughri",{eg:["على طول","3ala Tool"],n:"Straight ahead. Dughri also means an honest, straightforward person."}),
+ P("Ya m3allim","يا معلم","ya m3allim",{n:"Hey boss. How you call a shopkeeper, cook or driver."}),
+ P("Rabbina yikhalleek","ربنا يخليك","rabbina yikhallee{k|ki}",{only:"eg",n:"May God keep you: please, or thank you, depending on tone."}),
+ P("Shmagh","شماغ","shmaagh",{only:"jo",n:"The red-and-white checked headscarf. Jordan's national pattern."}),
 ]},
 {id:"tips", name:"Culture Tips", ar:"نصائح", desc:"Short notes on how things work.", tips:[
- {t:"Hospitality is real", ar:"أهلاً وسهلاً", d:"You will be invited for tea or coffee constantly. Accepting once is polite, and often the best part of the day. Refuse a refill by tilting the cup side to side. To stop the food: hand on heart, “wallah shbi3it”."},
+ {t:"Hospitality is real", ar:"أهلاً وسهلاً", d:"You will be invited for tea constantly. Accepting once is polite, and often the best part of the day. Refuse a refill by tilting the cup side to side. To stop the food: hand on heart, “wallah” and the word for full."},
  {t:"Greetings and hands", ar:"السلام", d:"Men shake hands with men. Wait for a woman to offer her hand first; a hand on the heart is a warm alternative. Use your right hand to eat, pass and pay."},
  {t:"Inshallah has layers", ar:"إن شاء الله", d:"Usually “hopefully, yes”. Sometimes “we'll see”. If you need a firm answer, ask again with a smile: “inshallah, or akeed?”"},
- {t:"Bargaining", ar:"السوق", d:"Expected in souqs, with street vendors and unmetered taxis. Not in malls, supermarkets, restaurants or with posted prices. Start around 60%, stay friendly, and walking away is part of the dance."},
- {t:"Taxis", ar:"تكسي", d:"Amman's yellow taxis must run the meter (3addaad); insist politely. Short hops cost 1–3 JD. Uber and Careem work well in Amman. For Petra, Wadi Rum or the Dead Sea, agree the full price first."},
- {t:"Money", ar:"مصاري", d:"The dinar (JD) is pegged at about 1.41 USD. 1 JD = 100 piasters = 1000 fils. Locals call the dinar “leera” too. Half-dinar and quarter-dinar coins look alike; check before paying."},
- {t:"Tipping", ar:"إكرامية", d:"About 10% in restaurants when no service charge is added. Round up taxi fares. 1–2 JD for porters and 5–10 JD a day for guides is generous and appreciated."},
- {t:"Friday and the weekend", ar:"الجمعة", d:"The weekend is Friday–Saturday. Friday morning shops and many restaurants stay shut until after noon prayers. Downtown Amman comes alive Friday evening."},
- {t:"Ramadan", ar:"رمضان", d:"Don't eat, drink or smoke in public during daylight hours. Many restaurants close until sunset, then the city celebrates late into the night. Hotels still serve tourists."},
- {t:"Dress", ar:"اللبس", d:"Covered shoulders and knees outside resorts, especially in small towns and religious sites. Women may want a scarf for mosques; the King Abdullah I Mosque lends gowns."},
- {t:"Photos", ar:"صور", d:"Ask before photographing people, especially women (mumkin aSawwrik?). Skip military, police and border installations."},
- {t:"Water and weather", ar:"مي", d:"Drink bottled water; brushing teeth with tap water is fine. Amman is high, hilly and dry, so carry water. Winter nights are cold, even in Petra and Wadi Rum."},
- {t:"How to address people", ar:"أستاذ", d:"Any man: ustaaz. Any woman: madaam. Older people: 7ajj / 7ajje. Kids say 3ammo (uncle) and khaalto (auntie) to grown-ups. Shopkeepers and drivers: ya m3allim."},
- {t:"Jordan Pass", ar:"جوردن باس", d:"Buy it online before you land. It waives the visa fee if you stay 3+ nights and covers Petra, Jerash, Wadi Rum and 40 other sites."},
- {t:"Emergencies", ar:"طوارئ", d:"Call 911 for police, ambulance or fire anywhere in Jordan. Tourist police stand at Petra, Jerash and downtown Amman. Pharmacies handle small problems well."},
- {t:"Body language", ar:"إشارات", d:"A raised palm pinched slowly means “slow down / wait” (shwayy shwayy). A quick “tsk” with an upward chin flick means no; it isn't rude. A hand on the heart means thank you, or no thank you."},
- {t:"Mansaf etiquette", ar:"منسف", d:"If invited: eat standing around the platter with your right hand, from the section in front of you, and don't blow on hot food. Say “zaaki!” and “yislamu eideiki” to the cook."},
- {t:"The g sound", ar:"ق", d:"Jordanians famously say ق as a hard “g”: gahwe, gaddeesh, Sadeeg. Many Amman city speakers use a glottal stop instead ('ahwe, 'addeesh). Both are Jordanian; this sheet uses g."},
+ {t:"Bargaining", ar:"السوق", d:"Expected in souqs, with street vendors and unmetered taxis. Not in malls, supermarkets, restaurants or with posted prices. Start around half, stay friendly, and walking away is part of the dance. Egypt opens higher than Jordan; a third of the first price is not rude in Khan el-Khalili."},
+ {t:"Taxis in Jordan", c:"jo", ar:"تكسي", d:"Amman's yellow taxis must run the meter (3addaad); insist politely. Short hops cost 1–3 JD. Uber and Careem work well in Amman. For Petra, Wadi Rum or the Dead Sea, agree the full price first."},
+ {t:"Taxis in Egypt", c:"eg", ar:"تاكسي", d:"Cairo's white taxis have meters that are rarely used; agree the fare before getting in or use Uber, Careem or inDrive, which are cheap and remove the argument. Drivers rarely have change, so carry small notes. Cairo traffic is slow: budget double the time Google Maps says."},
+ {t:"Money in Jordan", c:"jo", ar:"مصاري", d:"The dinar (JD) is pegged at about 1.41 USD. 1 JD = 100 piasters = 1000 fils. Locals call the dinar “leera” too. Half-dinar and quarter-dinar coins look alike; check before paying."},
+ {t:"Money in Egypt", c:"eg", ar:"فلوس", d:"The Egyptian pound (EGP, “gineeh”) floats and has moved a lot; check the rate the week you travel. Withdraw from bank ATMs, carry small notes (5, 10, 20) for tips and taxis, and expect many sites to price tickets in pounds but sell passes in dollars or euros."},
+ {t:"Tipping", ar:"بقشيش", d:"Jordan: about 10% in restaurants when no service charge is added; round up taxis; 1–2 JD for porters. Egypt: baksheesh is a way of life. A few pounds to bathroom attendants, anyone who helps with a bag or opens a tomb, 10% at restaurants, and 50–100 EGP a day for a good guide or driver."},
+ {t:"Friday and the weekend", ar:"الجمعة", d:"The weekend is Friday–Saturday in both countries. Friday morning shops and many restaurants stay shut until after noon prayers. Downtown Amman and Cairo's old city come alive Friday evening."},
+ {t:"Ramadan", ar:"رمضان", d:"Don't eat, drink or smoke in public during daylight hours. Many restaurants close until sunset, then the city celebrates late into the night. Hotels still serve tourists. Cairo during Ramadan nights is unforgettable."},
+ {t:"Dress", ar:"اللبس", d:"Covered shoulders and knees outside resorts, especially in small towns and religious sites. Women may want a scarf for mosques. Cairo and Amman are relaxed by regional standards; Upper Egypt and rural Jordan are not."},
+ {t:"Photos", ar:"صور", d:"Ask before photographing people, especially women (mumkin aSawwrik?). Skip military, police, bridges and border installations. Many Egyptian sites sell a separate photo ticket; a phone is sometimes free, a camera usually is not."},
+ {t:"Water and weather", ar:"مي", d:"Drink bottled water in both countries; brushing teeth with tap water is fine in Amman, less so in Cairo. Amman is high and dry with cold winters. Cairo is hot from May to September; Luxor and Aswan are brutal in summer, so sightsee early."},
+ {t:"How to address people", ar:"أستاذ", d:"Jordan: any man is ustaaz, any woman madaam, elders 7ajj / 7ajje, shopkeepers ya m3allim. Egypt: any man is ya baasha or ya ustaaz, elders ya 7agg / ya 7agga, drivers and craftsmen ya usTa, and “ya fandim” is the polite reply when someone calls you."},
+ {t:"Touts and hustle", c:"eg", ar:"لا شكراً", d:"Around the pyramids, Luxor and Khan el-Khalili, expect offers of camels, guides, papyrus and “free” gifts. A firm “la' shukran” with a smile, then “khalaS”, then walking on. Don't hand your camera to anyone. Nothing is free, and “student price” tickets require a real student card."},
+ {t:"Jordan Pass", c:"jo", ar:"جوردن باس", d:"Buy it online before you land. It waives the visa fee if you stay 3+ nights and covers Petra, Jerash, Wadi Rum and 40 other sites."},
+ {t:"Egypt visas and passes", c:"eg", ar:"فيزا", d:"Most Western passports get a visa on arrival (cash, US dollars) or an e-visa online. Cairo Pass and Luxor Pass cover multiple sites for five days; bring passport photos and cash."},
+ {t:"Emergencies", ar:"طوارئ", d:"Jordan: 911 for police, ambulance or fire. Egypt: 122 police, 123 ambulance, 180 fire, 126 tourist police. Tourist police stand at every major site in both countries. Pharmacies handle small problems well."},
+ {t:"Body language", ar:"إشارات", d:"A raised palm pinched slowly means “slow down / wait”. A quick “tsk” with an upward chin flick means no; it isn't rude. A hand on the heart means thank you, or no thank you. Egyptians touch fingertips together and shake the hand for “what's going on?”"},
+ {t:"Mansaf etiquette", c:"jo", ar:"منسف", d:"If invited: eat standing around the platter with your right hand, from the section in front of you, and don't blow on hot food. Say “zaaki!” and “yislamu eideiki” to the cook."},
+ {t:"Crossing the street in Cairo", c:"eg", ar:"الشارع", d:"There are few crossings and the traffic never fully stops. Walk steadily and predictably; drivers flow around you. Following a local across is the easiest lesson."},
+ {t:"The g sound", ar:"ق / ج", d:"The letter ق is a hard “g” in Jordan (gahwe, gaddeesh) and a glottal stop in Egypt ('ahwa, 'addeesh). The letter ج is “j” in Jordan (jamal) and a hard “g” in Egypt (gamal). Swap those two sounds and you've switched dialects."},
 ]},
 {id:"guide", name:"Pronunciation", ar:"النطق", desc:"How to read the transliteration in this sheet. The digits stand for sounds English doesn't have.", guide:[
  ["3","ع","A deep sound from the throat, like a swallowed “a”. Try saying “ah” while tightening your throat.","3arabi (Arabic), sab3a (seven), ma3 (with)"],
- ["7","ح","A breathy H, like fogging up glasses.","mar7aba (hello), 7ilu (nice), Sa7tein"],
- ["kh","خ","Like the “ch” in Scottish “loch” or German “Bach”.","khubiz (bread), khaTar (danger)"],
+ ["7","ح","A breathy H, like fogging up glasses.","mar7aba (hello), 7ilu (nice), 7isaab (bill)"],
+ ["kh","خ","Like the “ch” in Scottish “loch” or German “Bach”.","khubiz (bread), khaTar (danger), kharToosh (cartouche)"],
  ["gh","غ","A gargled G, like a French “r”.","ghaali (expensive), ghurfe (room)"],
  ["'","ء","A glottal stop, the catch in “uh-oh”.","la' (no), halla' (now), Tawaari'"],
- ["g","ق","Hard G as in “go”. That's the Jordanian sound. Amman city speakers often make it a glottal stop instead.","gaddeesh (how much), gahwe (coffee)"],
+ ["g (Jordan)","ق","In Jordan ق is a hard G as in “go”. Amman city speakers often make it a glottal stop instead.","gaddeesh (how much), gahwe (coffee)", "jo"],
+ ["j (Jordan)","ج","In Jordan ج is “j” as in “jam”.","jaaj (chicken), jamal (camel), jisir (bridge)", "jo"],
+ ["g (Egypt)","ج","In Egypt ج is a hard G as in “go”. This is the sound that marks Egyptian Arabic.","gamal (camel), gineeh (pound), gambari (shrimp)", "eg"],
+ ["' (Egypt)","ق","In Egypt ق becomes a glottal stop, written here as an apostrophe.","'ahwa (coffee), 'urayyib (near), 'aTr (train), dilwa'ti (now)", "eg"],
  ["S T D Z","ص ط ض ظ","Capitals are the heavy versions of s, t, d, z: say them deeper, with your tongue flatter.","Sabaa7 (morning), Tayyib (good), Daaye3 (lost)"],
  ["r","ر","Rolled, like Spanish.","marra (time), ruzz (rice)"],
  ["aa ee oo","ا ي و","Doubled vowels are long. Hold them.","salaam, kteer, shoob"],
  ["Double letters","ّ","Doubled consonants are held longer, with stress on that syllable.","sitte (six), 7ammaam (bathroom), kullo"],
- ["e / o","ـة / ـو","“e” as in bed, “o” as in go. A final “e” is where formal Arabic has -a.","ghurfe (room), kullo (all of it)"],
- ["el- / es- / esh-","الـ","“The”. Before s, sh, t, d, T, D, S, Z, n, r, z, j the “l” copies the next sound.","el-balad, es-saa3a, esh-shurTa, eT-Tareeg"],
+ ["e / o","ـة / ـو","“e” as in bed, “o” as in go. A final “e” (Jordan) or “a” (Egypt) is where formal Arabic has -a.","ghurfe / ooDa (room), kullo / kullu (all of it)"],
+ ["el- / es- / esh-","الـ","“The”. Before s, sh, t, d, T, D, S, Z, n, r, z, j the “l” copies the next sound.","el-balad, es-saa3a, esh-shurTa, eT-Taree'"],
 ]},
 ];
 
@@ -898,7 +990,7 @@ const CATS = [
 const LS = (k, d) => { try { const v = localStorage.getItem("jo-" + k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } };
 const SAVE = (k, v) => { try { localStorage.setItem("jo-" + k, JSON.stringify(v)); } catch (e) {} };
 const S = {
-  to: LS("to", "m"), me: LS("me", "m"), tr: LS("tr", "arabizi"), ar: LS("ar", 1), voice: LS("voice", ""), rate: LS("rate", 0.85),
+  to: LS("to", "m"), me: LS("me", "m"), dl: LS("dl", "both"), tr: LS("tr", "arabizi"), ar: LS("ar", 1), voice: LS("voice", ""), rate: LS("rate", 0.85),
   favs: new Set(LS("favs", [])), srs: LS("srs", {}), cat: LS("cat", "essentials"), q: "",
 };
 const ID = it => it.ar + "|" + it.en;
@@ -909,16 +1001,25 @@ const known = it => (S.srs[it.id]?.lvl || 0) >= 3;
 // ---------- text helpers ----------
 const tpl = s => String(s).replace(/\{([^{}|]*)\|([^{}]*)\}/g, (m, a, b) => S.to === "f" ? b : a)
                           .replace(/\[([^\[\]|]*)\|([^\[\]]*)\]/g, (m, a, b) => S.me === "f" ? b : a);
-const simple = s => s.replace(/3/g, "'").replace(/7/g, "h").replace(/S/g, "s").replace(/D/g, "d").replace(/T/g, "t").replace(/Z/g, "z");
+const simple = s => s.replace(/\S+/g, w => /^[A-Z]{2,}$/.test(w) ? w : w.replace(/3/g, "'").replace(/7/g, "h").replace(/S/g, "s").replace(/D/g, "d").replace(/T/g, "t").replace(/Z/g, "z"));
 const trOut = s => S.tr === "simple" ? simple(tpl(s)) : tpl(s);
-const hasGender = it => /[{\[][^}\]]*\|/.test(it.tr + (it.ar || ""));
+const hasGender = it => /[{\[][^}\]]*\|/.test([it.tr, it.ar, ...(it.eg || []), ...(it.r || []), ...(it.egr || [])].join(" "));
+const DL = { jo: "Jordan", eg: "Egypt" };
+const dlTag = (dl, extra) => dl ? `<span class="tag dl ${dl}">${DL[dl]}${extra || ""}</span>` : "";
+function forms(it) { if (!it.eg) return [{ dl: "", ar: it.ar, tr: it.tr }]; const f = [{ dl: "jo", ar: it.ar, tr: it.tr }, { dl: "eg", ar: it.eg[0], tr: it.eg[1] }]; return S.dl === "both" ? f : f.filter(x => x.dl === S.dl); }
+const primary = it => forms(it)[0];
+const visible = it => !it.only || S.dl === "both" || it.only === S.dl;
+function replies(it) { if (!it.r) return []; if (!it.egr) return [{ dl: "", r: it.r }]; const f = [{ dl: "jo", r: it.r }, { dl: "eg", r: it.egr }]; return S.dl === "both" ? f : f.filter(x => x.dl === S.dl); }
+function notes(it) { const out = []; if (it.n) out.push(it.n); if (it.jn && S.dl !== "eg") out.push((S.dl === "both" ? "Jordan: " : "") + it.jn); if (it.egn && S.dl !== "jo") out.push((S.dl === "both" ? "Egypt: " : "") + it.egn); return out; }
+const descOf = c => typeof c.desc === "string" ? c.desc : (c.desc[S.dl] || c.desc.both);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const norm = s => String(s).toLowerCase()
   .replace(/[ً-ْٰـ]/g, "").replace(/[أإآ]/g, "ا").replace(/ة/g, "ه").replace(/ى/g, "ي")
   .replace(/[{}\[\]]/g, "").replace(/[’‘]/g, "'");
 const allVariants = s => [S.to, "m", "f"].flatMap(t => ["m", "f"].map(m => { const save = [S.to, S.me]; S.to = t; S.me = m; const r = tpl(s); [S.to, S.me] = save; return r; })).join(" ");
 function matches(it, q) {
-  const hay = norm([it.en, allVariants(it.tr), simple(allVariants(it.tr)), allVariants(it.ar), it.n || "", it.l || "", it.r ? it.r.join(" ") : ""].join(" | "));
+  const strs = [it.tr, it.ar, ...(it.eg || []), ...(it.r || []).slice(1), ...(it.egr || []).slice(1)];
+  const hay = norm([it.en, ...strs.map(allVariants), ...strs.map(x => simple(allVariants(x))), it.n || "", it.jn || "", it.egn || "", it.l || "", it.r ? it.r[0] : "", it.egr ? it.egr[0] : ""].join(" | "));
   return q.split(/\s+/).filter(Boolean).every(w => hay.includes(w));
 }
 
@@ -971,7 +1072,7 @@ function navHTML(side) {
   const groups = side ? [["Phrases", CATS.filter(c => c.items).map(c => c.id)], ["Reference", ["numerals", "tips", "guide"]], ["Yours", ["saved"]]] : [["", ["saved", ...CATS.map(c => c.id)]]];
   return groups.map(([g, ids]) => (g ? `<div class="grp">${g}</div>` : "") + ids.map(id => {
     const c = id === "saved" ? { name: "Saved", items: [...S.favs] } : catById(id);
-    const n = c.items ? c.items.length : c.tool === "numerals" ? 10 : (c.tips || c.guide || []).length;
+    const n = c.items ? c.items.filter(visible).length : c.tool === "numerals" ? 10 : c.tips ? c.tips.filter(t => !t.c || S.dl === "both" || t.c === S.dl).length : (c.guide || []).length;
     return `<button class="cat ${S.cat === id ? "on" : ""} ${id === "saved" ? "fav-cat" : ""}" data-cat="${id}">${esc(c.name)} <span class="n">${n}</span></button>`;
   }).join("")).join("");
 }
@@ -980,14 +1081,18 @@ function renderNav() {
   const on = $("#cats .cat.on"); if (on) on.scrollIntoView({ block: "nearest", inline: "center" });
 }
 function phraseHTML(it, i) {
-  const reply = it.r ? `<div class="ph-reply"><span class="k">Reply</span><span class="tr">${esc(trOut(it.r[2]))}</span><span class="ar" lang="ar" data-act="reply" role="button" tabindex="0" title="Tap to hear the reply">${esc(tpl(it.r[1]))}</span><span class="ph-lit">${esc(it.r[0])}</span><button class="ib sm" data-act="reply" aria-label="Hear the reply" title="Hear the reply">${I.speak}</button></div>` : "";
-  const note = (it.n || it.l) ? `<div class="ph-note">${it.l ? `<span class="ph-lit">lit. “${esc(it.l)}”</span>${it.n ? " · " : ""}` : ""}${it.n ? esc(it.n) : ""}</div>` : "";
+  const fs = forms(it), multi = fs.length > 1;
+  const formsHTML = fs.map(f => `<div class="form"><div class="ph-ar" lang="ar" data-act="speak" data-ar="${esc(f.ar)}" role="button" tabindex="0" title="Tap to hear">${esc(tpl(f.ar))}</div><div class="ph-tr">${multi ? dlTag(f.dl) : ""}${esc(trOut(f.tr))}</div></div>`).join("");
+  const replyHTML = replies(it).map(x => `<div class="ph-reply"><span class="k">Reply${x.dl && S.dl === "both" ? " · " + DL[x.dl] : ""}</span><span class="tr">${esc(trOut(x.r[2]))}</span><span class="ar" lang="ar" data-act="reply" data-ar="${esc(x.r[1])}" role="button" tabindex="0" title="Tap to hear the reply">${esc(tpl(x.r[1]))}</span><span class="ph-lit">${esc(x.r[0])}</span><button class="ib sm" data-act="reply" data-ar="${esc(x.r[1])}" aria-label="Hear the reply" title="Hear the reply">${I.speak}</button></div>`).join("");
+  const ns = notes(it);
+  const note = (ns.length || it.l) ? `<div class="ph-note">${it.l ? `<span class="ph-lit">lit. “${esc(it.l)}”</span>${ns.length ? " · " : ""}` : ""}${ns.map(esc).join(" · ")}</div>` : "";
+  const onlyTag = it.only && S.dl === "both" ? dlTag(it.only, " only") : "";
   const fav = S.favs.has(it.id);
   return `<article class="ph ${known(it) ? "known" : ""}" data-i="${i}" data-id="${esc(it.id)}">
-    <div class="ph-en">${esc(it.en)}${hasGender(it) ? `<span class="tag g" title="Changes with gender">${S.to === "f" ? "to ♀" : "to ♂"}</span>` : ""}${known(it) ? `<span class="tag" title="Marked known in practice">known</span>` : ""}</div>
-    <div class="ph-ar" lang="ar" data-act="speak" role="button" tabindex="0" title="Tap to hear">${esc(tpl(it.ar))}</div>
-    <div class="ph-tr">${esc(trOut(it.tr))}</div>
-    ${note}${reply}
+    <div class="ph-main ${multi ? "multi" : ""}">
+      <div class="ph-en">${esc(it.en)}${onlyTag}${hasGender(it) ? `<span class="tag g" title="Changes with gender">${S.to === "f" ? "to ♀" : "to ♂"}</span>` : ""}${known(it) ? `<span class="tag" title="Marked known in practice">known</span>` : ""}</div>
+      ${formsHTML}${note}${replyHTML}
+    </div>
     <div class="acts">
       <button class="ib" data-act="speak" aria-label="Play audio" title="Hear it">${I.speak}</button>
       <button class="ib ${fav ? "on" : ""}" data-act="fav" aria-label="Save" title="Save">${fav ? I.starOn : I.star}</button>
@@ -1001,25 +1106,26 @@ function renderMain() {
   const main = $("#main");
   const q = norm(S.q.trim());
   if (q) {
-    LIST = ALL.filter(it => matches(it, q));
+    LIST = ALL.filter(it => visible(it) && matches(it, q));
     main.innerHTML = `<div class="sec-head"><div><h2>Search</h2><p>${LIST.length} match${LIST.length === 1 ? "" : "es"} for “${esc(S.q.trim())}”</p></div></div>` +
       (LIST.length ? `<div class="list">${LIST.map(phraseHTML).join("")}</div>` : `<div class="empty">Nothing found. Try an English word, the transliteration (with or without 3 and 7), or Arabic script.</div>`);
     return;
   }
   if (S.cat === "saved") {
-    LIST = ALL.filter(it => S.favs.has(it.id));
+    LIST = ALL.filter(it => S.favs.has(it.id) && visible(it));
     main.innerHTML = `<div class="sec-head"><div><h2>Saved<span class="ar" lang="ar">المحفوظات</span></h2><p>Your own short list. Tap the star on any phrase to add it. Practice can drill just these.</p></div>${progHTML(LIST)}</div>` +
       (LIST.length ? `<div class="list">${LIST.map(phraseHTML).join("")}</div>` : `<div class="empty">No saved phrases yet. Star the ones you want to keep close.</div>`);
     return;
   }
   const c = catById(S.cat) || CATS[0];
-  let html = `<div class="sec-head"><div><h2>${esc(c.name)}<span class="ar" lang="ar">${esc(c.ar)}</span></h2><p>${esc(c.desc)}</p></div>${c.items ? progHTML(c.items) : ""}</div>`;
+  const items = c.items ? c.items.filter(visible) : null;
+  let html = `<div class="sec-head"><div><h2>${esc(c.name)}<span class="ar" lang="ar">${esc(c.ar)}</span></h2><p>${esc(descOf(c))}</p></div>${items ? progHTML(items) : ""}</div>`;
   if (c.tool === "numbers") html += numberToolHTML();
   if (c.tool === "numerals") { LIST = []; html += numeralsHTML(); }
-  if (c.items) { LIST = c.items; html += `<div class="list">${c.items.map(phraseHTML).join("")}</div>`; }
-  if (c.tips) { LIST = []; html += `<div class="tips">${c.tips.map(t => `<div class="tip"><h3>${esc(t.t)}<span class="ar" lang="ar">${esc(t.ar)}</span></h3><p>${esc(t.d)}</p></div>`).join("")}</div>`; }
-  if (c.guide) { LIST = []; html += `<div class="guide wrap"><table><thead><tr><th>Written</th><th>Letter</th><th>Sound</th><th>Examples</th></tr></thead><tbody>${c.guide.map(g => `<tr><td class="sym">${esc(g[0])}</td><td><span class="ar" lang="ar">${esc(g[1])}</span></td><td>${esc(g[2])}</td><td class="ex">${esc(g[3])}</td></tr>`).join("")}</tbody></table></div>
-    <p class="hint">Stress usually falls on a long (doubled) vowel or a doubled consonant. When in doubt, say it flat and quick; Jordanians will meet you halfway.</p>`; }
+  if (items) { LIST = items; html += `<div class="list">${items.map(phraseHTML).join("")}</div>`; }
+  if (c.tips) { LIST = []; const tips = c.tips.filter(t => !t.c || S.dl === "both" || t.c === S.dl); html += `<div class="tips">${tips.map(t => `<div class="tip"><h3>${esc(t.t)}<span class="ar" lang="ar">${esc(t.ar)}</span>${S.dl === "both" ? dlTag(t.c) : ""}</h3><p>${esc(t.d)}</p></div>`).join("")}</div>`; }
+  if (c.guide) { LIST = []; const rows = c.guide.filter(g => !g[4] || S.dl === "both" || g[4] === S.dl); html += `<div class="guide wrap"><table><thead><tr><th>Written</th><th>Letter</th><th>Sound</th><th>Examples</th></tr></thead><tbody>${rows.map(g => `<tr><td class="sym">${esc(g[0])}${S.dl === "both" ? dlTag(g[4]) : ""}</td><td><span class="ar" lang="ar">${esc(g[1])}</span></td><td>${esc(g[2])}</td><td class="ex">${esc(g[3])}</td></tr>`).join("")}</tbody></table></div>
+    <p class="hint">Stress usually falls on a long (doubled) vowel or a doubled consonant. When in doubt, say it flat and quick; people will meet you halfway.</p>`; }
   main.innerHTML = html;
   if (c.tool === "numbers") wireNumberTool();
   if (c.tool === "numerals") wireNumerals();
@@ -1036,27 +1142,39 @@ const N = {
   hund: [null,["miyye","مية"],["miteen","ميتين"],["talat miyye","تلت مية"],["arba3 miyye","أربع مية"],["khams miyye","خمس مية"],["sitt miyye","ست مية"],["saba3 miyye","سبع مية"],["taman miyye","تمن مية"],["tisa3 miyye","تسع مية"]],
   thou: [null,["alf","ألف"],["alfein","ألفين"],["talat aalaaf","تلات آلاف"],["arba3t aalaaf","أربعت آلاف"],["khamst aalaaf","خمست آلاف"],["sitt aalaaf","ست آلاف"],["saba3t aalaaf","سبعت آلاف"],["tamant aalaaf","تمنت آلاف"],["tisa3t aalaaf","تسعت آلاف"]],
   short: [null,null,null,["talat","تلت"],["arba3","أربع"],["khams","خمس"],["sitt","ست"],["saba3","سبع"],["taman","تمن"],["tisa3","تسع"],["3ashar","عشر"]],
+  conj: ["w","و"],
 };
-function numWords(n) { // 0..9999 -> [tr, ar]
-  if (n === 0) return N.ones[0];
+const N_EG = {
+  ones: [["Sifr","صفر"],["waa7id","واحد"],["itnein","اتنين"],["talaata","تلاتة"],["arba3a","أربعة"],["khamsa","خمسة"],["sitta","ستة"],["sab3a","سبعة"],["tamanya","تمانية"],["tis3a","تسعة"],["3ashara","عشرة"],["7idaashar","حداشر"],["itnaashar","اتناشر"],["talattaashar","تلاتاشر"],["arba3taashar","أربعتاشر"],["khamastaashar","خمستاشر"],["sittaashar","ستاشر"],["saba3taashar","سبعتاشر"],["tamantaashar","تمنتاشر"],["tisa3taashar","تسعتاشر"]],
+  tens: [null,null,["3ishreen","عشرين"],["talaateen","تلاتين"],["arbi3een","أربعين"],["khamseen","خمسين"],["sitteen","ستين"],["sab3een","سبعين"],["tamaneen","تمانين"],["tis3een","تسعين"]],
+  hund: [null,["miyya","مية"],["miteen","ميتين"],["tultumiyya","تلتمية"],["rub3umiyya","ربعمية"],["khumsumiyya","خمسمية"],["suttumiyya","ستمية"],["sub3umiyya","سبعمية"],["tumnumiyya","تمنمية"],["tus3umiyya","تسعمية"]],
+  thou: [null,["alf","ألف"],["alfein","ألفين"],["talat talaaf","تلات تلاف"],["arba3 talaaf","أربع تلاف"],["khamas talaaf","خمس تلاف"],["sitt talaaf","ست تلاف"],["saba3 talaaf","سبع تلاف"],["taman talaaf","تمن تلاف"],["tisa3 talaaf","تسع تلاف"]],
+  short: [null,null,null,["talat","تلت"],["arba3","أربع"],["khamas","خمس"],["sitt","ست"],["saba3","سبع"],["taman","تمن"],["tisa3","تسع"],["3ashar","عشر"]],
+  conj: ["wi","و"],
+};
+const NT = dl => dl === "eg" ? N_EG : N;
+function numWords(n, T) { // 0..9999 -> [tr, ar]
+  T = T || N;
+  if (n === 0) return T.ones[0];
   const parts = [];
   const th = Math.floor(n / 1000), h = Math.floor((n % 1000) / 100), r = n % 100;
-  if (th) parts.push(N.thou[th]);
-  if (h) parts.push(N.hund[h]);
-  if (r) { if (r < 20) parts.push(N.ones[r]); else { const t = Math.floor(r / 10), o = r % 10; parts.push(o ? [N.ones[o][0] + " w " + N.tens[t][0], N.ones[o][1] + " و" + N.tens[t][1]] : N.tens[t]); } }
-  return [parts.map(p => p[0]).join(" w "), parts.map(p => p[1]).join(" و")];
+  if (th) parts.push(T.thou[th]);
+  if (h) parts.push(T.hund[h]);
+  if (r) { if (r < 20) parts.push(T.ones[r]); else { const t = Math.floor(r / 10), o = r % 10; parts.push(o ? [T.ones[o][0] + " " + T.conj[0] + " " + T.tens[t][0], T.ones[o][1] + " " + T.conj[1] + T.tens[t][1]] : T.tens[t]); } }
+  return [parts.map(p => p[0]).join(" " + T.conj[0] + " "), parts.map(p => p[1]).join(" " + T.conj[1])];
 }
-function dinarWords(n, frac) { // whole dinars + fractional piasters
-  let tr = "", ar = "";
-  if (n === 1) { tr = "dinaar"; ar = "دينار"; }
-  else if (n === 2) { tr = "dinaareen"; ar = "دينارين"; }
-  else if (n >= 3 && n <= 10) { tr = N.short[n][0] + " danaaneer"; ar = N.short[n][1] + " دنانير"; }
-  else if (n === 100) { tr = "meet dinaar"; ar = "ميت دينار"; }
-  else if (n > 0) { const w = numWords(n); tr = w[0] + " dinaar"; ar = w[1] + " دينار"; }
+const CUR = {
+  jo: { label: "In dinars (Jordan)", one: ["dinaar","دينار"], two: ["dinaareen","دينارين"], few: n => [N.short[n][0] + " danaaneer", N.short[n][1] + " دنانير"], hundred: ["meet dinaar","ميت دينار"], many: w => [w[0] + " dinaar", w[1] + " دينار"], cent: ["girsh","قرش"], cent2: ["girshein","قرشين"], centFew: n => [N.short[n][0] + " gruush", N.short[n][1] + " قروش"], frac: { 50: ["nuSS","نص"], 25: ["rubu3","ربع"], 75: ["talat rbaa3","تلت رباع"] } },
+  eg: { label: "In pounds (Egypt)", one: ["gineeh","جنيه"], two: ["gineihein","جنيهين"], few: n => [N_EG.ones[n][0] + " gneih", N_EG.ones[n][1] + " جنيه"], hundred: ["meet gineeh","ميت جنيه"], many: w => [w[0] + " gineeh", w[1] + " جنيه"], cent: ["'irsh","قرش"], cent2: ["'irshein","قرشين"], centFew: n => [N_EG.ones[n][0] + " 'irsh", N_EG.ones[n][1] + " قرش"], frac: { 50: ["nuSS","نص"], 25: ["rub3","ربع"], 75: ["talat arbaa3","تلات أرباع"] } },
+};
+function moneyWords(n, frac, dl) {
+  const C = CUR[dl], T = NT(dl); let tr = "", ar = "";
+  if (n === 1) [tr, ar] = C.one; else if (n === 2) [tr, ar] = C.two; else if (n >= 3 && n <= 10) [tr, ar] = C.few(n); else if (n === 100) [tr, ar] = C.hundred; else if (n > 0) [tr, ar] = C.many(numWords(n, T));
   if (frac) {
-    const f = { 50: ["nuSS", "نص"], 25: ["rubu3", "ربع"], 75: ["talat rbaa3", "تلت رباع"] }[frac];
-    const piece = f ? f : (frac === 1 ? ["girsh", "قرش"] : frac === 2 ? ["girshein", "قرشين"] : frac <= 10 ? [N.short[frac][0] + " gruush", N.short[frac][1] + " قروش"] : [numWords(frac)[0] + " girsh", numWords(frac)[1] + " قرش"]);
-    tr = tr ? tr + " w " + piece[0] : piece[0]; ar = ar ? ar + " و" + piece[1] : piece[1];
+    const f = C.frac[frac];
+    const piece = f || (frac === 1 ? C.cent : frac === 2 ? C.cent2 : frac <= 10 ? C.centFew(frac) : [numWords(frac, T)[0] + " " + C.cent[0], numWords(frac, T)[1] + " " + C.cent[1]]);
+    if (f && !n) { tr = f[0] + " " + C.one[0]; ar = f[1] + " " + C.one[1]; }
+    else { tr = tr ? tr + " " + T.conj[0] + " " + piece[0] : piece[0]; ar = ar ? ar + " " + T.conj[1] + piece[1] : piece[1]; }
   }
   return [tr, ar];
 }
@@ -1075,7 +1193,7 @@ const LOOKALIKES = [
   ["٩", "9", "Same as ours."],
 ];
 function numeralsHTML() {
-  const tiles = LOOKALIKES.map(([e, w, tip], i) => `<button class="dg" data-say="${esc(N.ones[i][1])}" title="${esc(tip)}"><span class="dg-e" lang="ar">${e}</span><span class="dg-w">${w}</span><span class="dg-t">${esc(S.tr === "simple" ? simple(N.ones[i][0]) : N.ones[i][0])}</span></button>`).join("");
+  const tiles = LOOKALIKES.map(([e, w, tip], i) => { const o = N.ones[i], g = N_EG.ones[i]; const lbl = S.dl === "eg" ? g[0] : S.dl === "jo" || o[0] === g[0] ? o[0] : o[0] + " / " + g[0]; return `<button class="dg" data-say="${esc(S.dl === "eg" ? g[1] : o[1])}" title="${esc(tip)}"><span class="dg-e" lang="ar">${e}</span><span class="dg-w">${w}</span><span class="dg-t">${esc(S.tr === "simple" ? simple(lbl) : lbl)}</span></button>`; }).join("");
   return `<div class="dgrid">${tiles}</div>
   <div class="tool"><label for="convIn">Convert either way: paste a price, a plate, a phone number</label><input id="convIn" value="٢٥٠ جنيه · بص ٣٥٧ · ٠١٠ ١٢٣٤ ٥٦٧٨" autocomplete="off">
     <div class="num-out" id="convOut"></div>
@@ -1113,13 +1231,18 @@ function wireNumberTool() {
     const v = parseFloat(raw);
     if (!raw || isNaN(v) || v < 0 || v > 9999) { out.innerHTML = `<div class="hint">Enter a number between 0 and 9999.</div>`; return; }
     const whole = Math.floor(v), frac = Math.round((v - whole) * 100);
-    const w = numWords(whole), d = dinarWords(whole, frac);
-    const numTr = frac ? (whole ? w[0] + " w " : "") + (frac === 50 ? "nuSS" : frac === 25 ? "rubu3" : numWords(frac)[0] + " bil-miyye") : w[0];
-    const numAr = frac ? (whole ? w[1] + " و" : "") + (frac === 50 ? "نص" : frac === 25 ? "ربع" : numWords(frac)[1] + " بالمية") : w[1];
-    out.innerHTML = `
-      <div class="row"><span class="k">Digits</span><span class="v ar" lang="ar">${esc(eastern(raw))}</span></div>
-      <div class="row"><span class="k">Number</span><span><span class="v tr">${esc(S.tr === "simple" ? simple(numTr) : numTr)}</span> <span class="v ar" lang="ar" style="display:inline">${esc(numAr)}</span></span></div>
-      <div class="row"><span class="k">In dinars</span><span><span class="v tr">${esc(S.tr === "simple" ? simple(d[0]) : d[0])}</span> <span class="v ar" lang="ar" style="display:inline">${esc(d[1])}</span> <button class="ib" style="display:inline-grid;vertical-align:middle" data-say="${esc(d[1])}" aria-label="Hear it">${I.speak}</button></span></div>`;
+    const dls = S.dl === "both" ? ["jo", "eg"] : [S.dl];
+    const T_ = t => S.tr === "simple" ? simple(t) : t;
+    let html = `<div class="row"><span class="k">Digits</span><span class="v ar" lang="ar">${esc(eastern(raw))}</span></div>`;
+    for (const dl of dls) {
+      const T = NT(dl), w = numWords(whole, T), d = moneyWords(whole, frac, dl);
+      const fr = frac ? (frac === 50 ? CUR[dl].frac[50] : frac === 25 ? CUR[dl].frac[25] : [numWords(frac, T)[0] + " bil-miyya", numWords(frac, T)[1] + " بالمية"]) : null;
+      const numTr = fr ? (whole ? w[0] + " " + T.conj[0] + " " : "") + fr[0] : w[0];
+      const numAr = fr ? (whole ? w[1] + " " + T.conj[1] : "") + fr[1] : w[1];
+      html += `<div class="row"><span class="k">Number${dls.length > 1 ? " · " + DL[dl] : ""}</span><span><span class="v tr">${esc(T_(numTr))}</span> <span class="v ar" lang="ar" style="display:inline">${esc(numAr)}</span></span></div>
+        <div class="row"><span class="k">${CUR[dl].label}</span><span><span class="v tr">${esc(T_(d[0]))}</span> <span class="v ar" lang="ar" style="display:inline">${esc(d[1])}</span> <button class="ib" style="display:inline-grid;vertical-align:middle" data-say="${esc(d[1])}" aria-label="Hear it">${I.speak}</button></span></div>`;
+    }
+    out.innerHTML = html;
   };
   inp.addEventListener("input", upd); upd();
   out.addEventListener("click", e => { const b = e.target.closest("[data-say]"); if (b) speak(b.dataset.say, b); });
@@ -1132,7 +1255,11 @@ function openShow(i) {
 }
 function renderShow() {
   const it = LIST[showIdx]; if (!it) return;
-  $("#showBody").innerHTML = `<div class="show-ar" lang="ar" id="showAr" role="button" tabindex="0">${esc(tpl(it.ar))}</div><div class="show-tr">${esc(trOut(it.tr))}</div><div class="show-en">${esc(it.en)}</div>${it.n ? `<div class="show-note">${esc(it.n)}</div>` : ""}${it.r ? `<div class="show-reply" data-say="${esc(tpl(it.r[1]))}" role="button" tabindex="0"><span class="k">They may reply</span><span class="ar" lang="ar">${esc(tpl(it.r[1]))}</span><span class="tr">${esc(trOut(it.r[2]))}</span></div>` : ""}`;
+  const fs = forms(it), multi = fs.length > 1;
+  $("#showBody").classList.toggle("multi", multi);
+  $("#showBody").innerHTML = fs.map(f => `<div class="show-form" data-say="${esc(f.ar)}" role="button" tabindex="0">${multi ? dlTag(f.dl) : ""}<div class="show-ar" lang="ar">${esc(tpl(f.ar))}</div><div class="show-tr">${esc(trOut(f.tr))}</div></div>`).join("")
+    + `<div class="show-en">${esc(it.en)}</div>${notes(it).length ? `<div class="show-note">${notes(it).map(esc).join(" · ")}</div>` : ""}`
+    + replies(it).map(x => `<div class="show-reply" data-say="${esc(x.r[1])}" role="button" tabindex="0"><span class="k">They may reply${x.dl && S.dl === "both" ? " · " + DL[x.dl] : ""}</span><span class="ar" lang="ar">${esc(tpl(x.r[1]))}</span><span class="tr">${esc(trOut(x.r[2]))}</span></div>`).join("");
   $("#showPrev").disabled = showIdx === 0; $("#showNext").disabled = showIdx >= LIST.length - 1;
 }
 function closeOverlays() { document.querySelectorAll(".ov.open").forEach(o => o.classList.remove("open")); document.body.style.overflow = ""; speechSynthesis?.cancel?.(); }
@@ -1142,6 +1269,7 @@ const PR = { mode: "flash", dir: "en2ar", scope: "cat", due: true, pool: [], i: 
 function poolFor() {
   let base = PR.scope === "saved" ? ALL.filter(it => S.favs.has(it.id)) : PR.scope === "all" ? ALL : (catById(S.cat)?.items || ALL);
   if (S.cat === "saved" && PR.scope === "cat") base = ALL.filter(it => S.favs.has(it.id));
+  base = base.filter(visible);
   if (PR.due) { const now = Date.now(); const due = base.filter(it => !S.srs[it.id] || S.srs[it.id].due <= now); if (due.length) base = due; }
   return base;
 }
@@ -1168,17 +1296,21 @@ function renderCard() {
   const it = PR.pool[PR.i];
   if (!it) return renderDone();
   $("#prTitle").textContent = `${PR.i + 1} / ${PR.pool.length}`;
-  const front = PR.dir === "en2ar" ? `<div class="big-en">${esc(it.en)}</div>` : `<div class="big-ar" lang="ar">${esc(tpl(it.ar))}</div>`;
-  const back = PR.dir === "en2ar" ? `<div class="big-ar" lang="ar">${esc(tpl(it.ar))}</div><div class="tr">${esc(trOut(it.tr))}</div>` : `<div class="big-en">${esc(it.en)}</div><div class="tr">${esc(trOut(it.tr))}</div>`;
+  const fs = forms(it), multi = fs.length > 1;
+  const arOnly = fs.map(f => `<div class="big-ar" lang="ar">${esc(tpl(f.ar))}</div>`).join("");
+  const trOnly = fs.map(f => `<div class="tr">${multi ? dlTag(f.dl) + " " : ""}${esc(trOut(f.tr))}</div>`).join("");
+  const enSide = `<div class="big-en">${esc(it.en)}</div>`;
+  const front = PR.dir === "en2ar" ? enSide : arOnly;
+  const back = PR.dir === "en2ar" ? arOnly + trOnly : enSide + trOnly;
   if (PR.mode === "flash") {
-    $("#prBody").innerHTML = `<div class="card" id="card">${front}<div class="hidden-side">${back}${it.n ? `<div class="sm">${esc(it.n)}</div>` : ""}<button class="ib" data-say="${esc(it.ar)}" aria-label="Hear it" style="display:inline-grid">${I.speak}</button></div></div>
+    $("#prBody").innerHTML = `<div class="card" id="card">${front}<div class="hidden-side">${back}${notes(it).length ? `<div class="sm">${esc(notes(it)[0])}</div>` : ""}<button class="ib" data-say="${esc(primary(it).ar)}" aria-label="Hear it" style="display:inline-grid">${I.speak}</button></div></div>
       <div class="pr-actions" id="prA"><button class="btn primary big" id="reveal">Reveal</button></div>
       <div class="pr-status"><span>Level ${S.srs[it.id]?.lvl || 0} of 5</span><span>${S.favs.has(it.id) ? "Saved" : ""}</span></div>`;
   } else {
-    const others = shuffle(ALL.filter(o => o.id !== it.id && o.cat === it.cat)).slice(0, 3);
-    while (others.length < 3) { const o = ALL[Math.floor(Math.random() * ALL.length)]; if (o.id !== it.id && !others.includes(o)) others.push(o); }
+    const others = shuffle(ALL.filter(o => o.id !== it.id && o.cat === it.cat && visible(o) && primary(o).ar !== primary(it).ar)).slice(0, 3);
+    while (others.length < 3) { const o = ALL[Math.floor(Math.random() * ALL.length)]; if (o.id !== it.id && !others.includes(o) && visible(o)) others.push(o); }
     const opts = shuffle([it, ...others]);
-    $("#prBody").innerHTML = `<div class="card" id="card">${front}</div><div class="opts" id="opts">${opts.map(o => `<button class="opt" data-id="${esc(o.id)}">${PR.dir === "en2ar" ? `<span class="tr">${esc(trOut(o.tr))}</span><span class="ar" lang="ar">${esc(tpl(o.ar))}</span>` : `<span>${esc(o.en)}</span>`}</button>`).join("")}</div>
+    $("#prBody").innerHTML = `<div class="card" id="card">${front}</div><div class="opts" id="opts">${opts.map(o => { const p = primary(o); return `<button class="opt" data-id="${esc(o.id)}">${PR.dir === "en2ar" ? `<span class="tr">${esc(trOut(p.tr))}</span><span class="ar" lang="ar">${esc(tpl(p.ar))}</span>` : `<span>${esc(o.en)}</span>`}</button>`; }).join("")}</div>
       <div class="pr-actions" id="prA"></div><div class="pr-status"><span>Score ${PR.score}</span><span>Level ${S.srs[it.id]?.lvl || 0} of 5</span></div>`;
     PR.answered = false;
   }
@@ -1202,11 +1334,12 @@ function renderDone() {
 function applySettings() {
   document.documentElement.style.setProperty("--ar-scale", S.ar);
   $("#toM").classList.toggle("on", S.to === "m"); $("#toF").classList.toggle("on", S.to === "f");
+  document.querySelectorAll("[data-dl]").forEach(b => b.classList.toggle("on", b.dataset.dl === S.dl));
   document.querySelectorAll("#segTo button").forEach(b => b.classList.toggle("on", b.dataset.v === S.to));
   document.querySelectorAll("#segMe button").forEach(b => b.classList.toggle("on", b.dataset.v === S.me));
   document.querySelectorAll("#segTr button").forEach(b => b.classList.toggle("on", b.dataset.v === S.tr));
   $("#arSize").value = S.ar; $("#rate").value = S.rate; $("#rateVal").textContent = Number(S.rate).toFixed(2);
-  SAVE("to", S.to); SAVE("me", S.me); SAVE("tr", S.tr); SAVE("ar", S.ar); SAVE("voice", S.voice); SAVE("rate", S.rate);
+  SAVE("to", S.to); SAVE("me", S.me); SAVE("dl", S.dl); SAVE("tr", S.tr); SAVE("ar", S.ar); SAVE("voice", S.voice); SAVE("rate", S.rate);
 }
 function openSettings(open) { $("#settings").classList.toggle("open", open); $("#scrim").classList.toggle("open", open); }
 
@@ -1218,21 +1351,22 @@ document.addEventListener("click", e => {
   if (act) {
     const row = act.closest(".ph"); const it = LIST[+row.dataset.i]; if (!it) return;
     const a = act.dataset.act;
-    if (a === "speak") speak(it.ar, act.classList.contains("ib") ? act : row.querySelector('.ib[data-act="speak"]'));
-    if (a === "reply" && it.r) speak(it.r[1], row.querySelector('.ib[data-act="reply"]'));
+    if (a === "speak") speak(act.dataset.ar || primary(it).ar, act.classList.contains("ib") ? act : row.querySelector('.ib[data-act="speak"]'));
+    if (a === "reply" && act.dataset.ar) speak(act.dataset.ar, act.classList.contains("ib") ? act : act.parentElement.querySelector('.ib[data-act="reply"]'));
     if (a === "fav") { S.favs.has(it.id) ? S.favs.delete(it.id) : S.favs.add(it.id); SAVE("favs", [...S.favs]); act.classList.toggle("on"); act.innerHTML = S.favs.has(it.id) ? I.starOn : I.star; toast(S.favs.has(it.id) ? "Saved" : "Removed"); renderNav(); if (S.cat === "saved" && !S.q) renderMain(); }
     if (a === "show") openShow(+row.dataset.i);
-    if (a === "copy") { navigator.clipboard?.writeText(`${tpl(it.ar)} — ${trOut(it.tr)} — ${it.en}`).then(() => toast("Copied"), () => toast("Couldn't copy")); }
+    if (a === "copy") { navigator.clipboard?.writeText(`${forms(it).map(f => `${tpl(f.ar)} — ${trOut(f.tr)}`).join(" | ")} — ${it.en}`).then(() => toast("Copied"), () => toast("Couldn't copy")); }
     return;
   }
   const say = e.target.closest("#practice [data-say], #show [data-say], .dg[data-say]"); if (say) return speak(say.dataset.say, say);
-  if (e.target.closest("#showAr") || e.target.closest("#showSpeak")) { const it = LIST[showIdx]; if (it) speak(it.ar, $("#showSpeak")); return; }
+  if (e.target.closest("#showSpeak")) { const it = LIST[showIdx]; if (it) speak(primary(it).ar, $("#showSpeak")); return; }
   if (e.target.closest("#showClose, #prClose")) return closeOverlays();
   if (e.target.closest("#showPrev")) { if (showIdx > 0) { showIdx--; renderShow(); } return; }
   if (e.target.closest("#showNext")) { if (showIdx < LIST.length - 1) { showIdx++; renderShow(); } return; }
   if (e.target.closest("#practiceBtn")) return openPractice();
   if (e.target.closest("#settingsBtn")) return openSettings(true);
   if (e.target.closest("#settingsClose, #scrim")) return openSettings(false);
+  const dlBtn = e.target.closest("[data-dl]"); if (dlBtn) { S.dl = dlBtn.dataset.dl; applySettings(); renderNav(); renderMain(); return; }
   if (e.target.closest("#toM")) { S.to = "m"; applySettings(); renderMain(); return; }
   if (e.target.closest("#toF")) { S.to = "f"; applySettings(); renderMain(); return; }
   const segBtn = e.target.closest("#settings .seg button[data-v]");
@@ -1251,7 +1385,7 @@ document.addEventListener("click", e => {
   const opt = e.target.closest(".opt");
   if (opt && !PR.answered) { PR.answered = true; const it = PR.pool[PR.i]; const ok = opt.dataset.id === it.id; grade(it, ok); if (ok) PR.score++;
     document.querySelectorAll(".opt").forEach(o => { o.disabled = true; if (o.dataset.id === it.id) o.classList.add("right"); else if (o === opt) o.classList.add("wrong"); });
-    if (PR.dir === "en2ar") speak(it.ar); $("#prA").innerHTML = `<button class="btn primary big" id="nextQ">${PR.i + 1 < PR.pool.length ? "Next" : "Finish"}</button>`; return; }
+    if (PR.dir === "en2ar") speak(primary(it).ar); $("#prA").innerHTML = `<button class="btn primary big" id="nextQ">${PR.i + 1 < PR.pool.length ? "Next" : "Finish"}</button>`; return; }
   if (e.target.closest("#nextQ")) { PR.i++; renderCard(); return; }
 });
 document.addEventListener("keydown", e => {
@@ -1260,7 +1394,7 @@ document.addEventListener("keydown", e => {
   if ($("#show").classList.contains("open")) { if (e.key === "ArrowLeft" && showIdx > 0) { showIdx--; renderShow(); } if (e.key === "ArrowRight" && showIdx < LIST.length - 1) { showIdx++; renderShow(); } }
   if ($("#practice").classList.contains("open") && (e.key === " " || e.key === "Enter") && $("#reveal") && document.activeElement.tagName !== "BUTTON") { e.preventDefault(); $("#reveal").click(); }
 });
-document.addEventListener("keydown", e => { if ((e.key === "Enter" || e.key === " ") && e.target.matches(".ph-ar, #showAr, .ph-reply .ar, .show-reply")) { e.preventDefault(); e.target.click(); } });
+document.addEventListener("keydown", e => { if ((e.key === "Enter" || e.key === " ") && e.target.matches(".ph-ar, .show-form, .ph-reply .ar, .show-reply")) { e.preventDefault(); e.target.click(); } });
 // swipe in show mode
 let tx = null; $("#show").addEventListener("touchstart", e => { tx = e.touches[0].clientX; }, { passive: true });
 $("#show").addEventListener("touchend", e => { if (tx == null) return; const dx = e.changedTouches[0].clientX - tx; tx = null; if (Math.abs(dx) > 50) { if (dx < 0 && showIdx < LIST.length - 1) showIdx++; else if (dx > 0 && showIdx > 0) showIdx--; else return; renderShow(); } });

@@ -1,7 +1,7 @@
 {
-  "name": "Yalla Jordan Phrasebook",
+  "name": "Yalla Arabic Phrasebook",
   "short_name": "Yalla",
-  "description": "Jordanian Arabic cheat sheet for travelers: phrases, audio, flashcards, numbers and culture tips.",
+  "description": "Jordanian and Egyptian Arabic cheat sheet for travelers: phrases, audio, flashcards, numbers and culture tips.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
