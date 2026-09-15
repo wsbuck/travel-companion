@@ -1,9 +1,9 @@
 // Yalla Jordan Phrasebook service worker.
 // App shell is cache-first; Google Fonts are cached on first use. Bump VERSION when index.html changes.
-const VERSION = "v5";
+const VERSION = "v6";
 const SHELL = `yalla-shell-${VERSION}`;
 const FONTS = "yalla-fonts";
-const SHELL_FILES = ["./", "./index.html", "./manifest.json", "./icon-192.png", "./icon-512.png", "./icon-maskable-512.png"];
+const SHELL_FILES = ["./", "./index.html", "./manifest.json", "./icon-dark-192.png", "./icon-dark-512.png", "./icon-dark-maskable-512.png"];
 
 self.addEventListener("install", e => {
   e.waitUntil(caches.open(SHELL).then(c => c.addAll(SHELL_FILES)).then(() => self.skipWaiting()));
