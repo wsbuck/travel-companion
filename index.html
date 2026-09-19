@@ -1033,33 +1033,44 @@ const I = {
 };
 
 // ---------- speech ----------
-let VOICE = null, voiceChecked = false;
+let VOICE = null, voiceChecked = false, warnedNoVoice = false;
 const arVoices = () => speechSynthesis.getVoices().filter(v => /^ar([-_]|$)/i.test(v.lang)).sort((a, b) => a.lang.localeCompare(b.lang) || a.name.localeCompare(b.name));
 const REGION = { JO: "Jordan", SA: "Saudi", AE: "Emirates", EG: "Egypt", LB: "Lebanon", SY: "Syria", PS: "Palestine", IQ: "Iraq", KW: "Kuwait", QA: "Qatar", BH: "Bahrain", OM: "Oman", YE: "Yemen", MA: "Morocco", TN: "Tunisia", DZ: "Algeria", LY: "Libya", XA: "Standard", "001": "Standard" };
-const voiceLabel = v => { const r = (v.lang.split(/[-_]/)[1] || "").toUpperCase(); return `${v.name} · ${REGION[r] || v.lang}${v.localService === false ? " (online)" : ""}`; };
+const IOS = /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+const voiceLabel = (v, all) => {
+  const r = (v.lang.split(/[-_]/)[1] || "").toUpperCase();
+  const q = (v.voiceURI.match(/premium|enhanced|compact|neural/i) || [""])[0].toLowerCase();
+  const dup = all && all.some(o => o !== v && o.name === v.name && o.lang === v.lang);
+  return `${v.name}${dup && q ? ` (${q})` : ""} · ${REGION[r] || v.lang}${v.localService === false ? " (online)" : ""}`;
+};
 function pickVoice() {
   const ar = arVoices();
   VOICE = (S.voice && ar.find(v => v.voiceURI === S.voice || v.name === S.voice))
     || ar.find(v => /JO/i.test(v.lang)) || ar.find(v => /SA|AE|LB|SY|PS/i.test(v.lang)) || ar[0] || null;
   const sel = document.getElementById("voiceSel"), info = document.getElementById("voiceInfo");
   if (sel) {
-    sel.innerHTML = `<option value="">Auto (best available)</option>` + ar.map(v => `<option value="${esc(v.voiceURI)}" ${S.voice && (v.voiceURI === S.voice || v.name === S.voice) ? "selected" : ""}>${esc(voiceLabel(v))}</option>`).join("");
+    sel.innerHTML = `<option value="">Auto (system default Arabic voice)</option>` + ar.map(v => `<option value="${esc(v.voiceURI)}" ${S.voice && (v.voiceURI === S.voice || v.name === S.voice) ? "selected" : ""}>${esc(voiceLabel(v, ar))}</option>`).join("");
     if (!S.voice) sel.value = "";
   }
   if (info) info.innerHTML = ar.length
-    ? `${ar.length} Arabic voice${ar.length === 1 ? "" : "s"} on this device. Now using <b>${esc(VOICE ? voiceLabel(VOICE) : "none")}</b>. Voices come from the operating system and read the script in a standard way; a Jordanian-labelled voice gets closest to the accent. Add more under iPhone Settings → Accessibility → Spoken Content → Voices → Arabic, Android Settings → Text-to-speech, or Mac System Settings → Accessibility → Spoken Content. Microsoft Edge includes Jordanian voices (Taim, Sana).`
-    : (speechSynthesis.getVoices().length ? "No Arabic voice is installed on this device. iPhone: Settings → Accessibility → Spoken Content → Voices → Arabic. Android: Settings → Text-to-speech → install Arabic. Then reload." : "Checking for Arabic voices…");
+    ? `${ar.length} Arabic voice${ar.length === 1 ? "" : "s"} listed. ${S.voice && VOICE ? `Now using <b>${esc(voiceLabel(VOICE, ar))}</b>.` : `Auto lets the phone choose its default Arabic voice.`}${IOS ? ` <b>iPhone tip:</b> Safari lists one Majed even when you've downloaded the Premium one. Leave Auto selected, then in Settings → Accessibility → Spoken Content → Voices → Arabic, tap Majed and pick <b>Majed (Premium)</b> as the default. Auto will use it.` : ` Add voices under Android Settings → Text-to-speech or Mac System Settings → Accessibility → Spoken Content. Microsoft Edge includes Jordanian voices (Taim, Sana).`}`
+    : (speechSynthesis.getVoices().length ? "No Arabic voice is installed on this device. iPhone: Settings → Accessibility → Spoken Content → Voices → Arabic → download Majed. Android: Settings → Text-to-speech → install Arabic. Then reload." : "Voices load after the first tap. Tap any phrase, then come back here.");
   voiceChecked = true;
 }
+// iOS keeps the voice list empty until speech has been used once; prime it on the first touch.
+function primeVoices() { try { if (!speechSynthesis.getVoices().length) { const u = new SpeechSynthesisUtterance(""); u.volume = 0; speechSynthesis.speak(u); setTimeout(pickVoice, 300); } } catch (e) {} }
+["touchend", "pointerdown", "keydown"].forEach(ev => addEventListener(ev, primeVoices, { once: true, passive: true }));
 function speak(text, btn) {
   if (!("speechSynthesis" in window)) return toast("No speech support in this browser");
-  if (!voiceChecked || !VOICE) pickVoice();
-  if (!VOICE) return toast("No Arabic voice on this device (see Settings)");
-  speechSynthesis.cancel();
+  if (!voiceChecked || (S.voice && !VOICE)) pickVoice();
   const u = new SpeechSynthesisUtterance(tpl(text).replace(/[…\/]/g, " ، ").replace(/\s+/g, " "));
-  u.voice = VOICE; u.lang = VOICE.lang; u.rate = S.rate;
+  if (S.voice && VOICE) { u.voice = VOICE; u.lang = VOICE.lang; }
+  else u.lang = VOICE ? VOICE.lang : "ar-SA"; // no voice object: the OS picks its default Arabic voice (Premium on iOS if set there)
+  u.rate = S.rate;
   if (btn) { btn.classList.add("busy"); u.onend = u.onerror = () => btn.classList.remove("busy"); }
+  if (speechSynthesis.speaking || speechSynthesis.pending) speechSynthesis.cancel();
   speechSynthesis.speak(u);
+  if (!VOICE && !warnedNoVoice && speechSynthesis.getVoices().length) { warnedNoVoice = true; toast("No Arabic voice found on this device. See Settings."); }
 }
 
 // ---------- toast ----------
